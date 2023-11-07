@@ -1,8 +1,29 @@
 <template>
   <a-layout class="layout">
-    <a-layout-header>
-      <div class="logo"><h1 class="logotitle">OCBC</h1></div>
-    </a-layout-header>
+    <nav class="navbar navbar-expand-lg navbar-custom p-4">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">OCBC</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Get Help</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <a-layout-content style="padding: 0 50px">
       <a-breadcrumb style="margin: 30px 0">
@@ -13,16 +34,15 @@
           <a-card style="width: 250px; height: 300px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
               <h3 :class="message.type">{{`${message.message}`}}</h3>
+
               <div v-for ="content in message.buttons" :key="content">
-                <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
+                <a-button @click=handleMessage(content.message) class="btn_bot" type="primary" shape="round" :size="size">
                   <h3 :class="content.message">{{`${content.message}`}}</h3>
                 </a-button>
                 <br/>
               </div>
-              
 
             </div>
-            <a-button :class="liveChat" type="link" >Link Button</a-button>
 
           </a-card>
           <div>
@@ -64,41 +84,44 @@ export default defineComponent({
       type: "chatbot",
       buttons: [
         {
-          message: "Credit Card Stolen",
-          urgency: 3,
-          answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
+          message: "Credit Card Stolen"
+          // urgency: 
+          // answer:
         },
         {
-          message: "Suspicious Transaction",
-          urgency: 3,
-          answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
+          message: "Suspicious Transaction"
         },
         {
-          message: "Register for Card",
-          urgency: 1,
-          answer: "Our FAQ page will have knowledge on this, Click here to view our FAQ page"
+          message: "Register for Card"
         },
         {
-          message: "Credit Limit Enquiry",
-          urgency: 2,
-          answer: "We will redirect you to our Customer Service Staff\
-          However, feel free to contact us via Email or call this hotline"
-        } 
+          message: "Credit Limit Enquiry"
+        }
       ]
     }
     ])
 
+    // const btnContent = ref([
+    //     {
+    //       message: "Credit Card Stolen"
+    //     },
+    //     {
+    //       message: "Suspicious Transaction"
+    //     },
+    //     {
+    //       message: "Register for Card"
+    //     },
+    //     {
+    //       message: "Credit Limit Enquiry"
+    //     } 
+    //   ])
+
     const value19 = ref('');
 
     const visible = ref(false);
-    const liveChat = ref('hide');
 
     const hide = () => {
       visible.value = false;
-    };
-
-    const proceedLiveChat = (state) => {
-      liveChat.value = state;
     };
 
     function handleMessage(message) {
@@ -106,7 +129,7 @@ export default defineComponent({
     }
 
     function displayMessages(message) {
-      arr.value.push({ message: message.message, type: 'customer' }) 
+      arr.value.push({ message: message, type: 'customer' }) 
       value19.value = ''
 
       var delayInMilliseconds = 1500; //1 second
@@ -119,12 +142,12 @@ export default defineComponent({
         //   type: 'chatbot',
         //   buttons: [] // arr.find message key in arr[0].buttons
         // }
-        arr.value.push({ message: message.answer, type: 'chatbot' })
-        proceedLiveChat('show')
+        arr.value.push({ message: message, type: 'chatbot' })
 
       }, delayInMilliseconds);
       
     }
+
     // [
     //   {
     //     message: "",
@@ -152,7 +175,6 @@ export default defineComponent({
       arr,
       hide,
       value19,
-      liveChat
       // btnContent
     }
   }
@@ -163,6 +185,11 @@ export default defineComponent({
 
 <style scoped>
 
+
+/* Modify the background color */
+.navbar-custom {
+    background-color: red;
+}
 .btn_bot{
   width: 200px;
   margin-bottom: 5px;
@@ -233,9 +260,5 @@ section {
 
 .chatbot { 
   text-align: left;
-}
-
-.hide {
-  display: none;
 }
 </style>
