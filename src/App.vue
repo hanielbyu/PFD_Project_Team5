@@ -13,15 +13,16 @@
           <a-card style="width: 250px; height: 300px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
               <h3 :class="message.type">{{`${message.message}`}}</h3>
-
               <div v-for ="content in message.buttons" :key="content">
-                <a-button @click=handleMessage(content.message) class="btn_bot" type="primary" shape="round" :size="size">
+                <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
                   <h3 :class="content.message">{{`${content.message}`}}</h3>
                 </a-button>
                 <br/>
               </div>
+              
 
             </div>
+            <a-button :class="liveChat" type="link" >Link Button</a-button>
 
           </a-card>
           <div>
@@ -63,44 +64,41 @@ export default defineComponent({
       type: "chatbot",
       buttons: [
         {
-          message: "Credit Card Stolen"
-          // urgency: 
-          // answer:
+          message: "Credit Card Stolen",
+          urgency: 3,
+          answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
         },
         {
-          message: "Suspicious Transaction"
+          message: "Suspicious Transaction",
+          urgency: 3,
+          answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
         },
         {
-          message: "Register for Card"
+          message: "Register for Card",
+          urgency: 1,
+          answer: "Our FAQ page will have knowledge on this, Click here to view our FAQ page"
         },
         {
-          message: "Credit Limit Enquiry"
+          message: "Credit Limit Enquiry",
+          urgency: 2,
+          answer: "We will redirect you to our Customer Service Staff\
+          However, feel free to contact us via Email or call this hotline"
         } 
       ]
     }
     ])
 
-    // const btnContent = ref([
-    //     {
-    //       message: "Credit Card Stolen"
-    //     },
-    //     {
-    //       message: "Suspicious Transaction"
-    //     },
-    //     {
-    //       message: "Register for Card"
-    //     },
-    //     {
-    //       message: "Credit Limit Enquiry"
-    //     } 
-    //   ])
-
     const value19 = ref('');
 
     const visible = ref(false);
+    const liveChat = ref('hide');
 
     const hide = () => {
       visible.value = false;
+    };
+
+    const proceedLiveChat = (state) => {
+      liveChat.value = state;
     };
 
     function handleMessage(message) {
@@ -108,7 +106,7 @@ export default defineComponent({
     }
 
     function displayMessages(message) {
-      arr.value.push({ message: message, type: 'customer' }) 
+      arr.value.push({ message: message.message, type: 'customer' }) 
       value19.value = ''
 
       var delayInMilliseconds = 1500; //1 second
@@ -121,12 +119,12 @@ export default defineComponent({
         //   type: 'chatbot',
         //   buttons: [] // arr.find message key in arr[0].buttons
         // }
-        arr.value.push({ message: message, type: 'chatbot' })
+        arr.value.push({ message: message.answer, type: 'chatbot' })
+        proceedLiveChat('show')
 
       }, delayInMilliseconds);
       
     }
-
     // [
     //   {
     //     message: "",
@@ -154,6 +152,7 @@ export default defineComponent({
       arr,
       hide,
       value19,
+      liveChat
       // btnContent
     }
   }
@@ -234,5 +233,9 @@ section {
 
 .chatbot { 
   text-align: left;
+}
+
+.hide {
+  display: none;
 }
 </style>
