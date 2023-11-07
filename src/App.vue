@@ -8,11 +8,36 @@
       <a-breadcrumb style="margin: 30px 0">
       </a-breadcrumb>
 
-      <a-button type="primary" class="button-text">
-        <span class="button-content">Need Help?  
-        <font-awesome-icon class="message-icon" :icon="['fas', 'message']" />
-      </span>
-      </a-button>
+      <a-popover v-model:open="visible" title="Support" trigger="click">
+        <template #content>
+          <a-card style="width: 250px; height: 300px; background-color: azure; overflow-y:auto;">
+            <div v-for ="message in arr" :key="message">
+              <h3 :class="message.type">{{`${message.message}`}}</h3>
+
+              <div v-for ="content in message.buttons" :key="content">
+                <a-button @click=handleMessage(content.message) class="btn_bot" type="primary" shape="round" :size="size">
+                  <h3 :class="content.message">{{`${content.message}`}}</h3>
+                </a-button>
+                <br/>
+              </div>
+
+            </div>
+
+          </a-card>
+          <div>
+
+            <!-- <a-input-group compact>
+              <a-input v-model:value="value19" style="width: calc(100% - 200px)" @pressEnter="handleMessage(value19)"/>
+              <a-button type="primary" @click="handleMessage(value19)">Submit</a-button>
+            </a-input-group> -->
+
+          </div>
+          <a @click="hide">Close</a>
+        </template>
+        <a-button class="need-button" type="primary">Need Help?
+          <font-awesome-icon class="message-icon" :icon="['fas', 'message']" />
+        </a-button>
+      </a-popover>
 
       <div class="chatbox"><Chat :chat="arr" :onSend="handleMessage" /></div>
       <div :style="{ background: 'rgb(180, 180, 180)', padding: '24px', minHeight: '280px' }">Content</div>
@@ -26,26 +51,110 @@
 
 <script>
 import { Chat } from "@chat-ui/vue3";
+// import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   components:{Chat},
   setup(){
-    const arr = ref([])
+    const arr = ref([
+    {
+      message: "Hi, how may I assist you?",
+      type: "chatbot",
+      buttons: [
+        {
+          message: "Credit Card Stolen"
+          // urgency: 
+          // answer:
+        },
+        {
+          message: "Suspicious Transaction"
+        },
+        {
+          message: "Register for Card"
+        },
+        {
+          message: "Credit Limit Enquiry"
+        } 
+      ]
+    }
+    ])
+
+    // const btnContent = ref([
+    //     {
+    //       message: "Credit Card Stolen"
+    //     },
+    //     {
+    //       message: "Suspicious Transaction"
+    //     },
+    //     {
+    //       message: "Register for Card"
+    //     },
+    //     {
+    //       message: "Credit Limit Enquiry"
+    //     } 
+    //   ])
+
+    const value19 = ref('');
+
+    const visible = ref(false);
+
+    const hide = () => {
+      visible.value = false;
+    };
 
     function handleMessage(message) {
         displayMessages(message)
-        console.log(message)
     }
 
     function displayMessages(message) {
-      arr.value.push({ message: message, type: 'person' })
+      arr.value.push({ message: message, type: 'customer' }) 
+      value19.value = ''
+
+      var delayInMilliseconds = 1500; //1 second
+
+      // waiting time
+      setTimeout(function() {
+        // push new object from array using answer from arr[0]
+        // {
+        //   message: '',
+        //   type: 'chatbot',
+        //   buttons: [] // arr.find message key in arr[0].buttons
+        // }
+        arr.value.push({ message: message, type: 'chatbot' })
+
+      }, delayInMilliseconds);
+      
     }
+
+    // [
+    //   {
+    //     message: "",
+    //     type: "",
+          // buttons: [
+          //   {
+          //     message: ""
+          //   },
+          //   {
+
+          //   }
+          // ]
+
+    //   },
+    //   {
+    //     message: "",
+    //     type: "",
+
+    //   }
+    // ]
 
     return{
       handleMessage,
       displayMessages,
-      arr
+      arr,
+      hide,
+      value19,
+      // btnContent
     }
   }
 
@@ -54,6 +163,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.btn_bot{
+  width: 200px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
 .site-layout-content {
   min-height: 500px; 
   padding: 24px;
@@ -72,7 +187,7 @@ export default defineComponent({
 section {
   height: 100vh;
 }
-button{
+.need-button{
   position:absolute;
   right:    0;
   bottom:   0;
@@ -89,7 +204,7 @@ button{
   color: whitesmoke;
   font-size: 25px;
   display: block;
-  padding-left: 119px;
+  padding-left: 80px;
   transform: translateY(-35%); /* Center horizontally */
 }
  .button-text{
@@ -111,5 +226,13 @@ button{
 
 [data-theme='dark'] .site-layout-content {
   background: #141414;
+}
+
+.customer {
+  text-align: right;
+}
+
+.chatbot { 
+  text-align: left;
 }
 </style>
