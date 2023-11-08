@@ -22,15 +22,19 @@
               
 
             </div>
-            <a-button :class="liveChat" type="link" >Link Button</a-button>
+            <a-button :class="liveChat" type="link" @click="liveChatSupport()">Proceed to Live Support</a-button>
 
+            <div :class="liveChatCard">
+              <a-divider style="height: 2px; background-color: #7cb305" />
+              <h1> LIVE CHAT SUPPORT</h1>
+            </div>
           </a-card>
           <div>
 
-            <!-- <a-input-group compact>
+            <a-input-group compact :class="liveChatCard">
               <a-input v-model:value="value19" style="width: calc(100% - 200px)" @pressEnter="handleMessage(value19)"/>
               <a-button type="primary" @click="handleMessage(value19)">Submit</a-button>
-            </a-input-group> -->
+            </a-input-group>
 
           </div>
           <a @click="hide">Close</a>
@@ -50,14 +54,22 @@
   </a-layout>
 </template>
 
+
+
+
+
+
 <script>
 import { Chat } from "@chat-ui/vue3";
 // import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
 
+
 export default defineComponent({
   components:{Chat},
   setup(){
+    // const socket = io();
+    
     const arr = ref([
     {
       message: "Hi, how may I assist you?",
@@ -92,6 +104,7 @@ export default defineComponent({
 
     const visible = ref(false);
     const liveChat = ref('hide');
+    const liveChatCard = ref('hideLive')
 
     const hide = () => {
       visible.value = false;
@@ -104,27 +117,33 @@ export default defineComponent({
     function handleMessage(message) {
         displayMessages(message)
     }
+    function handleMessageLive(message){
+        postMessage(message)
+    }
+
+    const liveChatSupport = () => {
+      liveChatCard.value = 'showLive'
+    }
 
     function displayMessages(message) {
       arr.value.push({ message: message.message, type: 'customer' }) 
-      value19.value = ''
-
       var delayInMilliseconds = 1500; //1 second
-
-      // waiting time
       setTimeout(function() {
-        // push new object from array using answer from arr[0]
-        // {
-        //   message: '',
-        //   type: 'chatbot',
-        //   buttons: [] // arr.find message key in arr[0].buttons
-        // }
         arr.value.push({ message: message.answer, type: 'chatbot' })
         proceedLiveChat('show')
-
       }, delayInMilliseconds);
-      
     }
+
+    function postMessage(message){
+      arr.value.push({ message: message.message, type: 'customer' }) 
+      value19.value = ''
+
+    }
+
+
+
+
+
     // [
     //   {
     //     message: "",
@@ -152,7 +171,10 @@ export default defineComponent({
       arr,
       hide,
       value19,
-      liveChat
+      liveChat,
+      liveChatCard,
+      liveChatSupport,
+      handleMessageLive
       // btnContent
     }
   }
@@ -236,6 +258,10 @@ section {
 }
 
 .hide {
+  display: none;
+}
+
+.hideLive {
   display: none;
 }
 </style>
