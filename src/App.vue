@@ -1,16 +1,18 @@
 <template>
   <a-layout class="layout">
-    <a-menu
-        theme="dark"
-        mode="horizontal"
-        v-model:selectedKeys="selectedKeys"
-        :style="{ lineHeight: '64px', background: 'red'}">
-        <a-menu-item key="home">OCBC</a-menu-item>
-        <div class="menu-items">
-          <a-menu-item key="aboutus">FAQ</a-menu-item>
-          <a-menu-item key="contact">CONTACT US</a-menu-item>
-        </div>
+    <a-layout-header>
+      <a-menu
+          theme="dark"
+          mode="horizontal"
+          v-model:selectedKeys="selectedKeys"
+          :style="{ lineHeight: '64px', background: 'rgb(186, 11, 11)'}">
+          <a-menu-item key="home">OCBC</a-menu-item>
+          <div class="menu-items">
+            <a-menu-item key="faq">FAQ</a-menu-item>
+            <a-menu-item key="contact">CONTACT US</a-menu-item>
+          </div>
       </a-menu>
+    </a-layout-header>
   
 
 
@@ -25,13 +27,16 @@
       <div :style="{ minHeight: '280px', 'margin-top': '10px', 'bottom': '0px', 'height': 'calc(100% - 64px)'}">
         <!-- <Home :type=selectedKeys v-if="selectedKeys == 'home' || selectedKeys == 'products'"/> -->
         <Contact v-if="selectedKeys == 'contact'"/>
+        <FAQ v-if="selectedKeys == 'faq'"/>
+        <HomePage v-if="selectedKeys == 'home'"/>
       </div>
 
     </a-layout-content>
+
   <a-layout-footer>
     <a-popover v-model:open="visible" title="Support" trigger="click">
         <template #content>
-          <a-card style="width: 250px; height: 300px; background-color: azure; overflow-y:auto;">
+          <a-card style="width: 350px; height: 420px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
               <h3 :class="message.type">{{`${message.message}`}}</h3>
               <div v-for ="content in message.buttons" :key="content">
@@ -43,18 +48,20 @@
               
 
             </div>
-            <a-button :class="liveChat" type="link" @click="liveChatSupport()">Proceed to Live Support</a-button>
+            
+            <a-button 
+            :class="liveChat" type="link" @click="liveChatSupport()" >Proceed to Live Support</a-button>
 
             <div :class="liveChatCard">
-              <a-divider style="height: 2px; background-color: #7cb305" />
+              <a-divider style="margin-top: ; height: 2px; background-color: #7cb305" />
               <h1> LIVE CHAT SUPPORT</h1>
             </div>
           </a-card>
           <div>
 
             <a-input-group compact :class="liveChatCard">
-              <a-input v-model:value="value19" style="width: calc(100% - 200px)" @pressEnter="handleMessage(value19)"/>
-              <a-button type="primary" @click="handleMessage(value19)">Submit</a-button>
+              <a-input class="inputBox" v-model:value="textInput" style="width: calc(100% - 200px)" @pressEnter="handleMessage(textInput)"/>
+              <a-button class="submitBox" type="primary" @click="handleMessage(textInput)">Submit</a-button>
             </a-input-group>
 
           </div>
@@ -77,16 +84,22 @@
 // import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
 import Contact from './components/ContactUs.vue';
+import FAQ from './components/FAQ.vue';
+import HomePage from "./components/HomePage.vue";
+
+
 
 
 export default defineComponent({
   components:{
-    Contact
-  },
+    Contact,
+    FAQ,
+    HomePage,
+},
   setup(){
     // const socket = io();
 
-    const selectedKeys = ref(['home']);
+    let selectedKeys = ref(['home']);
     
     const arr = ref([
     {
@@ -118,7 +131,7 @@ export default defineComponent({
     }
     ])
 
-    const value19 = ref('');
+    const textInput = ref('');
 
     const visible = ref(false);
     const liveChat = ref('hide');
@@ -143,6 +156,7 @@ export default defineComponent({
 
     const liveChatSupport = () => {
       liveChatCard.value = 'showLive'
+      selectedKeys = 'faq'
     }
 
     function displayMessages(message) {
@@ -156,18 +170,18 @@ export default defineComponent({
 
     function postMessage(message){
       arr.value.push({ message: message.message, type: 'customer' }) 
-      value19.value = ''
+      textInput.value = ''
 
     }
 
 
     return{
-        handleMessage,
+      handleMessage,
       selectedKeys,
       displayMessages,
       arr,
       hide,
-      value19,
+      textInput,
       liveChat,
       liveChatCard,
       liveChatSupport,
@@ -193,6 +207,7 @@ export default defineComponent({
   margin-top: 5px;
   z-index: 10;
 }
+
 .site-layout-content {
   min-height: 500px; 
   padding: 24px;
@@ -206,7 +221,19 @@ export default defineComponent({
   font-size: 25px;
   font-weight: bold;
 }
+ .liveChatCard {
+  width: 200px;
+}
 
+.ant-input-group{
+  text-align: right;
+  width: 100%;
+}
+
+.ant-input{
+  width: 500px;
+  text-align: left;
+}
 
 section {
   height: 100vh;
@@ -220,6 +247,8 @@ section {
   background-color: rgb(55, 63, 63);
   line-height: 0px;
 }
+
+
 .button-content{
   padding-right: 20px;
 }
@@ -258,6 +287,7 @@ section {
 
 .chatbot { 
   text-align: left;
+  max-width: 70%;
 }
 
 .hide {

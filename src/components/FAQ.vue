@@ -1,6 +1,7 @@
 <template>
     <header>
-        <h1>CONTACT US</h1>
+        <h1>FAQ</h1>
     </header>
   </template>
+  
   
