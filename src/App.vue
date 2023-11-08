@@ -1,35 +1,35 @@
 <template>
   <a-layout class="layout">
-    <nav class="navbar navbar-expand-lg navbar-custom p-4">
-  <div class="container-fluid">
-    <a class="navbar-brand text-white" href="#">OCBC</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Account</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Get Help</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="#">Login</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+    <a-menu
+        theme="dark"
+        mode="horizontal"
+        v-model:selectedKeys="selectedKeys"
+        :style="{ lineHeight: '64px', background: 'red'}">
+        <a-menu-item key="home">OCBC</a-menu-item>
+        <div class="menu-items">
+          <a-menu-item key="aboutus">FAQ</a-menu-item>
+          <a-menu-item key="contact">CONTACT US</a-menu-item>
+        </div>
+      </a-menu>
+  
+
 
     <a-layout-content style="padding: 0 50px">
+
       <a-breadcrumb style="margin: 30px 0">
       </a-breadcrumb>
 
-      <a-popover v-model:open="visible" title="Support" trigger="click">
+      
+
+      
+      <div :style="{ minHeight: '280px', 'margin-top': '10px', 'bottom': '0px', 'height': 'calc(100% - 64px)'}">
+        <!-- <Home :type=selectedKeys v-if="selectedKeys == 'home' || selectedKeys == 'products'"/> -->
+        <Contact v-if="selectedKeys == 'contact'"/>
+      </div>
+
+    </a-layout-content>
+  <a-layout-footer>
+    <a-popover v-model:open="visible" title="Support" trigger="click">
         <template #content>
           <a-card style="width: 250px; height: 300px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
@@ -64,14 +64,7 @@
           <font-awesome-icon class="message-icon" :icon="['fas', 'message']" />
         </a-button>
       </a-popover>
-
-      <div class="chatbox"><Chat :chat="arr" :onSend="handleMessage" /></div>
-      <div :style="{ background: 'rgb(180, 180, 180)', padding: '24px', minHeight: '280px' }">Content</div>
-
-    </a-layout-content>
-    <a-layout-footer style="text-align: center">
-      footer
-    </a-layout-footer>
+      </a-layout-footer>
   </a-layout>
 </template>
 
@@ -81,15 +74,19 @@
 
 
 <script>
-import { Chat } from "@chat-ui/vue3";
 // import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
+import Contact from './components/ContactUs.vue';
 
 
 export default defineComponent({
-  components:{Chat},
+  components:{
+    Contact
+  },
   setup(){
     // const socket = io();
+
+    const selectedKeys = ref(['home']);
     
     const arr = ref([
     {
@@ -120,20 +117,6 @@ export default defineComponent({
       ]
     }
     ])
-    // const btnContent = ref([
-    //     {
-    //       message: "Credit Card Stolen"
-    //     },
-    //     {
-    //       message: "Suspicious Transaction"
-    //     },
-    //     {
-    //       message: "Register for Card"
-    //     },
-    //     {
-    //       message: "Credit Limit Enquiry"
-    //     } 
-    //   ])
 
     const value19 = ref('');
 
@@ -143,6 +126,7 @@ export default defineComponent({
 
     const hide = () => {
       visible.value = false;
+      console.log('check', visible)
     };
 
     const proceedLiveChat = (state) => {
@@ -177,32 +161,9 @@ export default defineComponent({
     }
 
 
-
-
-
-    // [
-    //   {
-    //     message: "",
-    //     type: "",
-          // buttons: [
-          //   {
-          //     message: ""
-          //   },
-          //   {
-
-          //   }
-          // ]
-
-    //   },
-    //   {
-    //     message: "",
-    //     type: "",
-
-    //   }
-    // ]
-
     return{
-      handleMessage,
+        handleMessage,
+      selectedKeys,
       displayMessages,
       arr,
       hide,
@@ -210,7 +171,7 @@ export default defineComponent({
       liveChat,
       liveChatCard,
       liveChatSupport,
-      handleMessageLive
+      handleMessageLive,
       // btnContent
     }
   }
@@ -230,6 +191,7 @@ export default defineComponent({
   width: 200px;
   margin-bottom: 5px;
   margin-top: 5px;
+  z-index: 10;
 }
 .site-layout-content {
   min-height: 500px; 
