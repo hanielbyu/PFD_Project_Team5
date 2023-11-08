@@ -1,8 +1,29 @@
 <template>
   <a-layout class="layout">
-    <a-layout-header>
-      <div class="logo"><h1 class="logotitle">OCBC</h1></div>
-    </a-layout-header>
+    <nav class="navbar navbar-expand-lg navbar-custom p-4">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">OCBC</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Get Help</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <a-layout-content style="padding: 0 50px">
       <a-breadcrumb style="margin: 30px 0">
@@ -99,6 +120,20 @@ export default defineComponent({
       ]
     }
     ])
+    // const btnContent = ref([
+    //     {
+    //       message: "Credit Card Stolen"
+    //     },
+    //     {
+    //       message: "Suspicious Transaction"
+    //     },
+    //     {
+    //       message: "Register for Card"
+    //     },
+    //     {
+    //       message: "Credit Limit Enquiry"
+    //     } 
+    //   ])
 
     const value19 = ref('');
 
@@ -113,6 +148,7 @@ export default defineComponent({
     const proceedLiveChat = (state) => {
       liveChat.value = state;
     };
+
 
     function handleMessage(message) {
         displayMessages(message)
@@ -185,6 +221,11 @@ export default defineComponent({
 
 <style scoped>
 
+
+/* Modify the background color */
+.navbar-custom {
+    background-color: red;
+}
 .btn_bot{
   width: 200px;
   margin-bottom: 5px;
