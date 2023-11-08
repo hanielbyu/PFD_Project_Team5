@@ -10,6 +10,7 @@
           <div class="menu-items">
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
+            <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item>
           </div>
       </a-menu>
     </a-layout-header>
@@ -29,6 +30,7 @@
         <Contact v-if="selectedKeys == 'contact'"/>
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
+        <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/>
       </div>
 
     </a-layout-content>
@@ -86,6 +88,7 @@ import { defineComponent, ref } from "vue";
 import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
+import LiveChatSupport from "./components/LiveChatSupport.vue";
 
 
 
@@ -95,6 +98,7 @@ export default defineComponent({
     Contact,
     FAQ,
     HomePage,
+    LiveChatSupport,
 },
   setup(){
     // const socket = io();

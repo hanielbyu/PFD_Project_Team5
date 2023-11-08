@@ -19,7 +19,7 @@
       <li class="faq-item">
         <div class="question">If none of these questions answer my enquiry, what should I do?</div>
         <div class="answer">
-          If none of the provided questions address your specific enquiry, please feel free to <a href="#">contact our support team</a> for further assistance.
+          If none of the provided questions address your specific enquiry, please feel free to <a href="./HomePage.vue">contact our support team</a> for further assistance.
         </div>
       </li>
     </ul>
