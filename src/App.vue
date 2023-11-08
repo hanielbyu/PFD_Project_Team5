@@ -34,23 +34,28 @@
           <a-card style="width: 250px; height: 300px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
               <h3 :class="message.type">{{`${message.message}`}}</h3>
-
               <div v-for ="content in message.buttons" :key="content">
-                <a-button @click=handleMessage(content.message) class="btn_bot" type="primary" shape="round" :size="size">
+                <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
                   <h3 :class="content.message">{{`${content.message}`}}</h3>
                 </a-button>
                 <br/>
               </div>
+              
 
             </div>
+            <a-button :class="liveChat" type="link" @click="liveChatSupport()">Proceed to Live Support</a-button>
 
+            <div :class="liveChatCard">
+              <a-divider style="height: 2px; background-color: #7cb305" />
+              <h1> LIVE CHAT SUPPORT</h1>
+            </div>
           </a-card>
           <div>
 
-            <!-- <a-input-group compact>
+            <a-input-group compact :class="liveChatCard">
               <a-input v-model:value="value19" style="width: calc(100% - 200px)" @pressEnter="handleMessage(value19)"/>
               <a-button type="primary" @click="handleMessage(value19)">Submit</a-button>
-            </a-input-group> -->
+            </a-input-group>
 
           </div>
           <a @click="hide">Close</a>
@@ -70,37 +75,51 @@
   </a-layout>
 </template>
 
+
+
+
+
+
 <script>
 import { Chat } from "@chat-ui/vue3";
 // import { message } from "ant-design-vue";
 import { defineComponent, ref } from "vue";
 
+
 export default defineComponent({
   components:{Chat},
   setup(){
+    // const socket = io();
+    
     const arr = ref([
     {
       message: "Hi, how may I assist you?",
       type: "chatbot",
       buttons: [
         {
-          message: "Credit Card Stolen"
-          // urgency: 
-          // answer:
+          message: "Credit Card Stolen",
+          urgency: 3,
+          answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
         },
         {
-          message: "Suspicious Transaction"
+          message: "Suspicious Transaction",
+          urgency: 3,
+          answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
         },
         {
-          message: "Register for Card"
+          message: "Register for Card",
+          urgency: 1,
+          answer: "Our FAQ page will have knowledge on this, Click here to view our FAQ page"
         },
         {
-          message: "Credit Limit Enquiry"
-        }
+          message: "Credit Limit Enquiry",
+          urgency: 2,
+          answer: "We will redirect you to our Customer Service Staff\
+          However, feel free to contact us via Email or call this hotline"
+        } 
       ]
     }
     ])
-
     // const btnContent = ref([
     //     {
     //       message: "Credit Card Stolen"
@@ -119,34 +138,47 @@ export default defineComponent({
     const value19 = ref('');
 
     const visible = ref(false);
+    const liveChat = ref('hide');
+    const liveChatCard = ref('hideLive')
 
     const hide = () => {
       visible.value = false;
     };
 
+    const proceedLiveChat = (state) => {
+      liveChat.value = state;
+    };
+
+
     function handleMessage(message) {
         displayMessages(message)
     }
+    function handleMessageLive(message){
+        postMessage(message)
+    }
+
+    const liveChatSupport = () => {
+      liveChatCard.value = 'showLive'
+    }
 
     function displayMessages(message) {
-      arr.value.push({ message: message, type: 'customer' }) 
+      arr.value.push({ message: message.message, type: 'customer' }) 
+      var delayInMilliseconds = 1500; //1 second
+      setTimeout(function() {
+        arr.value.push({ message: message.answer, type: 'chatbot' })
+        proceedLiveChat('show')
+      }, delayInMilliseconds);
+    }
+
+    function postMessage(message){
+      arr.value.push({ message: message.message, type: 'customer' }) 
       value19.value = ''
 
-      var delayInMilliseconds = 1500; //1 second
-
-      // waiting time
-      setTimeout(function() {
-        // push new object from array using answer from arr[0]
-        // {
-        //   message: '',
-        //   type: 'chatbot',
-        //   buttons: [] // arr.find message key in arr[0].buttons
-        // }
-        arr.value.push({ message: message, type: 'chatbot' })
-
-      }, delayInMilliseconds);
-      
     }
+
+
+
+
 
     // [
     //   {
@@ -175,6 +207,10 @@ export default defineComponent({
       arr,
       hide,
       value19,
+      liveChat,
+      liveChatCard,
+      liveChatSupport,
+      handleMessageLive
       // btnContent
     }
   }
@@ -260,5 +296,13 @@ section {
 
 .chatbot { 
   text-align: left;
+}
+
+.hide {
+  display: none;
+}
+
+.hideLive {
+  display: none;
 }
 </style>
