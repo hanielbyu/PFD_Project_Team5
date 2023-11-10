@@ -63,8 +63,8 @@
           <div>
 
             <a-input-group compact :class="liveChatCard">
-              <a-input class="inputBox" v-model:value="textInput" style="width: calc(100% - 200px)" @pressEnter="handleMessage(textInput)"/>
-              <a-button class="submitBox" type="primary" @click="handleMessage(textInput)">Submit</a-button>
+              <a-input class="inputBox" v-model:value="textInput" style="width: calc(100% - 200px)" @pressEnter="handleMessageLive(textInput)"/>
+              <a-button class="submitBox" type="primary" @click="handleMessageLive(textInput)">Submit</a-button>
             </a-input-group>
 
           </div>
@@ -174,9 +174,8 @@ export default defineComponent({
     }
 
     function postMessage(message){
-      arr.value.push({ message: message.message, type: 'customer' }) 
+      arr.value.push({ message: message, type: 'customer' }) 
       textInput.value = ''
-
     }
 
 
@@ -319,7 +318,7 @@ section {
 
 .layout {
   min-height: 110vh;
-  background-image: url('https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg');
+  background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg");;
   background-size: cover; 
   background-position: center;
 }
