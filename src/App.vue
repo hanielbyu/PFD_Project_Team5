@@ -33,12 +33,14 @@
         <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/>
       </div>
 
+      
+
     </a-layout-content>
 
   <a-layout-footer>
     <a-popover v-model:open="visible" title="Support" trigger="click">
         <template #content>
-          <a-card style="width: 350px; height: 420px; background-color: azure; overflow-y:auto;">
+          <a-card style="width: 400px; height: 400px; max-height: 400px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
               <h3 :class="message.type">{{`${message.message}`}}</h3>
               <div v-for ="content in message.buttons" :key="content">
@@ -47,27 +49,24 @@
                 </a-button>
                 <br/>
               </div>
-              
-
             </div>
+
+          
             
-            <a-button 
-            :class="liveChat" type="link" @click="liveChatSupport()" >Proceed to Live Support</a-button>
-
-            <div :class="liveChatCard">
-              <a-divider style="margin-top: ; height: 2px; background-color: #7cb305" />
-              <h1> LIVE CHAT SUPPORT</h1>
-              
-            </div>
+            <a-button :class="liveChat" type="link" 
+            @click="liveChatSupport()"  href="#sec-3" v-smooth-scroll >Proceed to Live Support</a-button>
+            <section :class="liveChatCard" id="sec-3">
+              <div :class="liveChatCard">
+              <a-divider style="height: 5px; background-color: #7cb305" />
+              <h1 class="livechattitle"> LIVE CHAT SUPPORT</h1>
+              <a-divider style="height: 5px; background-color: #7cb305" />
+              </div>
+            </section>
           </a-card>
-          <div>
-
-            <a-input-group compact :class="liveChatCard">
-              <a-input class="inputBox" v-model:value="textInput" style="width: calc(100% - 200px)" @pressEnter="handleMessageLive(textInput)"/>
-              <a-button class="submitBox" type="primary" @click="handleMessageLive(textInput)">Submit</a-button>
-            </a-input-group>
-
-          </div>
+          <a-input-group compact :class="liveChatCard">
+                <a-input class="inputBox" v-model:value="textInput" style="width: calc(100% - 100px)" @pressEnter="handleMessageLive(textInput)"/>
+                <a-button class="submitBox" type="primary" @click="handleMessageLive(textInput)">Submit</a-button>
+              </a-input-group>
           <a @click="hide">Close</a>
         </template>
         <a-button class="need-button" type="primary">Need Help?
@@ -85,14 +84,14 @@
 
 <script>
 // import { message } from "ant-design-vue";
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref} from 'vue';
 import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
 import LiveChatSupport from "./components/LiveChatSupport.vue";
-
-
-
+import AgoraRTM from 'agora-rtm-sdk';
+import { v4 as uuidv4 } from 'uuid';
+import {onMounted, nextTick, defineExpose } from 'vue';
 
 export default defineComponent({
   components:{
@@ -105,6 +104,7 @@ export default defineComponent({
     // const socket = io();
 
     let selectedKeys = ref(['home']);
+
     
     const arr = ref([
     {
@@ -151,7 +151,6 @@ export default defineComponent({
       liveChat.value = state;
     };
 
-
     function handleMessage(message) {
         displayMessages(message)
     }
@@ -179,6 +178,45 @@ export default defineComponent({
     }
 
 
+    const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
+const CHANNEL = 'wdj';
+let client = AgoraRTM.createInstance(APP_ID);
+let uid = uuidv4();
+let text = ref('');
+let messagesRef = ref(null);
+let messages = ref([]);
+let channel;
+
+defineExpose({ messagesRef });
+
+const appendMessage = async (message) => {
+  messages.value.push(message);
+  await nextTick();
+  messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
+};
+
+    onMounted(async () => {
+      await client.login({ uid, token: null });
+      channel = await client.createChannel(CHANNEL);
+      await channel.join();
+      channel.on('ChannelMessage', (message, peerId) => {
+        appendMessage({
+          text: message.text,
+          uid: peerId,
+        });
+      });
+    });
+
+    function sendMessage() {
+      if (text.value === '') return;
+      channel.sendMessage({ text: text.value, type: 'text' });
+      appendMessage({
+        text: text.value,
+        uid,
+      });
+      text.value = '';
+    }
+
     return{
       handleMessage,
       selectedKeys,
@@ -190,6 +228,7 @@ export default defineComponent({
       liveChatCard,
       liveChatSupport,
       handleMessageLive,
+      sendMessage
       // btnContent
     }
   }
@@ -310,6 +349,9 @@ section {
   width: 200px;
 }
 
+.livechattitle{
+  text-align: center;
+}
 .live-chat-card a-divider {
   margin-top: 2px;
   height: 2px;
