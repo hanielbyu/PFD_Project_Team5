@@ -8,9 +8,9 @@
           :style="{ lineHeight: '64px', background: 'rgb(186, 11, 11)'}">
           <a-menu-item key="home">OCBC</a-menu-item>
           <div class="menu-items">
-            <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
             <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item>
+            <a-menu-item key='login'>LOGIN</a-menu-item>
           </div>
       </a-menu>
     </a-layout-header>
@@ -31,6 +31,7 @@
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
         <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/>
+        <LoginView v-if="selectedKeys == 'login'"/>
       </div>
 
     </a-layout-content>
@@ -89,6 +90,7 @@ import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
 import LiveChatSupport from "./components/LiveChatSupport.vue";
+import LoginView from "./components/LoginView.vue";
 
 
 
@@ -99,6 +101,7 @@ export default defineComponent({
     FAQ,
     HomePage,
     LiveChatSupport,
+    LoginView,
 },
   setup(){
     // const socket = io();
