@@ -10,7 +10,7 @@
             <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
-            <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item>
+            <a-menu-item key="manual">Manual</a-menu-item>
           </div>
       </a-menu>
     </a-layout-header>
@@ -30,7 +30,7 @@
         <Contact v-if="selectedKeys == 'contact'"/>
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
-        <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/>
+        <Manual v-if="selectedKeys == 'manual'"/>
       </div>
 
     </a-layout-content>
@@ -89,7 +89,7 @@ import { defineComponent, ref } from "vue";
 import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
-import LiveChatSupport from "./components/LiveChatSupport.vue";
+import Manual from "./components/Manual.vue";
 
 
 
@@ -99,7 +99,7 @@ export default defineComponent({
     Contact,
     FAQ,
     HomePage,
-    LiveChatSupport,
+    Manual,
 },
   setup(){
     // const socket = io();
@@ -341,11 +341,5 @@ section {
   font-family: 'Your Font Here', sans-serif;
 }
 
-.header{
-  color: rgb(242, 8, 8);
-  margin: 0 15px;
-  font-size: 155px;
-  font-weight: bold;
-  font-family: 'Your Font Here', sans-serif;
-}
+
 </style>
