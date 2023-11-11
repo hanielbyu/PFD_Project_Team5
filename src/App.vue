@@ -5,9 +5,9 @@
           theme="dark"
           mode="horizontal"
           v-model:selectedKeys="selectedKeys"
-          :style="{ lineHeight: '64px', background: 'rgb(186, 11, 11)'}">
-          <a-menu-item key="home">OCBC</a-menu-item>
+          :style="{ lineHeight: '64px', background: 'rgb(255, 255, 255)'}">
           <div class="menu-items">
+            <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
             <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item>
@@ -57,6 +57,7 @@
             <div :class="liveChatCard">
               <a-divider style="margin-top: ; height: 2px; background-color: #7cb305" />
               <h1> LIVE CHAT SUPPORT</h1>
+              
             </div>
           </a-card>
           <div>
@@ -218,7 +219,7 @@ export default defineComponent({
   background: #fff;
 }
 .ant-layout-header{
-  background: rgb(186, 11, 11);
+  background: rgb(255, 255, 255);
 }
 .logotitle{
   color: whitesmoke;
@@ -232,6 +233,10 @@ export default defineComponent({
 .ant-input-group{
   text-align: right;
   width: 100%;
+}
+
+.ant-menu-overflow-item {
+  background-color: #000000;
 }
 
 .ant-input{
@@ -300,5 +305,47 @@ section {
 
 .hideLive {
   display: none;
+}
+
+.live-chat-card {
+  width: 200px;
+}
+
+.live-chat-card a-divider {
+  margin-top: 2px;
+  height: 2px;
+  background-color: #7cb305;
+}
+
+.layout {
+  min-height: 110vh;
+  background-image: url('https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg');
+  background-size: cover; 
+  background-position: center;
+}
+.menu-items {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(242, 8, 8);
+  margin: 0 15px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Your Font Here', sans-serif;
+}
+
+.menu-title{
+  color: rgb(242, 8, 8);
+  margin: 0 15px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: 'Your Font Here', sans-serif;
+}
+
+.header{
+  color: rgb(242, 8, 8);
+  margin: 0 15px;
+  font-size: 155px;
+  font-weight: bold;
+  font-family: 'Your Font Here', sans-serif;
 }
 </style>
