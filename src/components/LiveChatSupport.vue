@@ -1,3 +1,27 @@
+<template>
+  <div class="panel">
+    <div class="messages" ref="messagesRef">
+      <div class="inner">
+        <div
+          :key="index"
+          v-for="(message, index) in messages"
+          class="message" >
+          <div v-if="message.uid === uid" class="user-self">
+            <div class="text-self">{{ message.text }}</div>
+          </div>
+          <div v-else class="user-them">
+            <div class="text-them">{{ message.text }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form class="chatbox-form" @submit.prevent="sendMessage">
+      <input class="text-input" v-model="text" />
+      <button class="text-button" >+</button>
+    </form>
+  </div>
+</template>
+
 
 <script setup>
 import AgoraRTM from 'agora-rtm-sdk';
@@ -6,6 +30,7 @@ import { ref, onMounted, nextTick, defineExpose } from 'vue';
 
 const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
 const CHANNEL = 'wdj';
+
 let client = AgoraRTM.createInstance(APP_ID);
 let uid = uuidv4();
 let text = ref('');
@@ -16,9 +41,10 @@ let channel;
 defineExpose({ messagesRef });
 
 const appendMessage = async (message) => {
+  console.log('BELONGS TO LIVECHATSUPPORT')
   messages.value.push(message);
   await nextTick();
-  messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
+  if(messagesRef.value) messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
 };
 
 onMounted(async () => {
@@ -35,6 +61,7 @@ onMounted(async () => {
 
 function sendMessage() {
   if (text.value === '') return;
+  console.log('check text', text)
   channel.sendMessage({ text: text.value, type: 'text' });
   appendMessage({
     text: text.value,
@@ -43,32 +70,6 @@ function sendMessage() {
   text.value = '';
 }
 </script>
-
-<template>
-        <div class="panel">
-          <div class="messages" ref="messagesRef">
-            <div class="inner">
-              <div
-                :key="index"
-                v-for="(message, index) in messages"
-                class="message"
-              >
-                <div v-if="message.uid === uid" class="user-self">
-                  <div class="text-self">{{ message.text }}</div>
-                </div>
-                <div v-else class="user-them">
-                  <div class="text-them">{{ message.text }}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-      
-        <form class="chatbox-form" @submit.prevent="sendMessage">
-        <input class="text-input" v-model="text" />
-        <button class="text-button" >+</button>
-        </form>
-</div>
-</template>
 
 <style>
 body {

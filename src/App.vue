@@ -10,7 +10,7 @@
             <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
-            <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item>
+            <!-- <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item> -->
           </div>
       </a-menu>
     </a-layout-header>
@@ -30,7 +30,7 @@
         <Contact v-if="selectedKeys == 'contact'"/>
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
-        <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/>
+        <!-- <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/> -->
       </div>
 
       
@@ -60,13 +60,12 @@
               <a-divider style="height: 5px; background-color: #7cb305" />
               <h1 class="livechattitle"> LIVE CHAT SUPPORT</h1>
               <a-divider style="height: 5px; background-color: #7cb305" />
+              <LiveChatSupport/>
               </div>
             </section>
           </a-card>
-          <a-input-group compact :class="liveChatCard">
-                <a-input class="inputBox" v-model:value="textInput" style="width: calc(100% - 100px)" @pressEnter="handleMessageLive(textInput)"/>
-                <a-button class="submitBox" type="primary" @click="handleMessageLive(textInput)">Submit</a-button>
-              </a-input-group>
+          <!-- <a-input-group compact :class="liveChatCard">
+          </a-input-group> -->
           <a @click="hide">Close</a>
         </template>
         <a-button class="need-button" type="primary">Need Help?
@@ -76,10 +75,6 @@
       </a-layout-footer>
   </a-layout>
 </template>
-
-
-
-
 
 
 <script>
@@ -192,7 +187,7 @@ defineExpose({ messagesRef });
 const appendMessage = async (message) => {
   messages.value.push(message);
   await nextTick();
-  messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
+  if(messagesRef.value) messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
 };
 
     onMounted(async () => {
