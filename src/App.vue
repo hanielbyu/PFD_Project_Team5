@@ -11,6 +11,7 @@
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
             <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item>
+            <a-menu-item key="scheduleappointment">Schedule Appointment</a-menu-item>
           </div>
       </a-menu>
     </a-layout-header>
@@ -31,6 +32,7 @@
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
         <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/>
+        <ScheduleAppointment v-if="selectedKeys == 'scheduleappointment'"/>
       </div>
 
     </a-layout-content>
@@ -89,7 +91,7 @@ import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
 import LiveChatSupport from "./components/LiveChatSupport.vue";
-
+import ScheduleAppointment from "./components/ScheduleAppointment.vue";
 
 
 
@@ -99,6 +101,7 @@ export default defineComponent({
     FAQ,
     HomePage,
     LiveChatSupport,
+    ScheduleAppointment,
 },
   setup(){
     // const socket = io();
