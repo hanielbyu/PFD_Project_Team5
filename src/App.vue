@@ -11,6 +11,8 @@
             <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
+            <a-menu-item key="login">LOGIN</a-menu-item>
+
             <!-- <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item> -->
 
           </div>
@@ -32,6 +34,7 @@
         <Contact v-if="selectedKeys == 'contact'"/>
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
+        <LoginView v-if="selectedKeys == 'login'"/>
 
         <!-- <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/> -->
 
@@ -87,6 +90,7 @@ import { defineComponent, ref} from 'vue';
 import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
+import LoginView from './components/LoginView.vue';
 import LiveChatSupport from "./components/LiveChatSupport.vue";
 import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
@@ -99,6 +103,7 @@ export default defineComponent({
     FAQ,
     HomePage,
     LiveChatSupport,
+    LoginView,
     
 },
   setup(){

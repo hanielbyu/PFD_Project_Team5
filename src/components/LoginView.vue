@@ -1,5 +1,5 @@
 <template>
-  <form name="login-form" class="login-form">
+  <form name="login-form" class="login-form" @submit.prevent="login">
     <div class="form-group">
       <label for="username">Username:</label>
       <input type="text" id="username" v-model="input.username" class="form-control" />
@@ -29,6 +29,18 @@ export default {
         password: '',
       },
     };
+  },
+  methods: {
+    login() {
+      // Check if the entered username and password are correct
+      if (this.input.username === 'Tommy' && this.input.password === 'Tommy123') {
+        // Redirect to the 'tech' route
+        this.$router.push({ name: 'Tech' });
+      } else {
+        // Handle incorrect credentials (show an error message, etc.)
+        console.log('Incorrect username or password');
+      }
+    },
   },
 };
 </script>

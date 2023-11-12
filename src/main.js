@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import router from './router';
 import App from './App.vue'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
@@ -11,6 +12,10 @@ import { faMessage } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
 import VueSmoothScroll from 'vue3-smooth-scroll'
 
+
+
+
+
 library.add(faMessage)
 
 // const { io } = require("socket.io-client");
@@ -20,6 +25,7 @@ const app = createApp(App);
 app.use(VueSmoothScroll)
 app.use(Antd)
 .component('font-awesome-icon', FontAwesomeIcon)
+.use(router) 
 .mount('#app');
 
 
