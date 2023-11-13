@@ -2,7 +2,13 @@
   <div class="panel">
     <div class="messages" ref="messagesRef">
       <div class="inner">
-        <div
+        <div v-if="role == 'tech'">
+          <h5 v-if="role == 'tech'">Category: Suspicious Transaction</h5>
+          <h5 v-if="role == 'tech'">Time: 12:00pm </h5>
+          <h5 v-if="startState && role == 'tech'">Customer Service Staff have entered this chat...</h5>
+        </div>
+    
+        <div 
           :key="index"
           v-for="(message, index) in messages"
           class="message" >
@@ -13,9 +19,11 @@
             <div class="text-them">{{ message.text }}</div>
           </div>
         </div>
+        
       </div>
     </div>
-    <form class="chatbox-form" @submit.prevent="sendMessage">
+    <a-button v-if="role == 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
+    <form v-else class="chatbox-form" @submit.prevent="sendMessage">
       <input class="text-input" v-model="text" />
       <button class="text-button" >+</button>
     </form>
@@ -30,15 +38,14 @@ import { ref, onMounted, nextTick, defineExpose } from 'vue';
 
 const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
 const CHANNEL = 'wdj';
-
+let role = ref('tech') // Get role from store
 let client = AgoraRTM.createInstance(APP_ID);
 let uid = uuidv4();
 let text = ref('');
 let messagesRef = ref(null);
 let messages = ref([]);
 let channel;
-
-defineExpose({ messagesRef });
+let startState = ref(false);
 
 const appendMessage = async (message) => {
   console.log('BELONGS TO LIVECHATSUPPORT')
@@ -59,6 +66,8 @@ onMounted(async () => {
   });
 });
 
+defineExpose({ messagesRef });
+
 function sendMessage() {
   if (text.value === '') return;
   console.log('check text', text)
@@ -69,6 +78,9 @@ function sendMessage() {
   });
   text.value = '';
 }
+function startChat(){
+  startState.value = true
+}
 </script>
 
 <style>
@@ -76,6 +88,12 @@ body {
   margin: 0;
   height: 400px;
 }
+
+h5{
+  color: rgb(156, 156, 156);
+}
+
+
 
 
 .panel {
