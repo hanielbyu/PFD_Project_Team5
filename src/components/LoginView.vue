@@ -1,22 +1,32 @@
 <template>
-  <form name="login-form" class="login-form" @submit.prevent="login">
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" id="username" v-model="input.username" class="form-control" />
-    </div>
+  <div>
+    <form name="login-form" class="login-form" @submit.prevent="login">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" v-model="input.username" class="form-control" />
+      </div>
 
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" v-model="input.password" class="form-control" />
-    </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="input.password" class="form-control" />
+      </div>
 
-    <button class="btn btn-outline-dark" type="submit">Login</button>
+      <button class="btn btn-outline-dark" type="submit">Login</button>
 
-    <div class="form-text">
-      <p>Username is: {{ input.username }}</p>
-      <p>Password is: {{ input.password }}</p>
+      <div class="form-text">
+        <p>Username is: {{ input.username }}</p>
+        <p>Password is: {{ input.password }}</p>
+      </div>
+    </form>
+
+    <!-- Conditionally render a different component or content based on the login status -->
+    <div v-if="isLoggedIn">
+      <!-- Use router-link to navigate to 'tech' route -->
+      <router-link to="/tech">
+        <h2>Welcome to the Tech Page!</h2>
+      </router-link>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -28,13 +38,16 @@ export default {
         username: '',
         password: '',
       },
+      isLoggedIn: false,
     };
   },
   methods: {
     login() {
       // Check if the entered username and password are correct
       if (this.input.username === 'Tommy' && this.input.password === 'Tommy123') {
-        // Redirect to the 'tech' route
+        // Set the login status to true
+        this.isLoggedIn = true;
+        // Redirect to the 'Tech' route
         this.$router.push({ name: 'Tech' });
       } else {
         // Handle incorrect credentials (show an error message, etc.)

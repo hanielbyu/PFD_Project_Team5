@@ -19,9 +19,9 @@
             <td>{{ technician.keywords }}</td>
             <td>{{ getTimeString(technician) }}</td>
             <td>
-                <a href="./FaQ.vue">
-                <button>Chat</button>
-                </a>
+              <router-link to="/faq">
+  <button>Chat</button>
+</router-link>
             </td>
           </tr>
         </tbody>
@@ -58,6 +58,7 @@
   
   <script>
   export default {
+    name: 'TechView',
     methods: {
       getTimeString(technician) {
         if (technician.userName === 'John Doe') {
