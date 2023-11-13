@@ -2,10 +2,10 @@
   <a-layout class="layout">
     <a-layout-header>
       <a-menu
-          theme="dark"
+          theme="light"
           mode="horizontal"
           v-model:selectedKeys="selectedKeys"
-          :style="{ lineHeight: '64px', background: 'rgb(255, 255, 255)'}">
+          :style="{ lineHeight: '63px', background: 'rgb(255, 255, 255)'}">
           <div class="menu-items">
             <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
             <a-menu-item key="faq">FAQ</a-menu-item>
@@ -240,6 +240,8 @@ const appendMessage = async (message) => {
 
 
 /* Modify the background color */
+
+
 .navbar-custom {
     background-color: red;
 }
@@ -359,7 +361,7 @@ section {
 
 .layout {
   min-height: 110vh;
-  background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg");;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg");;
   background-size: cover; 
   background-position: center;
 }
