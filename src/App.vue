@@ -10,6 +10,7 @@
             <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
+            <a-menu-item key="tech">TECH</a-menu-item>
             <!-- <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item> -->
           </div>
       </a-menu>
@@ -30,6 +31,7 @@
         <Contact v-if="selectedKeys == 'contact'"/>
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
+        <TechView v-if="selectedKeys == 'tech'"/>
         <!-- <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/> -->
       </div>
 
@@ -40,7 +42,7 @@
   <a-layout-footer>
     <a-popover v-model:open="visible" title="Support" trigger="click">
         <template #content>
-          <a-card style="width: 400px; height: 400px; max-height: 400px; background-color: azure; overflow-y:auto;">
+          <a-card style="width: 400px; height: 500px; max-height: 500px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
               <h3 :class="message.type">{{`${message.message}`}}</h3>
               <div v-for ="content in message.buttons" :key="content">
@@ -87,6 +89,7 @@ import LiveChatSupport from "./components/LiveChatSupport.vue";
 import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import {onMounted, nextTick, defineExpose } from 'vue';
+import TechView from './components/TechView.vue';
 
 export default defineComponent({
   components:{
@@ -94,6 +97,7 @@ export default defineComponent({
     FAQ,
     HomePage,
     LiveChatSupport,
+    TechView,
 },
   setup(){
     // const socket = io();
