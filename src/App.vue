@@ -2,15 +2,29 @@
   <a-layout class="layout">
     <a-layout-header>
       <a-menu
-          theme="dark"
+          v-if="role == 'tech'"
+          theme="light"
           mode="horizontal"
           v-model:selectedKeys="selectedKeys"
-          :style="{ lineHeight: '64px', background: 'rgb(255, 255, 255)'}">
+          :style="{ lineHeight: '63px', background: 'rgb(255, 255, 255)'}">
+          <div class="menu-items">
+            <a-menu-item class="menu-title" key="home">OCBC SUPPORT</a-menu-item>
+            <a-menu-item key="faq">FAQ</a-menu-item>
+            <a-menu-item key="support">SUPPORT</a-menu-item>
+            <a-menu-item key="tech">TECH</a-menu-item>
+
+          </div>
+      </a-menu>
+      <a-menu
+          v-if="role == 'user'"
+          theme="light"
+          mode="horizontal"
+          v-model:selectedKeys="selectedKeys"
+          :style="{ lineHeight: '63px', background: 'rgb(255, 255, 255)'}">
           <div class="menu-items">
             <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
-            <!-- <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item> -->
           </div>
       </a-menu>
     </a-layout-header>
@@ -30,6 +44,8 @@
         <Contact v-if="selectedKeys == 'contact'"/>
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
+        <TechView v-if="selectedKeys == 'tech'"/>
+        <SupportLine v-if="selectedKeys == 'support'"/>
         <!-- <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/> -->
       </div>
 
@@ -38,9 +54,10 @@
     </a-layout-content>
 
   <a-layout-footer>
-    <a-popover v-model:open="visible" title="Support" trigger="click">
+    <a-popover v-model:open="visible" title="Customer Enquiry" trigger="click">
         <template #content>
-          <a-card style="width: 400px; height: 400px; max-height: 400px; background-color: azure; overflow-y:auto;">
+          <a-card style="width: 400px; height: 500px; max-height: 500px; background-color: azure; overflow-y:auto;">
+            <a-card class="message-card">
             <div v-for ="message in arr" :key="message">
               <h3 :class="message.type">{{`${message.message}`}}</h3>
               <div v-for ="content in message.buttons" :key="content">
@@ -50,6 +67,7 @@
                 <br/>
               </div>
             </div>
+            </a-card>
 
           
             
@@ -87,13 +105,16 @@ import LiveChatSupport from "./components/LiveChatSupport.vue";
 import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import {onMounted, nextTick, defineExpose } from 'vue';
-
+import TechView from './components/TechView.vue';
+import SupportLine from './components/SupportLine.vue'
 export default defineComponent({
   components:{
     Contact,
     FAQ,
     HomePage,
     LiveChatSupport,
+    TechView,
+    SupportLine,
 },
   setup(){
     // const socket = io();
@@ -132,7 +153,7 @@ export default defineComponent({
     ])
 
     const textInput = ref('');
-
+    const role = ref('tech');
     const visible = ref(false);
     const liveChat = ref('hide');
     const liveChatCard = ref('hideLive')
@@ -174,13 +195,13 @@ export default defineComponent({
 
 
     const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
-const CHANNEL = 'wdj';
-let client = AgoraRTM.createInstance(APP_ID);
-let uid = uuidv4();
-let text = ref('');
-let messagesRef = ref(null);
-let messages = ref([]);
-let channel;
+    const CHANNEL = 'wdj';
+    let client = AgoraRTM.createInstance(APP_ID);
+    let uid = uuidv4();
+    let text = ref('');
+    let messagesRef = ref(null);
+    let messages = ref([]);
+    let channel;
 
 defineExpose({ messagesRef });
 
@@ -214,6 +235,7 @@ const appendMessage = async (message) => {
 
     return{
       handleMessage,
+      role,
       selectedKeys,
       displayMessages,
       arr,
@@ -236,6 +258,8 @@ const appendMessage = async (message) => {
 
 
 /* Modify the background color */
+
+
 .navbar-custom {
     background-color: red;
 }
@@ -355,7 +379,7 @@ section {
 
 .layout {
   min-height: 110vh;
-  background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg");;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg");;
   background-size: cover; 
   background-position: center;
 }
