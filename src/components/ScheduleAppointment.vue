@@ -2,7 +2,7 @@
     <header>Appointment Booking</header>
     <br>
     <a-space direction="vertical" :size="12">
-    <a-date-picker v-model:value="dateselected" :disabled-date="disabledDate" />
+    <a-date-picker allowClear = ' true' v-model:value="dateselected" :disabled-date="disabledDate" />
   </a-space>
   <br>
   <br>
