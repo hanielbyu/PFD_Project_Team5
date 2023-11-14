@@ -12,6 +12,7 @@
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="support">SUPPORT</a-menu-item>
             <a-menu-item key="tech">TECH</a-menu-item>
+            <a-menu-item key="scheduleappointment">Schedule Appointment</a-menu-item>
 
           </div>
       </a-menu>
@@ -48,6 +49,7 @@
         <TechView v-if="selectedKeys == 'tech'"/>
         <SupportLine v-if="selectedKeys == 'support'"/>
         <LoginView v-if="selectedKeys == 'login'"/>
+        <ScheduleAppointment v-if="selectedKeys == 'scheduleappointment'"/>
       </div>
 
       
@@ -114,6 +116,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {onMounted, nextTick, defineExpose } from 'vue';
 import TechView from './components/TechView.vue';
 import SupportLine from './components/SupportLine.vue'
+import ScheduleAppointment from './components/ScheduleAppointment.vue';
 export default defineComponent({
   components:{
     Contact,
@@ -122,7 +125,8 @@ export default defineComponent({
     LiveChatSupport,
     TechView,
     SupportLine,
-    LoginView
+    LoginView,
+    ScheduleAppointment,
 },
   setup(){
     // const socket = io();
