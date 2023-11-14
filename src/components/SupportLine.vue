@@ -9,8 +9,14 @@
         <a-tab-pane key="1" tab="John Wick">
             <LiveChatSupport />
         </a-tab-pane>
-      <a-tab-pane key="2" tab="Tab 2">Content of Tab 2</a-tab-pane>
-      <a-tab-pane key="3" tab="Tab 3">Content of Tab 3</a-tab-pane>
+
+      <a-tab-pane key="2" tab="Tab 2">
+        <LiveChatSupport />
+      </a-tab-pane>
+        
+      <a-tab-pane key="3" tab="Tab 3">
+        <LiveChatSupport />
+      </a-tab-pane>
     </a-tabs>
   </template>
 
@@ -25,8 +31,8 @@
   export default defineComponent({
 
     components: {
-        LiveChatSupport 
-        },
+    LiveChatSupport,
+},
     setup() {
         const activeKey = ref("1");
         return {

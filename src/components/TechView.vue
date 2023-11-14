@@ -26,13 +26,6 @@
           </tr>
         </tbody>
       </table>
-      <div>
-        <section :class="liveChatTech">
-          <div :class="liveChatTech">
-            <LiveChatSupport class="liveChatPanel"/>
-          </div>
-        </section>
-      </div>
     </div>
   </template>
 
@@ -71,12 +64,9 @@
   
   <script>
   import {defineComponent, ref} from 'vue';
-  import LiveChatSupport from "./LiveChatSupport.vue"
+
 
   export default defineComponent({
-    components:{
-      LiveChatSupport,
-    },
     
     methods: {
       getTimeString(technician) {

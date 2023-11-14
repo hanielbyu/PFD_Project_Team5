@@ -57,17 +57,20 @@
     <a-popover v-model:open="visible" title="Customer Enquiry" trigger="click">
         <template #content>
           <a-card style="width: 400px; height: 500px; max-height: 500px; background-color: azure; overflow-y:auto;">
-            <a-card class="message-card">
             <div v-for ="message in arr" :key="message">
-              <h3 :class="message.type">{{`${message.message}`}}</h3>
-              <div v-for ="content in message.buttons" :key="content">
-                <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
-                  <h3 :class="content.message">{{`${content.message}`}}</h3>
-                </a-button>
-                <br/>
-              </div>
+              <a-card :class="message.type">
+                <h3 :class="message.type">{{`${message.message}`}}</h3>
+              </a-card>
+              <a-card class="button-message-card">
+                <div v-for ="content in message.buttons" :key="content">
+                  <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
+                    <h3 :class="content.message">{{`${content.message}`}}</h3>
+                  </a-button>
+                  <br/>
+                </div>
+              </a-card>
             </div>
-            </a-card>
+            
 
           
             
@@ -260,6 +263,11 @@ const appendMessage = async (message) => {
 /* Modify the background color */
 
 
+.button-message-card{
+  max-width: 250px;
+  background-color:  rgb(255, 255, 255);
+}
+
 .navbar-custom {
     background-color: red;
 }
@@ -348,12 +356,16 @@ section {
 }
 
 .customer {
+  max-width: 250px;
+  background: rgb(255, 255, 255);
   text-align: right;
 }
 
 .chatbot { 
+  max-width: 250px;
+  background-color: rgb(255, 255, 255);
   text-align: left;
-  max-width: 70%;
+  margin-bottom: 10px;
 }
 
 .hide {
