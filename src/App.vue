@@ -13,6 +13,7 @@
             <a-menu-item key="contact">CONTACT US</a-menu-item>
             <a-menu-item key="login">LOGIN</a-menu-item>
 
+
             <!-- <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item> -->
 
           </div>
@@ -104,12 +105,17 @@ export default defineComponent({
     HomePage,
     LiveChatSupport,
     LoginView,
+
     
 },
+
+
   setup(){
     // const socket = io();
 
     let selectedKeys = ref(['home']);
+
+    
 
     
     const arr = ref([
@@ -234,7 +240,8 @@ const appendMessage = async (message) => {
       liveChatCard,
       liveChatSupport,
       handleMessageLive,
-      sendMessage
+      sendMessage,
+      
       // btnContent
     }
   }

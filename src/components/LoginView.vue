@@ -20,12 +20,9 @@
     </form>
 
     <!-- Conditionally render a different component or content based on the login status -->
-    <div v-if="isLoggedIn">
-      <!-- Use router-link to navigate to 'tech' route -->
-      <router-link to="/tech">
-        <h2>Welcome to the Tech Page!</h2>
-      </router-link>
-    </div>
+    <button v-if="isLoggedIn" @click="navigateToTech" class="btn btn-outline-dark">
+      Go to TechView
+    </button>
   </div>
 </template>
 
@@ -39,6 +36,7 @@ export default {
         password: '',
       },
       isLoggedIn: false,
+      userRole: '',
     };
   },
   methods: {
@@ -47,11 +45,22 @@ export default {
       if (this.input.username === 'Tommy' && this.input.password === 'Tommy123') {
         // Set the login status to true
         this.isLoggedIn = true;
-        // Redirect to the 'Tech' route
-        this.$router.push({ name: 'Tech' });
+
+        // Set the user role to 'tech' for the example
+        this.userRole = 'tech';
       } else {
         // Handle incorrect credentials (show an error message, etc.)
         console.log('Incorrect username or password');
+      }
+    },
+    setUserRoleAndNavigate() {
+      // Check the user's role and perform actions accordingly
+      if (this.userRole === 'tech') {
+        // Perform actions for 'tech' role (e.g., show tech homepage)
+        console.log('Redirect to tech homepage');
+      } else {
+        // Perform actions for other roles (e.g., show user dashboard)
+        console.log('Redirect to user dashboard');
       }
     },
   },
