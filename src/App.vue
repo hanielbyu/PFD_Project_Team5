@@ -76,6 +76,8 @@
             
             <a-button :class="liveChat" type="link" 
             @click="liveChatSupport()"  href="#sec-3" v-smooth-scroll >Proceed to Live Support</a-button>
+            <a-button :class="faqPage" type="link" 
+            @click="liveChatFAQ()">View FAQ Page</a-button>
             <section :class="liveChatCard" id="sec-3">
               <div :class="liveChatCard">
               <a-divider style="height: 5px; background-color: #7cb305" />
@@ -158,6 +160,7 @@ export default defineComponent({
     const textInput = ref('');
     const role = ref('tech');
     const visible = ref(false);
+    const faqPage = ref('hide');
     const liveChat = ref('hide');
     const liveChatCard = ref('hideLive')
 
@@ -170,6 +173,10 @@ export default defineComponent({
       liveChat.value = state;
     };
 
+    const proceedFAQ = (state) => {
+      faqPage.value = state;
+    }
+
     function handleMessage(message) {
         displayMessages(message)
     }
@@ -179,15 +186,23 @@ export default defineComponent({
 
     const liveChatSupport = () => {
       liveChatCard.value = 'showLive'
-      selectedKeys = 'faq'
     }
-
+    const liveChatFAQ = () => {
+      selectedKeys.value = ['faq']
+    }
+    
     function displayMessages(message) {
       arr.value.push({ message: message.message, type: 'customer' }) 
       var delayInMilliseconds = 1500; //1 second
       setTimeout(function() {
         arr.value.push({ message: message.answer, type: 'chatbot' })
-        proceedLiveChat('show')
+        if (message.urgency == 1){
+          proceedFAQ('show')
+        }
+        else{
+          proceedLiveChat('show')
+          proceedFAQ('show')
+        }    
       }, delayInMilliseconds);
     }
 
@@ -247,6 +262,8 @@ const appendMessage = async (message) => {
       liveChat,
       liveChatCard,
       liveChatSupport,
+      liveChatFAQ,
+      faqPage,
       handleMessageLive,
       sendMessage
       // btnContent
@@ -356,12 +373,16 @@ section {
 }
 
 .customer {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  float: right;
   max-width: 250px;
-  background: rgb(255, 255, 255);
+  background: rgb(255, 241, 228);
   text-align: right;
 }
 
 .chatbot { 
+  clear: both;
   max-width: 250px;
   background-color: rgb(255, 255, 255);
   text-align: left;

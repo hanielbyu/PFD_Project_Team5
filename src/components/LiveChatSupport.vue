@@ -5,14 +5,18 @@
         <div v-if="role == 'tech'">
           <h5 v-if="role == 'tech'">Category: Suspicious Transaction</h5>
           <h5 v-if="role == 'tech'">Time: 12:00pm </h5>
-          <h5 v-if="startState && role == 'tech'">Customer Service Staff have entered this chat...</h5>
         </div>
+        <h5>Waiting for Customer Service Staff to assist you</h5>
+        
     
         <div 
           :key="index"
           v-for="(message, index) in messages"
           class="message" >
-          <div v-if="message.uid === uid" class="user-self">
+          <div v-if="message.uid === 'center'" class="user-center">
+            <div class="text-center">{{ message.text }}</div>
+          </div>
+          <div v-else-if="message.uid === uid" class="user-self">
             <div class="text-self">{{ message.text }}</div>
           </div>
           <div v-else class="user-them">
@@ -48,7 +52,7 @@ let channel;
 let startState = ref(false);
 
 const appendMessage = async (message) => {
-  console.log('BELONGS TO LIVECHATSUPPORT')
+  console.log('BELONGS TO LIVECHATSUPPORT', message)
   messages.value.push(message);
   await nextTick();
   if(messagesRef.value) messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
@@ -80,6 +84,9 @@ function sendMessage() {
 }
 function startChat(){
   startState.value = true
+  let text = 'Customer Service has entered the chat'
+  messages.value.push({text: text, uid: 'center' })
+  channel.sendMessage({ text: text, type: 'text' });
 }
 </script>
 
@@ -101,7 +108,7 @@ h5{
   flex-direction: column;
   padding: 20px;
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 800px;
   height: 450px;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -125,17 +132,20 @@ h5{
   margin-bottom: 6px;
 }
 .text-them{
+  font-size: 16px;
   text-align: left;
+  max-width: 70%;
 }
 .text-self{
+  font-size: 16px;
   text-align: right;
+  
 }
 .user-self {
-  color: green;
+  color: rgb(71, 148, 0);
 }
 .user-them {
-  color: red;
-
+  color: rgb(170, 6, 6);
 }
 .chatbox-form {
   position: relative;
