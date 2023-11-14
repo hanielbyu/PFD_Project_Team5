@@ -33,6 +33,10 @@ export default {
 </script>
 
 <style scoped>
+
+h2,li, .question, .answer{
+  color: white;
+}
 .faq-container {
   max-width: 800px;
   margin: 0 auto;
