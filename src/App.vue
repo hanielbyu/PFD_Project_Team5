@@ -297,23 +297,32 @@ const appendMessage = async (message) => {
 }
 
 .ant-input{
-  width: 500px;
-  text-align: left;
+  width: 50000px;
+  text-align: right;
 }
 
 section {
   height: 100vh;
 }
-.need-button{
-  position:absolute;
-  right:    0;
-  bottom:   0;
-  margin: 70px 70px;
-  padding: 35px 40px;
+.need-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 20px;
   background-color: rgb(55, 63, 63);
-  line-height: 0px;
+  border: 2px solid #7fa275;
+  border-radius: 10px;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  height:80px;
+  width:150px;
 }
 
+.need-button:hover {
+  background-color: rgb(116, 164, 159)}
 
 .button-content{
   padding-right: 20px;
@@ -379,7 +388,7 @@ section {
 
 .layout {
   min-height: 110vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg");;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iv2VYtHhrIF4/v0/1200x800.jpg");;
   background-size: cover; 
   background-position: center;
 }
