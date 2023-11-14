@@ -11,7 +11,7 @@
             <a-menu-item key="faq">FAQ</a-menu-item>
             <a-menu-item key="contact">CONTACT US</a-menu-item>
             <!-- <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item> -->
-            <a-menu-item key="scheduleapppointment">Schedule Appointmennt</a-menu-item>
+            <a-menu-item key="scheduleappointment">Schedule Appointment</a-menu-item>
           </div>
       </a-menu>
     </a-layout-header>
