@@ -65,6 +65,10 @@ a-tabs{
     color: white;
 }
 
+.ant-tabs-tab:hover{
+    background:rgb(207, 52, 52);
+}
+
 .ant-tabs-tab-btn{
     color: white !important;
 }
