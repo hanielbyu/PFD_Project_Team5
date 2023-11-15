@@ -111,9 +111,6 @@ import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
 import LiveChatSupport from "./components/LiveChatSupport.vue";
 import LoginView from './components/LoginView1.vue';
-import AgoraRTM from 'agora-rtm-sdk';
-import { v4 as uuidv4 } from 'uuid';
-import {onMounted, nextTick, defineExpose } from 'vue';
 import TechView from './components/TechView.vue';
 import SupportLine from './components/SupportLine.vue'
 import ScheduleAppointment from './components/ScheduleAppointment.vue';
@@ -218,46 +215,6 @@ export default defineComponent({
       textInput.value = ''
     }
 
-
-    const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
-    const CHANNEL = 'wdj';
-    let client = AgoraRTM.createInstance(APP_ID);
-    let uid = uuidv4();
-    let text = ref('');
-    let messagesRef = ref(null);
-    let messages = ref([]);
-    let channel;
-
-defineExpose({ messagesRef });
-
-const appendMessage = async (message) => {
-  messages.value.push(message);
-  await nextTick();
-  if(messagesRef.value) messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
-};
-
-    onMounted(async () => {
-      await client.login({ uid, token: null });
-      channel = await client.createChannel(CHANNEL);
-      await channel.join();
-      channel.on('ChannelMessage', (message, peerId) => {
-        appendMessage({
-          text: message.text,
-          uid: peerId,
-        });
-      });
-    });
-
-    function sendMessage() {
-      if (text.value === '') return;
-      channel.sendMessage({ text: text.value, type: 'text' });
-      appendMessage({
-        text: text.value,
-        uid,
-      });
-      text.value = '';
-    }
-
     return{
       handleMessage,
       role,
@@ -272,7 +229,6 @@ const appendMessage = async (message) => {
       liveChatFAQ,
       faqPage,
       handleMessageLive,
-      sendMessage
       // btnContent
     }
   }

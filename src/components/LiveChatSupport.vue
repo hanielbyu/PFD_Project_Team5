@@ -40,8 +40,8 @@ import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, onMounted, nextTick, defineExpose } from 'vue';
 
-const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
-const CHANNEL = 'wdj';
+const APP_ID = '8a2667e467284e6e975d1ca95176477c';
+const CHANNEL = 'han';
 let role = ref('tech') // Get role from store
 let client = AgoraRTM.createInstance(APP_ID);
 let uid = uuidv4();
@@ -84,8 +84,8 @@ function sendMessage() {
 }
 function startChat(){
   startState.value = true
-  let text = 'Customer Service has entered the chat'
-  messages.value.push({text: text, uid: 'center' })
+  let text = 'Customer Service has entered the chat';
+  messages.value.push({text: text, uid: 'center' });
   channel.sendMessage({ text: text, type: 'text' });
 }
 </script>
