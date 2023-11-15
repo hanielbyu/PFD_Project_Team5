@@ -10,11 +10,11 @@
             <LiveChatSupport />
         </a-tab-pane>
 
-      <a-tab-pane key="2" tab="Tab 2">
+      <a-tab-pane key="2" tab="Jane Lee">
         <LiveChatSupport />
       </a-tab-pane>
         
-      <a-tab-pane key="3" tab="Tab 3">
+      <a-tab-pane key="3" tab="Johnathan">
         <LiveChatSupport />
       </a-tab-pane>
     </a-tabs>
