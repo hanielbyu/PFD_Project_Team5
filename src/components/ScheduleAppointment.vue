@@ -81,7 +81,6 @@ export default {
           if (this.selectedTime) {
             console.log('Appointment submitted for time:', this.selectedTime);
             this.showModal(); 
-            this.selectedTime.clear();
           } else {
             console.log('Please select a time slot before submitting.');
           }
