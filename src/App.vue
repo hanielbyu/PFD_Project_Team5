@@ -13,6 +13,7 @@
             <a-menu-item key="support">SUPPORT</a-menu-item>
             <a-menu-item key="tech">TECH</a-menu-item>
             <a-menu-item key="scheduleappointment">Schedule Appointment</a-menu-item>
+            <a-menu-item key="login">LOGIN</a-menu-item>
 
           </div>
       </a-menu>
@@ -29,6 +30,7 @@
             <a-menu-item key="contact">CONTACT US</a-menu-item>
             <a-menu-item key="login">LOGIN</a-menu-item>
 
+            <router-view></router-view>
 
           </div>
       </a-menu>
@@ -51,7 +53,7 @@
         <HomePage v-if="selectedKeys == 'home'"/>
         <TechView v-if="selectedKeys == 'tech'"/>
         <SupportLine v-if="selectedKeys == 'support'"/>
-        <LoginView v-if="selectedKeys == 'login'"/>
+        <LoginView1 v-if="selectedKeys == 'login'"/>
         <ScheduleAppointment v-if="selectedKeys == 'scheduleappointment'"/>
 
       </div>
@@ -113,7 +115,7 @@ import { defineComponent, ref} from 'vue';
 import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
-import LoginView from './components/LoginView.vue';
+import LoginView1 from './components/LoginView1.vue';
 import LiveChatSupport from "./components/LiveChatSupport.vue";
 import TechView from './components/TechView.vue';
 import SupportLine from './components/SupportLine.vue'
@@ -124,7 +126,7 @@ export default defineComponent({
     FAQ,
     HomePage,
     LiveChatSupport,
-    LoginView,
+    LoginView1,
     TechView,
     SupportLine,
     ScheduleAppointment,
@@ -170,7 +172,7 @@ export default defineComponent({
     ])
 
     const textInput = ref('');
-    const role = ref('tech');
+    const role = ref('user');
     const visible = ref(false);
     const faqPage = ref('hide');
     const liveChat = ref('hide');
