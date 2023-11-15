@@ -28,6 +28,13 @@
     </div>
     <a-button v-if="role == 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
     <form v-else class="chatbox-form" @submit.prevent="sendMessage">
+      <div class="suggested-texts">
+        <!-- Add predefined suggestions -->
+        <span @click="setText('How can I apply for a credit card?')">Credit Card Application</span>
+        <span @click="setText('I want to report a lost card')">Lost Card</span>
+        <!-- Add more suggestions as needed -->
+
+      </div>
       <input class="text-input" v-model="text" />
       <button class="text-button" >+</button>
     </form>
@@ -88,6 +95,10 @@ function startChat(){
   messages.value.push({text: text, uid: 'center' });
   channel.sendMessage({ text: text, type: 'text' });
 }
+function setText(suggestion) {
+  text.value = suggestion;
+}
+
 </script>
 
 <style>
@@ -167,11 +178,42 @@ h5{
   outline: none;
   background: rgb(58, 58, 58);
   color: white;
-  padding: 6px 10px;
+  padding: 1px 10px;
   position: absolute;
   right: 0px;
-  bottom: 0px;
+  bottom: 10px;
 
   font-size: 24px;
 }
+.suggested-texts {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.suggested-texts span {
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: #313030; /* Grey color */
+  color: white;
+  border-radius: 5px;
+  margin-right: 5px; /* No spacing between buttons */
+}
+
+.chatbox-form {
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Adjust to column layout */
+}
+
+.text-input {
+  width: 100%;
+  border: none;
+  height: 40px;
+  padding: 8px;
+  border-top: 1px solid #999;
+  border-radius: 5px;
+  outline: none;
+  margin-bottom: 10px;
+}
+
 </style>
