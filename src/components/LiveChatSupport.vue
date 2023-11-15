@@ -32,7 +32,20 @@
         <button class="text-button" >Submit</button>
       </form>
     </div>
-  </template>
+    <a-button v-if="role == 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
+    <form v-else class="chatbox-form" @submit.prevent="sendMessage">
+      <div class="suggested-texts">
+        <!-- Add predefined suggestions -->
+        <span @click="setText('How can I apply for a credit card?')">Credit Card Application</span>
+        <span @click="setText('I want to report a lost card')">Lost Card</span>
+        <!-- Add more suggestions as needed -->
+
+      </div>
+      <input class="text-input" v-model="text" />
+      <button class="text-button" >+</button>
+    </form>
+  </div>
+</template>
 
 
   <script setup>
