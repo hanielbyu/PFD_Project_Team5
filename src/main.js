@@ -21,6 +21,7 @@ const app = createApp(App);
 
 app.use(VueSmoothScroll)
 app.use(Antd)
+
 .component('font-awesome-icon', FontAwesomeIcon)
 .use(router)
 .mount('#app');
