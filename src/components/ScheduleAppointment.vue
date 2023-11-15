@@ -120,9 +120,19 @@ export default {
 }
 
 .content {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column {
+  flex: 0.5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .button {
