@@ -24,6 +24,7 @@
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
     "uuid": "^9.0.1",
+    "view-router": "^0.2.3",
     "vue": "^3.2.13",
     "vue-router": "^4.2.5",
     "vue3-smooth-scroll": "^0.8.1"
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@types/uuid": "^9.0.7",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",

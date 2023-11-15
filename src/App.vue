@@ -2,10 +2,26 @@
   <a-layout class="layout">
     <a-layout-header>
       <a-menu
-          theme="dark"
+          v-if="role == 'tech'"
+          theme="light"
           mode="horizontal"
           v-model:selectedKeys="selectedKeys"
-          :style="{ lineHeight: '64px', background: 'rgb(255, 255, 255)'}">
+          :style="{ lineHeight: '63px', background: 'rgb(255, 255, 255)'}">
+          <div class="menu-items">
+            <a-menu-item class="menu-title" key="home">OCBC SUPPORT</a-menu-item>
+            <a-menu-item key="faq">FAQ</a-menu-item>
+            <a-menu-item key="support">SUPPORT</a-menu-item>
+            <a-menu-item key="tech">TECH</a-menu-item>
+            <a-menu-item key="scheduleappointment">Schedule Appointment</a-menu-item>
+
+          </div>
+      </a-menu>
+      <a-menu
+          v-if="role == 'user'"
+          theme="light"
+          mode="horizontal"
+          v-model:selectedKeys="selectedKeys"
+          :style="{ lineHeight: '63px', background: 'rgb(255, 255, 255)'}">
           <div class="menu-items">
 
             <a-menu-item class="menu-title" key="home">OCBC</a-menu-item>
@@ -13,8 +29,6 @@
             <a-menu-item key="contact">CONTACT US</a-menu-item>
             <a-menu-item key="login">LOGIN</a-menu-item>
 
-
-            <!-- <a-menu-item key="livechatsupport">LiveChatSupport</a-menu-item> -->
 
           </div>
       </a-menu>
@@ -35,9 +49,10 @@
         <Contact v-if="selectedKeys == 'contact'"/>
         <FAQ v-if="selectedKeys == 'faq'"/>
         <HomePage v-if="selectedKeys == 'home'"/>
+        <TechView v-if="selectedKeys == 'tech'"/>
+        <SupportLine v-if="selectedKeys == 'support'"/>
         <LoginView v-if="selectedKeys == 'login'"/>
-
-        <!-- <LiveChatSupport v-if="selectedKeys == 'livechatsupport'"/> -->
+        <ScheduleAppointment v-if="selectedKeys == 'scheduleappointment'"/>
 
       </div>
 
@@ -46,23 +61,30 @@
     </a-layout-content>
 
   <a-layout-footer>
-    <a-popover v-model:open="visible" title="Support" trigger="click">
+    <a-popover v-model:open="visible" title="Customer Enquiry" trigger="click">
         <template #content>
-          <a-card style="width: 400px; height: 400px; max-height: 400px; background-color: azure; overflow-y:auto;">
+          <a-card style="width: 400px; height: 500px; max-height: 500px; background-color: azure; overflow-y:auto;">
             <div v-for ="message in arr" :key="message">
-              <h3 :class="message.type">{{`${message.message}`}}</h3>
-              <div v-for ="content in message.buttons" :key="content">
-                <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
-                  <h3 :class="content.message">{{`${content.message}`}}</h3>
-                </a-button>
-                <br/>
-              </div>
+              <a-card :class="message.type">
+                <h3 :class="message.type">{{`${message.message}`}}</h3>
+              </a-card>
+              <a-card class="button-message-card">
+                <div v-for ="content in message.buttons" :key="content">
+                  <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
+                    <h3 :class="content.message">{{`${content.message}`}}</h3>
+                  </a-button>
+                  <br/>
+                </div>
+              </a-card>
             </div>
+            
 
           
             
             <a-button :class="liveChat" type="link" 
             @click="liveChatSupport()"  href="#sec-3" v-smooth-scroll >Proceed to Live Support</a-button>
+            <a-button :class="faqPage" type="link" 
+            @click="liveChatFAQ()">View FAQ Page</a-button>
             <section :class="liveChatCard" id="sec-3">
               <div :class="liveChatCard">
               <a-divider style="height: 5px; background-color: #7cb305" />
@@ -77,7 +99,7 @@
           <a @click="hide">Close</a>
         </template>
         <a-button class="need-button" type="primary">Need Help?
-          <font-awesome-icon class="message-icon" :icon="['fas', 'message']" />
+          <!-- <font-awesome-icon class="message-icon" :icon="['fas', 'message']" /> -->
         </a-button>
       </a-popover>
       </a-layout-footer>
@@ -93,11 +115,9 @@ import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
 import LoginView from './components/LoginView.vue';
 import LiveChatSupport from "./components/LiveChatSupport.vue";
-import AgoraRTM from 'agora-rtm-sdk';
-import { v4 as uuidv4 } from 'uuid';
-import {onMounted, nextTick, defineExpose } from 'vue';
-
-
+import TechView from './components/TechView.vue';
+import SupportLine from './components/SupportLine.vue'
+import ScheduleAppointment from './components/ScheduleAppointment.vue';
 export default defineComponent({
   components:{
     Contact,
@@ -105,8 +125,9 @@ export default defineComponent({
     HomePage,
     LiveChatSupport,
     LoginView,
-
-    
+    TechView,
+    SupportLine,
+    ScheduleAppointment,
 },
 
 
@@ -149,8 +170,9 @@ export default defineComponent({
     ])
 
     const textInput = ref('');
-
+    const role = ref('tech');
     const visible = ref(false);
+    const faqPage = ref('hide');
     const liveChat = ref('hide');
     const liveChatCard = ref('hideLive')
 
@@ -163,6 +185,10 @@ export default defineComponent({
       liveChat.value = state;
     };
 
+    const proceedFAQ = (state) => {
+      faqPage.value = state;
+    }
+
     function handleMessage(message) {
         displayMessages(message)
     }
@@ -172,15 +198,23 @@ export default defineComponent({
 
     const liveChatSupport = () => {
       liveChatCard.value = 'showLive'
-      selectedKeys = 'faq'
     }
-
+    const liveChatFAQ = () => {
+      selectedKeys.value = ['faq']
+    }
+    
     function displayMessages(message) {
       arr.value.push({ message: message.message, type: 'customer' }) 
       var delayInMilliseconds = 1500; //1 second
       setTimeout(function() {
         arr.value.push({ message: message.answer, type: 'chatbot' })
-        proceedLiveChat('show')
+        if (message.urgency == 1){
+          proceedFAQ('show')
+        }
+        else{
+          proceedLiveChat('show')
+          proceedFAQ('show')
+        }    
       }, delayInMilliseconds);
     }
 
@@ -189,48 +223,9 @@ export default defineComponent({
       textInput.value = ''
     }
 
-
-    const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
-const CHANNEL = 'wdj';
-let client = AgoraRTM.createInstance(APP_ID);
-let uid = uuidv4();
-let text = ref('');
-let messagesRef = ref(null);
-let messages = ref([]);
-let channel;
-
-defineExpose({ messagesRef });
-
-const appendMessage = async (message) => {
-  messages.value.push(message);
-  await nextTick();
-  if(messagesRef.value) messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
-};
-
-    onMounted(async () => {
-      await client.login({ uid, token: null });
-      channel = await client.createChannel(CHANNEL);
-      await channel.join();
-      channel.on('ChannelMessage', (message, peerId) => {
-        appendMessage({
-          text: message.text,
-          uid: peerId,
-        });
-      });
-    });
-
-    function sendMessage() {
-      if (text.value === '') return;
-      channel.sendMessage({ text: text.value, type: 'text' });
-      appendMessage({
-        text: text.value,
-        uid,
-      });
-      text.value = '';
-    }
-
     return{
       handleMessage,
+      role,
       selectedKeys,
       displayMessages,
       arr,
@@ -239,10 +234,9 @@ const appendMessage = async (message) => {
       liveChat,
       liveChatCard,
       liveChatSupport,
+      liveChatFAQ,
+      faqPage,
       handleMessageLive,
-      sendMessage,
-      
-      // btnContent
     }
   }
 
@@ -254,6 +248,13 @@ const appendMessage = async (message) => {
 
 
 /* Modify the background color */
+
+
+.button-message-card{
+  max-width: 250px;
+  background-color:  rgb(255, 255, 255);
+}
+
 .navbar-custom {
     background-color: red;
 }
@@ -299,15 +300,25 @@ section {
   height: 100vh;
 }
 .need-button{
-  position:absolute;
-  right:    0;
-  bottom:   0;
-  margin: 70px 70px;
-  padding: 35px 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 20px;
   background-color: rgb(55, 63, 63);
-  line-height: 0px;
+  border: 2px solid #7fa275;
+  border-radius: 10px;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  height:80px;
+  width:150px;
 }
 
+.need-button:hover {
+  background-color: rgb(116, 164, 159) 
+}
 
 .button-content{
   padding-right: 20px;
@@ -342,12 +353,20 @@ section {
 }
 
 .customer {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  float: right;
+  max-width: 250px;
+  background: rgb(255, 241, 228);
   text-align: right;
 }
 
 .chatbot { 
+  clear: both;
+  max-width: 250px;
+  background-color: rgb(255, 255, 255);
   text-align: left;
-  max-width: 70%;
+  margin-bottom: 10px;
 }
 
 .hide {
@@ -373,7 +392,7 @@ section {
 
 .layout {
   min-height: 110vh;
-  background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url("https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/img/gateway-page/kv_driving-growth.jpg");;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iv2VYtHhrIF4/v0/1200x800.jpg");;
   background-size: cover; 
   background-position: center;
 }

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';  
-import LoginView from './components/LoginView.vue'; 
+
+import LoginView from './components/LoginView1.vue'; 
 import TechView from './components/TechView.vue';  
 import FAQ from './components/FAQ.vue';
 

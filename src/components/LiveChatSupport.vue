@@ -2,20 +2,32 @@
   <div class="panel">
     <div class="messages" ref="messagesRef">
       <div class="inner">
-        <div
+        <div v-if="role == 'tech'">
+          <h5 v-if="role == 'tech'">Category: Suspicious Transaction</h5>
+          <h5 v-if="role == 'tech'">Time: 12:00pm </h5>
+        </div>
+        <h5>Waiting for Customer Service Staff to assist you</h5>
+        
+    
+        <div 
           :key="index"
           v-for="(message, index) in messages"
           class="message" >
-          <div v-if="message.uid === uid" class="user-self">
+          <div v-if="message.uid === 'center'" class="user-center">
+            <div class="text-center">{{ message.text }}</div>
+          </div>
+          <div v-else-if="message.uid === uid" class="user-self">
             <div class="text-self">{{ message.text }}</div>
           </div>
           <div v-else class="user-them">
             <div class="text-them">{{ message.text }}</div>
           </div>
         </div>
+        
       </div>
     </div>
-    <form class="chatbox-form" @submit.prevent="sendMessage">
+    <a-button v-if="role == 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
+    <form v-else class="chatbox-form" @submit.prevent="sendMessage">
       <input class="text-input" v-model="text" />
       <button class="text-button" >+</button>
     </form>
@@ -28,20 +40,19 @@ import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, onMounted, nextTick, defineExpose } from 'vue';
 
-const APP_ID = '452f99a0814b44d29d9a446ec20356fc';
-const CHANNEL = 'wdj';
-
+const APP_ID = '8a2667e467284e6e975d1ca95176477c';
+const CHANNEL = 'han';
+let role = ref('tech') // Get role from store
 let client = AgoraRTM.createInstance(APP_ID);
 let uid = uuidv4();
 let text = ref('');
 let messagesRef = ref(null);
 let messages = ref([]);
 let channel;
-
-defineExpose({ messagesRef });
+let startState = ref(false);
 
 const appendMessage = async (message) => {
-  console.log('BELONGS TO LIVECHATSUPPORT')
+  console.log('BELONGS TO LIVECHATSUPPORT', message)
   messages.value.push(message);
   await nextTick();
   if(messagesRef.value) messagesRef.value.scrollTop = messagesRef.value.scrollHeight;
@@ -59,6 +70,8 @@ onMounted(async () => {
   });
 });
 
+defineExpose({ messagesRef });
+
 function sendMessage() {
   if (text.value === '') return;
   console.log('check text', text)
@@ -69,6 +82,12 @@ function sendMessage() {
   });
   text.value = '';
 }
+function startChat(){
+  startState.value = true
+  let text = 'Customer Service has entered the chat';
+  messages.value.push({text: text, uid: 'center' });
+  channel.sendMessage({ text: text, type: 'text' });
+}
 </script>
 
 <style>
@@ -77,19 +96,19 @@ body {
   height: 400px;
 }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+h5{
+  color: rgb(156, 156, 156);
 }
+
+
+
 
 .panel {
   display: flex;
   flex-direction: column;
   padding: 20px;
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 800px;
   height: 450px;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -113,17 +132,20 @@ body {
   margin-bottom: 6px;
 }
 .text-them{
+  font-size: 16px;
   text-align: left;
+  max-width: 70%;
 }
 .text-self{
+  font-size: 16px;
   text-align: right;
+  
 }
 .user-self {
-  color: green;
+  color: rgb(71, 148, 0);
 }
 .user-them {
-  color: red;
-
+  color: rgb(170, 6, 6);
 }
 .chatbox-form {
   position: relative;
@@ -139,6 +161,7 @@ body {
   border-radius: 0px;
   outline: none;
 }
+
 .text-button {
   border: none;
   outline: none;

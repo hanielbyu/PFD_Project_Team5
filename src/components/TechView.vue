@@ -19,17 +19,29 @@
             <td>{{ technician.keywords }}</td>
             <td>{{ getTimeString(technician) }}</td>
             <td>
+
               <router-link to="/faq">
   <button>Chat</button>
 </router-link>
+
+                <a href="" @click="proceedLiveChat('show')" >
+                <a-button>Chat</a-button>
+                </a>
+
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </template>
+
+  
   
   <style scoped>
+
+    .liveChatPanel{
+      margin-top: 40px;
+    }
     .tech-table {
       width: 100%;
       border-collapse: collapse;
@@ -57,8 +69,13 @@
   </style>
   
   <script>
-  export default {
-    name: 'TechView',
+
+
+  import {defineComponent, ref} from 'vue';
+
+
+  export default defineComponent({
+    
     methods: {
       getTimeString(technician) {
         if (technician.userName === 'John Doe') {
@@ -77,9 +94,22 @@
           { id: 1, userName: 'John Doe', urgency: 3, keywords: 'Compromised, Scam' },
           { id: 2, userName: 'Jane Smith', urgency: 2, keywords: 'Crash' },
           { id: 3, userName: 'Tarry Lim', urgency: 3, keywords: 'Money, Hacked' },
-        ]
+        ],
       };
+    },
+    setup(){
+      const liveChat = ref('hide');
+
+      const proceedLiveChat = (state) => {
+      liveChat.value = state;
+    };
+
+      return{
+      proceedLiveChat,
+      liveChat,
+      
     }
-  };
+    }
+  });
   </script>
   

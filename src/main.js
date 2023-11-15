@@ -16,6 +16,7 @@ import VueSmoothScroll from 'vue3-smooth-scroll'
 
 
 
+
 library.add(faMessage)
 
 // const { io } = require("socket.io-client");
@@ -25,7 +26,9 @@ const app = createApp(App);
 app.use(VueSmoothScroll)
 app.use(Antd)
 .component('font-awesome-icon', FontAwesomeIcon)
-.use(router) 
+
+.use(router)
+
 .mount('#app');
 
 
