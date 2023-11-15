@@ -2,11 +2,11 @@
     <header>Appointment Booking</header>
     <br>
     <a-space direction="vertical" :size="12">
-    <a-date-picker allowClear = ' true' v-model:value="dateselected" :disabled-date="disabledDate" />
+    <a-date-picker v-model:value="dateselected" :disabled-date="disabledDate" />
   </a-space>
   <br>
   <br>
-  <div>Time Slots Available</div><br>
+  <div class="tstitle">Time Slots Available</div><br>
   <div class="content">
     <div class="column">  <a-space wrap>
           <a-button
@@ -14,16 +14,16 @@
             :key="index"
             type="primary"
             class="button"
-            :style="{ backgroundColor: isSelected(slot) ? 'blue' : 'white' }"
+            :style="{ backgroundColor: isSelected(slot) ? 'red' : 'white' }"
             @click="selectTime(slot)"
           >
             {{ slot }}
           </a-button>
-        </a-space>
-    </div>  
+  </a-space>
+</div>  
 </div>
 <br>
-<a-checkbox v-model:checked="checked">I understand that after scheduling an appointment, I will no longer remain in the current queue.</a-checkbox>
+<a-checkbox v-model:checked="checked" class="checkbox">I understand that after scheduling an appointment, I will no longer remain in the current queue.</a-checkbox>
 <br><br>
 <a-space wrap>
     <a-button @click="showModal">Confirm</a-button>
@@ -51,6 +51,8 @@ export default {
   methods: {
     updateTimeSlots() {
       const now = new Date();
+      const formattedDate = now.toISOString().substring(0, 10);
+      console.log(formattedDate);
       now.setMinutes(Math.ceil(now.getMinutes() / 30) * 30); 
       const options = { hour: 'numeric', minute: 'numeric', hour12: true };
       // for loop to generate 30 min interval buttons
@@ -102,12 +104,13 @@ export default {
         },
         class: 'test',
       });
-    },
-  },
+    }
+  }
 }
 </script>
 
 <style scoped>
+
 .content {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -122,7 +125,9 @@ export default {
 .button:selected {
   color: red;
 }
-
+.checkbox, header, .tstitle {
+    color: white;
+}
 
 @media (max-width: 880px) {
   #button{
