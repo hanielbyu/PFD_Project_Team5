@@ -9,21 +9,25 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
 import { faMessage } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
-import VueSmoothScroll from 'vue3-smooth-scroll'
-import router from './router';
+import VueSmoothScroll from 'vue3-smooth-scroll' 
+import { createPinia } from 'pinia';
+import { router } from './helpers';
+// setup fake backend will migrate to nodejs later
+import { fakeBackend } from './helpers';
 
+fakeBackend();
 
 library.add(faMessage)
 
-// const { io } = require("socket.io-client");
-
 const app = createApp(App);
 
+app.use(createPinia());
+app.use(router);
 app.use(VueSmoothScroll)
 app.use(Antd)
 .component('font-awesome-icon', FontAwesomeIcon)
 .use(router)
-.mount('#app');
+app.mount('#app');
 
 
 
