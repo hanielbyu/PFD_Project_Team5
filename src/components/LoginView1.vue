@@ -3,12 +3,12 @@
     <form name="login-form" class="login-form" @submit.prevent="login">
       <div class="form-group">
         <label for="username">Username:</label>
-        <input type="text" id="username" v-model="input.username" class="form-control" />
+        <input type="text" id="username" v-model="username" class="form-control" />
       </div>
 
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" v-model="input.password" class="form-control" />
+        <input type="password" id="password" v-model="password" class="form-control" />
       </div>
 
       <button v-on:click ="login">Login</button>
@@ -19,19 +19,27 @@
 
 
 <script>
+import axios from 'axios'
 export default {
   name: 'LoginView1',
   data() {
     return {
-      input: {
         username: '',
         password: '',
-      },
     };
   },
   methods: {
-    login() {
-      console.warn(this.username, this.password)
+    async login() { 
+      let result = axios.get(
+        'http://localhost:3000/roles?username=$(this.username)&password=$(this.password)'
+      )
+
+      if(result.status==200 && result.data.length>0)
+      {
+      localStorage.setItem("user-info",JSON.stringify(result.data[0]))
+      this.$router.push({name:"FAQ"})
+    }
+      console.warn(result)
     },
   },
 };

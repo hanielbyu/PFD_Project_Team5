@@ -133,7 +133,7 @@ export default defineComponent({
 
 
     
-    const selectedKeys = ref([]);
+  let selectedKeys = ref(['home']);
 
   
     const arr = ref([
