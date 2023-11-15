@@ -103,7 +103,7 @@
 
 <script>
 // import { message } from "ant-design-vue";
-import { defineComponent, ref, watchEffect} from 'vue';
+import { defineComponent, ref} from 'vue';
 import Contact from './components/ContactUs.vue';
 import FAQ from './components/FAQ.vue';
 import HomePage from "./components/HomePage.vue";
@@ -114,7 +114,6 @@ import { v4 as uuidv4 } from 'uuid';
 import {onMounted, nextTick, defineExpose } from 'vue';
 import TechView from './components/TechView.vue';
 import SupportLine from './components/SupportLine.vue'
-import { useStore } from 'vuex';
 
 export default defineComponent({
   components:{
@@ -125,7 +124,7 @@ export default defineComponent({
     TechView,
     SupportLine,
     LoginView,
-    
+
     },
 
     
@@ -134,14 +133,9 @@ export default defineComponent({
 
 
     
-    const store = useStore();
     const selectedKeys = ref([]);
 
-    // Watch for changes in the role from the store
-    watchEffect(() => {
-      console.log('Role changed:', store.state.role);
-    });
-
+  
     const arr = ref([
     {
       message: "Hi, how may I assist you?",
