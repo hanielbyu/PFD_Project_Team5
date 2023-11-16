@@ -1,8 +1,8 @@
 <template>
-  <header>
-    <div class="logo-container">
-      <img src="src/components/images/ocbclogo.png" />
-      <h1 class="title">WELCOME TO OCBC</h1>
+  <header style="text-align: center;">
+    <div class="logo-container" style="text-align: center;">
+      <!-- <img src="" /> -->
+      <h1 class="title" style="text-align: center;">WELCOME TO OCBC</h1>
     </div>
 </header>
 <div class="overlay" id="overlay"></div>
