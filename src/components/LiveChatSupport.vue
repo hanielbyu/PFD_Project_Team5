@@ -36,6 +36,7 @@
 
       </div>
       <input class="text-input" v-model="text" />
+      <Speech v-on:set-child-data="speech2text"/>
       <button class="text-button" >+</button>
     </form>
   </div>
@@ -46,6 +47,7 @@
 import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, onMounted, nextTick, defineExpose } from 'vue';
+import Speech from './Speech.vue';
 
 const APP_ID = '8a2667e467284e6e975d1ca95176477c';
 const CHANNEL = 'han';
@@ -97,6 +99,10 @@ function startChat(){
 }
 function setText(suggestion) {
   text.value = suggestion;
+}
+
+function speech2text(voice){
+  text.value = voice;
 }
 
 </script>
