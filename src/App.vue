@@ -19,10 +19,10 @@
               <RouterLink to="/tech" class="nav-item nav-link">TECH</RouterLink>
           </a-menu-item>
           <a-menu-item class="menu-title" key="appt">
-              <RouterLink to="/schedule-appointment" class="nav-item nav-link">Schedule Appointment</RouterLink>
+              <RouterLink to="/schedule-appointment" class="nav-item nav-link">SCHEDULE APPOINTMENT</RouterLink>
           </a-menu-item>
           <a-menu-item class="logoutBtn">
-              <a @click="authStore.logout()" class="nav-item nav-link">Logout</a>
+              <a @click="authStore.logout()" class="nav-item nav-link">LOGOUT</a>
           </a-menu-item>
         </div>
       </a-menu>
@@ -119,26 +119,41 @@ const authUser = authStore.$state.user;
 }
 
 .need-button{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 20px;
-  background-color: rgb(55, 63, 63);
-  border: 2px solid #7fa275;
-  border-radius: 10px;
-  color: whitesmoke;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  height:80px;
-  width:150px;
+  background-color: var(--bgOrange);
+  width: fit-content;
+  color: white;
+    padding: 0.8rem 2.3rem;
+    box-shadow: 5px 5px 7px 0px #0000003f;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-weight: 500;
+    border: solid 3px transparent;
+    position: relative;
+  z-index: 1;
+  transform: scaleX(1);
 }
-
-.need-button:hover {
-  background-color: rgb(116, 164, 159) 
+.need-button::before {
+    content: "" ;
+    position: absolute;
+    background-color: #fff;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.8s;
 }
-
+.need-button:hover::before {
+    transform: scaleX(1);
+}
+.need-button:hover { 
+    border: solid 3px var(--bgOrange);
+    color: black;
+    background-color: #000000;
+}
 .ocbclogo {
 width: 50px;
 padding: 10px;

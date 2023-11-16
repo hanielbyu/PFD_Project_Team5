@@ -199,13 +199,14 @@ section {
   height: 100vh;
 }
 .need-button{
+  background-color: rgb(179, 34, 34);
+  box-shadow: 5px 5px 7px 0px #0000003f;
+  transition: all 0.5s;
   position: fixed;
   bottom: 20px;
   right: 20px;
   padding: 20px;
-  background-color: rgb(55, 63, 63);
-  border: 2px solid #7fa275;
-  border-radius: 10px;
+  border: solid 3px black;
   color: whitesmoke;
   font-size: 18px;
   font-weight: bold;
@@ -213,10 +214,30 @@ section {
   transition: background-color 0.3s ease-in-out;
   height:80px;
   width:150px;
+  z-index: 1;
+}
+.need-button::before{
+  content: "";
+    position: absolute;
+    background-color: rgb(214, 53, 53);
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.8s;
 }
 
+.need-button:hover::before{
+  transform: scaleX(1);
+}
 .need-button:hover {
-  background-color: rgb(116, 164, 159) 
+  background-color: rgb(255, 255, 255);
+  border: solid 3px rgb(255, 255, 255);
+  color: black;
+
 }
 
 .button-content{
