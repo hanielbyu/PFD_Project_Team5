@@ -1,7 +1,6 @@
 <template>
   <header>
     <div class="logo-container">
-      <img src="src/components/images/ocbclogo.png" />
       <h1 class="title">WELCOME TO OCBC</h1>
     </div>
 </header>
@@ -120,12 +119,12 @@ background-color: #0056b3;
 .logo-container {
 display: flex;
 align-items: center;
-max-width: 500px;
+max-width: 300px;
 }
 
-.ocbc-logo {
-width: 50px; /* Adjust the width according to your logo size */
-margin-right: 10px; /* Provide some spacing between logo and title */
+.ocbclogo {
+width: 50px;
+padding: 10px;
 }
 
 /* Hero Section */
