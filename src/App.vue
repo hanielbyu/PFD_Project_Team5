@@ -1,6 +1,6 @@
 <template>
   <a-layout class="layout">
-    <a-layout-header v-show="authStore.user">
+    <a-layout-header v-if="authStore.user">
       <a-menu
         theme="light"
         mode="horizontal"
@@ -12,10 +12,10 @@
           <a-menu-item class="menu-title" key="faq">
               <RouterLink to="/FAQ" class="nav-item nav-link">FAQ</RouterLink>
           </a-menu-item>
-          <a-menu-item class="menu-title" key="support">
+          <a-menu-item v-if="authStore.$state.user.role === 'tech'" class="menu-title" key="support">
               <RouterLink to="/support" class="nav-item nav-link">SUPPORT</RouterLink>
           </a-menu-item>
-          <a-menu-item class="menu-title" key="tech">
+          <a-menu-item v-if="authStore.$state.user.role === 'tech'" class="menu-title" key="tech">
               <RouterLink to="/tech" class="nav-item nav-link">TECH</RouterLink>
           </a-menu-item>
           <a-menu-item class="menu-title" key="appt">
@@ -30,6 +30,7 @@
 
     <a-layout-content style="padding: 0 50px" >
       <a-breadcrumb style="margin: 30px 0"/>
+      <!-- <button @click="checkRole"></button> -->
       <RouterView />
     </a-layout-content>
 
@@ -45,6 +46,10 @@ import { useAuthStore } from '@/stores';
 import ChatBot from './components/ChatBot.vue'
 
 const authStore = useAuthStore();
+const authUser = authStore.$state.user;
+// const checkRole = () => {
+//   console.log(authStore.$state.user.role)
+// }
 </script>
 
 <style scoped>
