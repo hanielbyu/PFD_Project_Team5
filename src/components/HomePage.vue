@@ -16,46 +16,62 @@
       <button @click="nextPage">Next</button>
     </div>
     <div v-else-if="currentPage === 2">
-      <p>
-        Welcome to our Live Chat Support! To get started, look for the "Need Help?" button at the bottom right corner of the page. It's a round button with a chat icon. Click on it to open the chat interface.
-      </p>
-      <button @click="prevPage">Previous</button>
+    <p>
+      Welcome to our Live Chat Support! To get started, look for the "Need Help?" button at the bottom right corner of the page. It's a round button with a chat icon. Click on it to open the chat interface.
+    </p>
+    <div class="button-container">
+      <button @click="prevPage">Prev</button>
+      <div class="button-gap"></div>
       <button @click="nextPage">Next</button>
     </div>
-    <div v-else-if="currentPage === 3">
-      <p>
-        You can then type your questions or concerns in the chatbox. The AI will analyze your input and provide helpful responses. Feel free to ask anything related to our products, services, or common issues.
-      </p>
-      <button @click="prevPage">Previous</button>
+  </div>
+  <div v-else-if="currentPage === 3">
+    <p>
+      You can then type your questions or concerns in the chatbox. The AI will analyze your input and provide helpful responses. Feel free to ask anything related to our products, services, or common issues.
+    </p>
+    <div class="button-container">
+      <button @click="prevPage">Prev</button>
+      <div class="button-gap"></div>
       <button @click="nextPage">Next</button>
     </div>
-    <!-- Add more steps following the same structure -->
-    <div v-else-if="currentPage === 4">
-      <p>
-        The AI will suggest related categories based on your input.
-      </p>
-      <button @click="prevPage">Previous</button>
+  </div>
+
+  <div v-else-if="currentPage === 4">
+    <p>
+      The AI will suggest related categories based on your input.
+    </p>
+    <div class="button-container">
+      <button @click="prevPage">Prev</button>
+      <div class="button-gap"></div>
       <button @click="nextPage">Next</button>
     </div>
-    <div v-else-if="currentPage === 5">
-      <p>
-        Choose a category, and the system will categorize your inquiry by urgency (1-5).
-      </p>
-      <button @click="prevPage">Previous</button>
+  </div>
+  <div v-else-if="currentPage === 5">
+    <p>
+      Choose a category, and the system will categorize your inquiry by urgency (1-5).
+    </p>
+    <div class="button-container">
+      <button @click="prevPage">Prev</button>
+      <div class="button-gap"></div>
       <button @click="nextPage">Next</button>
     </div>
-    <div v-else-if="currentPage === 6">
-      <p>
-        You'll be redirected to a technician for live chat support based on urgency.
-      </p>
-      <button @click="prevPage">Previous</button>
+  </div>
+
+  <div v-else-if="currentPage === 6">
+    <p>
+      You'll be redirected to a technician for live chat support based on urgency.
+    </p>
+    <div class="button-container">
+      <button @click="prevPage">Prev</button>
+      <div class="button-gap"></div>
       <button @click="nextPage">Next</button>
     </div>
+  </div>
     <div v-else>
       <p>
         Ready to get started? Feel free to ask your first question!
       </p>
-      <button @click="prevPage">Previous</button>
+      <button @click="prevPage">Prev</button>
     </div>
     <div class="opaque-background"></div>
   </div>
@@ -78,26 +94,27 @@
 
 <script>
 export default {
-name: "HomePage",
-data() {
-  return {
-    currentPage: 1,
-  };
-},
-methods: {
-  nextPage() {
-    if (this.currentPage < 7) {
-      this.currentPage++;
-    }
+  name: "HomePage",
+  data() {
+    return {
+      currentPage: 1,
+    };
   },
-},
-prevPage() {
+  methods: {
+    nextPage() {
+      if (this.currentPage < 7) {
+        this.currentPage++;
+      }
+    },
+    prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
       }
-  }
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 .live-chat-support-container {
@@ -185,9 +202,10 @@ padding: 10px;
 .hero__bg-content p {
   font-size: 1rem;
   line-height: 28px;
+  font-weight: 500;
 }
 div.hero__bg-content {
-background-color: rgba(255, 255, 255, 0.9);
+background-color: rgba(193, 193, 193, 0.9);
 -webkit-backdrop-filter: blur(5px);
 backdrop-filter: blur(5px);
 padding: 20px;
@@ -277,5 +295,14 @@ hr {
       height: auto; 
       padding-left: 20%;
 }
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Align buttons to the left */
+  gap: 10px; /* Adjust the gap as needed */
+  margin-top: 10px; /* Adjust the top margin as needed */
+}
 
+.button-gap {
+  flex: 0; /* This creates a flexible space to push the buttons apart */
+}
 </style>
