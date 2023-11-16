@@ -8,58 +8,70 @@
 
 
 <div class="live-chat-support-container">
-  <h2>Live Chat Support Instructions</h2>
-  <div v-if="currentPage === 1">
-    <p>
-      Welcome to our Live Chat Support! This guide will help you navigate through the process.
-    </p>
-    <button @click="nextPage">Next</button>
-  </div>
-  <div v-else-if="currentPage === 2">
-    <p>
+    <h2>Live Chat Support Instructions</h2>
+    <div v-if="currentPage === 1">
+      <p>
+        Welcome to our Live Chat Support! This guide will help you navigate through the process.
+      </p>
+      <button @click="nextPage">Next</button>
+    </div>
+    <div v-else-if="currentPage === 2">
+      <p>
         Welcome to our Live Chat Support! To get started, look for the "Need Help?" button at the bottom right corner of the page. It's a round button with a chat icon. Click on it to open the chat interface.
-        
-    </p>
-    <button @click="nextPage">Next</button>
-  </div>
-  <div v-else-if="currentPage === 3">
-    <p>
+      </p>
+      <button @click="prevPage">Previous</button>
+      <button @click="nextPage">Next</button>
+    </div>
+    <div v-else-if="currentPage === 3">
+      <p>
         You can then type your questions or concerns in the chatbox. The AI will analyze your input and provide helpful responses. Feel free to ask anything related to our products, services, or common issues.
-    </p>
-    <button @click="nextPage">Next</button>
+      </p>
+      <button @click="prevPage">Previous</button>
+      <button @click="nextPage">Next</button>
+    </div>
+    <!-- Add more steps following the same structure -->
+    <div v-else-if="currentPage === 4">
+      <p>
+        The AI will suggest related categories based on your input.
+      </p>
+      <button @click="prevPage">Previous</button>
+      <button @click="nextPage">Next</button>
+    </div>
+    <div v-else-if="currentPage === 5">
+      <p>
+        Choose a category, and the system will categorize your inquiry by urgency (1-5).
+      </p>
+      <button @click="prevPage">Previous</button>
+      <button @click="nextPage">Next</button>
+    </div>
+    <div v-else-if="currentPage === 6">
+      <p>
+        You'll be redirected to a technician for live chat support based on urgency.
+      </p>
+      <button @click="prevPage">Previous</button>
+      <button @click="nextPage">Next</button>
+    </div>
+    <div v-else>
+      <p>
+        Ready to get started? Feel free to ask your first question!
+      </p>
+      <button @click="prevPage">Previous</button>
+    </div>
+    <div class="opaque-background"></div>
   </div>
-  <!-- Add more steps following the same structure -->
-  <div v-else-if="currentPage === 4">
-    <p>
-      The AI will suggest related categories based on your input.
-    </p>
-    <button @click="nextPage">Next</button>
-  </div>
-  <div v-else-if="currentPage === 5">
-    <p>
-      Choose a category, and the system will categorize your inquiry by urgency (1-5).
-    </p>
-    <button @click="nextPage">Next</button>
-  </div>
-  <div v-else-if="currentPage === 6">
-    <p>
-      You'll be redirected to a technician for live chat support based on urgency.
-    </p>
-    <button @click="nextPage">Next</button>
-  </div>
-  <div v-else>
-    <p>
-      Ready to get started? Feel free to ask your first question!
-    </p>
-  </div>
-  <div class="opaque-background"></div>
-</div>
+
+<hr>
+
 <section class="hero-section">
 <div class="hero__bg">
     <div class="hero__bg-content">
         <h1>About Live Chat Support</h1>
+
         <p class="p-lead">OCBC is excited to introduce Live Chat Support, a new feature designed to make your banking experience even more convenient and efficient. With Live Chat Support, you can now connect with our dedicated support team in real-time, right from the comfort of your digital space.</p>
+        <hr>
+        <p> Experience personalized assistance tailored to your specific needs. Our knowledgeable support agents are here to help you with account inquiries, transaction assistance, and any other banking-related questions you may have. Enjoy the benefits of quick, efficient, and personalized support with OCBC's Live Chat Support.</p>
     </div>
+    <img src="https://i.pinimg.com/564x/65/5f/fe/655ffee238b9cfa3671dedc72c879240.jpg" alt="LIVE CHAT SUPPORT" class="small-image" >
 </div>
 </section>
 </template>
@@ -79,6 +91,11 @@ methods: {
     }
   },
 },
+prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+  }
 };
 </script>
 
@@ -161,6 +178,8 @@ padding: 10px;
 .hero__bg-content h1 {
   line-height: 32px;
   font-size: 1.5rem;
+  margin-bottom: 40px;
+  font-weight: bold;
 }
 
 .hero__bg-content p {
@@ -168,7 +187,7 @@ padding: 10px;
   line-height: 28px;
 }
 div.hero__bg-content {
-background-color: rgba(255, 255, 255, 0.3);
+background-color: rgba(255, 255, 255, 0.9);
 -webkit-backdrop-filter: blur(5px);
 backdrop-filter: blur(5px);
 padding: 20px;
@@ -212,9 +231,9 @@ z-index: 1;
 max-width: 800px;
 margin: 20px auto;
 padding: 20px;
-background-color: rgba(175, 174, 174, 0.7);
+background-color: rgba(175, 174, 174, 0.9);
 border-radius: 10px;
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
 }
 
 .instruction-step {
@@ -224,7 +243,7 @@ background-color: #e0e0e0;
 border-radius: 8px;
 }
 button {
-background-color: #999999;
+background-color: rgb(206, 12, 12);
 color: white;
 border: none;
 padding: 12px 20px;
@@ -246,6 +265,17 @@ background-color: rgba(255, 255, 255, 0.9);
 padding: 20px;
 border-radius: 10px;
 box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+hr {
+  border: 1px solid #2b2b2b; /* Set the color of the line */
+  margin: 20px 0; /* Adjust the margin above and below the line */
+}
+
+.small-image {
+      width: 80%;
+      height: auto; 
+      padding-left: 20%;
 }
 
 </style>
