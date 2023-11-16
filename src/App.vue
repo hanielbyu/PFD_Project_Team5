@@ -19,7 +19,7 @@
               <RouterLink to="/tech" class="nav-item nav-link">TECH</RouterLink>
           </a-menu-item>
           <a-menu-item class="menu-title" key="appt">
-              <RouterLink to="/schedule-appointment" class="nav-item nav-link">Schedule Appointment</RouterLink>
+              <RouterLink to="/schedule-appointment" class="nav-item nav-link">APPOINTMENT</RouterLink>
           </a-menu-item>
           <a-menu-item class="logoutBtn">
               <a @click="authStore.logout()" class="nav-item nav-link">Logout</a>
@@ -35,7 +35,7 @@
     </a-layout-content>
 
     <a-layout-footer>
-      <ChatBot v-if="authStore.$state.user"/>
+      <ChatBot v-if="authStore.$state.user && authStore.$state.user.role ==='user'"/>
     </a-layout-footer>    
   </a-layout>
 </template>
@@ -46,10 +46,6 @@ import { useAuthStore } from '@/stores';
 import ChatBot from './components/ChatBot.vue'
 
 const authStore = useAuthStore();
-const authUser = authStore.$state.user;
-// const checkRole = () => {
-//   console.log(authStore.$state.user.role)
-// }
 </script>
 
 <style scoped>
