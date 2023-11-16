@@ -63,6 +63,7 @@ a-tabs{
 
 .ant-tabs-tab{
     color: white;
+    font-size: 18px !important;
 }
 
 .ant-tabs-tab:hover{
