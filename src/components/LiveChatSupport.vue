@@ -3,7 +3,7 @@
     <div class="messages" ref="messagesRef">
       <div class="inner">
         <div v-if="role == 'tech'">
-          <h5 v-if="role == 'tech'">Category: Suspicious Transaction</h5>
+          <h5 v-if="role == 'tech'">Keywords: Compromised, Scam</h5>
           <h5 v-if="role == 'tech'">Time: 12:00pm </h5>
         </div>
         <h5>Waiting for Customer Service Staff to assist you</h5>
