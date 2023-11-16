@@ -84,7 +84,7 @@ const authUser = authStore.$state.user;
 
 .layout {
   min-height: 110vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iv2VYtHhrIF4/v0/1200x800.jpg");;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://www.efinancialcareers.sg/binaries/content/gallery/efinancial-careers/articles/2020/11/ocbc2.jpg");;
   background-size: cover; 
   background-position: center;
 }
