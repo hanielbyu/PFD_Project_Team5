@@ -26,7 +26,7 @@
         </div>
       </div><br>
       <p>Your issue</p>
-      <a-textarea :rows="3" placeholder="type here" :maxlength="4" />
+      <a-textarea :rows="3" placeholder="type here" :maxlength="150" />
       <br />
       <a-checkbox v-model:checked="checked">I understand that after scheduling an appointment, I will no longer remain in the current queue.</a-checkbox>
       <br />

@@ -19,7 +19,7 @@
               <RouterLink to="/tech" class="nav-item nav-link">TECH</RouterLink>
           </a-menu-item>
           <a-menu-item class="menu-title" key="appt">
-              <RouterLink to="/schedule-appointment" class="nav-item nav-link">Schedule Appointment</RouterLink>
+              <RouterLink to="/schedule-appointment" class="nav-item nav-link">APPOINTMENT</RouterLink>
           </a-menu-item>
           <a-menu-item class="logoutBtn">
               <a @click="authStore.logout()" class="nav-item nav-link">Logout</a>
