@@ -35,7 +35,7 @@
     </a-layout-content>
 
     <a-layout-footer>
-      <ChatBot v-if="authStore.$state.user"/>
+      <ChatBot v-if="authStore.$state.user.role === 'user'"/>
     </a-layout-footer>    
   </a-layout>
 </template>
