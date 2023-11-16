@@ -7,7 +7,7 @@
         :style="{ lineHeight: '63px', background: 'rgb(255, 255, 255)'}">
         <div class="menu-items">
           <a-menu-item class="menu-title" key="home">
-              <RouterLink to="/" class="nav-item nav-link">OCBC SUPPORT</RouterLink>
+              <RouterLink to="/" class="nav-item nav-link"><img class="ocbclogo" src="src/assets/OCBC without text.png" /></RouterLink>
           </a-menu-item>
           <a-menu-item class="menu-title" key="faq">
               <RouterLink to="/FAQ" class="nav-item nav-link">FAQ</RouterLink>
@@ -132,5 +132,10 @@ const authStore = useAuthStore();
 
 .need-button:hover {
   background-color: rgb(116, 164, 159) 
+}
+
+.ocbclogo {
+width: 50px;
+padding: 10px;
 }
 </style>
