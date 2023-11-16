@@ -26,12 +26,12 @@
         
       </div>
     </div>
-    <a-button v-if="role == 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
+    <a-button v-if="authStore.$state.user.role === 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
     <form v-else class="chatbox-form" @submit.prevent="sendMessage">
       <div class="suggested-texts">
         <!-- Add predefined suggestions -->
-        <span @click="setText('How can I apply for a credit card?')">Credit Card Application</span>
-        <span @click="setText('I want to report a lost card')">Lost Card</span>
+        <span @click="setText('Thank You!')">Thank You</span>
+        <span @click="setText('Hi there!')">Hi there</span>
         <!-- Add more suggestions as needed -->
 
       </div>
@@ -44,10 +44,13 @@
 
 
 <script setup>
+import { useAuthStore } from '@/stores';
 import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, onMounted, nextTick, defineExpose } from 'vue';
 import Speech from './Speech.vue';
+
+const authStore = useAuthStore();
 
 const APP_ID = '8a2667e467284e6e975d1ca95176477c';
 const CHANNEL = 'han';
@@ -127,7 +130,7 @@ h5{
   margin: 0 auto;
   max-width: 800px;
   height: 450px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(240, 182, 182, 0.7);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   border-radius: 10px;
@@ -209,6 +212,10 @@ h5{
   position: relative;
   display: flex;
   flex-direction: column; /* Adjust to column layout */
+}
+
+div .ant-card-bordered{
+  background-color: rgb(255, 174, 174);
 }
 
 .text-input {
