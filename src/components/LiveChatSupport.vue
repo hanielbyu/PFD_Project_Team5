@@ -130,7 +130,7 @@ h5{
   margin: 0 auto;
   max-width: 800px;
   height: 450px;
-  background: rgba(240, 182, 182, 0.7);
+  background:whitesmoke;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   border-radius: 10px;
