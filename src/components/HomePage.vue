@@ -224,7 +224,7 @@ background-color: #e0e0e0;
 border-radius: 8px;
 }
 button {
-background-color: #999999;
+background-color: rgb(206, 12, 12);
 color: white;
 border: none;
 padding: 12px 20px;
