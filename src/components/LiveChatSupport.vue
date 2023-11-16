@@ -3,16 +3,14 @@
     <div class="messages" ref="messagesRef">
       <div class="inner">
         <div v-if="role == 'tech'">
-          <h5 v-if="role == 'tech'">Category: Suspicious Transaction</h5>
+          <h5 v-if="role == 'tech'">Keywords: Compromised, Scam</h5>
           <h5 v-if="role == 'tech'">Time: 12:00pm </h5>
         </div>
         <h5>Waiting for Customer Service Staff to assist you</h5>
-        
-    
+      
         <div 
           :key="index"
-          v-for="(message, index) in messages"
-          class="message" >
+          v-for="(message, index) in messages" class="message">
           <div v-if="message.uid === 'center'" class="user-center">
             <div class="text-center">{{ message.text }}</div>
           </div>
@@ -23,31 +21,36 @@
             <div class="text-them">{{ message.text }}</div>
           </div>
         </div>
-        
+
       </div>
     </div>
-    <a-button v-if="role == 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
+    <a-button v-if="authStore.$state.user.role === 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
     <form v-else class="chatbox-form" @submit.prevent="sendMessage">
       <div class="suggested-texts">
         <!-- Add predefined suggestions -->
-        <span @click="setText('How can I apply for a credit card?')">Credit Card Application</span>
-        <span @click="setText('I want to report a lost card')">Lost Card</span>
+        <span @click="setText('Thank You!')">Thank You</span>
+        <span @click="setText('Hi there!')">Hi there</span>
         <!-- Add more suggestions as needed -->
 
       </div>
       <input class="text-input" v-model="text" />
       <Speech v-on:set-child-data="speech2text"/>
-      <button class="text-button" >+</button>
+      <button class="text-button" >></button>
     </form>
+    <Call/>
   </div>
 </template>
 
 
 <script setup>
+import { useAuthStore } from '@/stores';
 import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, onMounted, nextTick, defineExpose } from 'vue';
 import Speech from './Speech.vue';
+import Call from './Call.vue';
+
+const authStore = useAuthStore();
 
 const APP_ID = '8a2667e467284e6e975d1ca95176477c';
 const CHANNEL = 'han';
@@ -107,7 +110,8 @@ function speech2text(voice){
 
 </script>
 
-<style>
+<style scoped>
+
 body {
   margin: 0;
   height: 400px;
@@ -127,7 +131,7 @@ h5{
   margin: 0 auto;
   max-width: 800px;
   height: 450px;
-  background: rgba(255, 255, 255, 0.7);
+  background:whitesmoke;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   border-radius: 10px;
@@ -209,6 +213,10 @@ h5{
   position: relative;
   display: flex;
   flex-direction: column; /* Adjust to column layout */
+}
+
+div .ant-card-bordered{
+  background-color: rgb(255, 174, 174);
 }
 
 .text-input {

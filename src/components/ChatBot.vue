@@ -8,7 +8,7 @@
           </a-card>
           <a-card class="button-message-card">
             <div v-for ="content in message.buttons" :key="content">
-              <a-button @click=handleMessage(content) class="btn_bot" type="primary" shape="round" :size="size">
+              <a-button @click=handleMessage(content) :disabled='isDisabled' class="btn_bot" type="primary" shape="round" :size="size">
                 <h3 :class="content.message">{{`${content.message}`}}</h3>
               </a-button>
               <br/>
@@ -80,6 +80,8 @@ export default defineComponent({
     const liveChat = ref('hide');
     const liveChatCard = ref('hideLive')
 
+    const isDisabled = ref(false);
+
     const hide = () => {
       visible.value = false;
       console.log('check', visible)
@@ -94,6 +96,7 @@ export default defineComponent({
     }
 
     function handleMessage(message) {
+        isDisabled.value = true;
         displayMessages(message)
     }
     function handleMessageLive(message){
@@ -136,6 +139,7 @@ export default defineComponent({
       liveChatSupport,
       faqPage,
       handleMessageLive,
+      isDisabled
       // btnContent
     }
   }

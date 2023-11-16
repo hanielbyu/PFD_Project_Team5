@@ -6,7 +6,7 @@
       <a-radio-button value="right">right</a-radio-button>
     </a-radio-group> -->
     <a-tabs v-model:activeKey="activeKey" tab-position="left" animated>
-        <a-tab-pane key="1" tab="John Wick">
+        <a-tab-pane key="1" tab="John Doe">
             <LiveChatSupport />
         </a-tab-pane>
 
@@ -63,6 +63,7 @@ a-tabs{
 
 .ant-tabs-tab{
     color: white;
+    font-size: 18px !important;
 }
 
 .ant-tabs-tab:hover{
