@@ -34,7 +34,7 @@
     </a-layout-content>
 
     <a-layout-footer>
-      <ChatBot/>
+      <ChatBot v-if="authStore.$state.user"/>
     </a-layout-footer>    
   </a-layout>
 </template>
