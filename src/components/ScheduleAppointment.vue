@@ -1,6 +1,7 @@
   <template>
     <div class="appointment-container">
-      <header>Appointment Booking</header>
+      <header class="aptbooking">Book an Appointment</header>
+      <hr>
       <br />
       <a-space direction="vertical" :size="12">
         <a-date-picker allowClear="true" v-model:value="dateselected" :disabled-date="disabledDate" />
@@ -155,5 +156,10 @@
     background-color: #ccc;
     color: #fff;
     cursor: not-allowed;
+  }
+
+  .aptbooking{
+    font-weight: bold;
+    font-size: 20px;
   }
   </style>
