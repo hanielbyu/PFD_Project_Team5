@@ -1,6 +1,7 @@
   <template>
     <div class="appointment-container">
-      <header>Appointment Booking</header>
+      <header class="aptbooking">Book an Appointment</header>
+      <hr>
       <br />
       <a-space direction="vertical" :size="12">
         <a-date-picker allowClear="true" v-model:value="dateselected" :disabled-date="disabledDate" />
@@ -26,7 +27,7 @@
         </div>
       </div><br>
       <p>Your issue</p>
-      <a-textarea :rows="3" placeholder="type here" :maxlength="4" />
+      <a-textarea :rows="3" placeholder="type here" :maxlength="150" />
       <br />
       <a-checkbox v-model:checked="checked">I understand that after scheduling an appointment, I will no longer remain in the current queue.</a-checkbox>
       <br />
@@ -155,5 +156,10 @@
     background-color: #ccc;
     color: #fff;
     cursor: not-allowed;
+  }
+
+  .aptbooking{
+    font-weight: bold;
+    font-size: 20px;
   }
   </style>
