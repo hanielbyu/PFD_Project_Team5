@@ -203,8 +203,8 @@ section {
   box-shadow: 5px 5px 7px 0px #0000003f;
   transition: all 0.5s;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 50px;
+  right: 80px;
   padding: 20px;
   border: solid 3px black;
   color: whitesmoke;

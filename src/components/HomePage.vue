@@ -212,6 +212,7 @@ padding: 20px;
 margin: 30px;
 font-weight: bold;
 }
+
 header {
 background-color: #ef61611c;
 max-width: 340px ;
@@ -291,9 +292,9 @@ hr {
 }
 
 .small-image {
-      width: 80%;
+      width: 75%;
       height: auto; 
-      padding-left: 20%;
+      padding-left: 12%;
 }
 .button-container {
   display: flex;
