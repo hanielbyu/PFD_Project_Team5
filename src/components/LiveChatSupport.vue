@@ -7,12 +7,10 @@
           <h5 v-if="role == 'tech'">Time: 12:00pm </h5>
         </div>
         <h5>Waiting for Customer Service Staff to assist you</h5>
-        
-    
+      
         <div 
           :key="index"
-          v-for="(message, index) in messages"
-          class="message" >
+          v-for="(message, index) in messages" class="message">
           <div v-if="message.uid === 'center'" class="user-center">
             <div class="text-center">{{ message.text }}</div>
           </div>
@@ -23,7 +21,7 @@
             <div class="text-them">{{ message.text }}</div>
           </div>
         </div>
-        
+
       </div>
     </div>
     <a-button v-if="authStore.$state.user.role === 'tech' && !startState" type="primary" @click="startChat">Start Chat</a-button>
@@ -37,8 +35,9 @@
       </div>
       <input class="text-input" v-model="text" />
       <Speech v-on:set-child-data="speech2text"/>
-      <button class="text-button" >+</button>
+      <button class="text-button" >></button>
     </form>
+    <Call/>
   </div>
 </template>
 
@@ -49,6 +48,7 @@ import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, onMounted, nextTick, defineExpose } from 'vue';
 import Speech from './Speech.vue';
+import Call from './Call.vue';
 
 const authStore = useAuthStore();
 
@@ -110,7 +110,8 @@ function speech2text(voice){
 
 </script>
 
-<style>
+<style scoped>
+
 body {
   margin: 0;
   height: 400px;
