@@ -7,7 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
-import { faMessage } from '@fortawesome/free-solid-svg-icons'
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
 import VueSmoothScroll from 'vue3-smooth-scroll' 
 import { createPinia } from 'pinia';
@@ -17,7 +17,7 @@ import { fakeBackend } from './helpers';
 
 fakeBackend();
 
-library.add(faMessage)
+library.add(faMicrophone)
 
 const app = createApp(App);
 
