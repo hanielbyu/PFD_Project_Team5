@@ -80,7 +80,7 @@ const authStore = useAuthStore();
 
 .layout {
   min-height: 110vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://www.efinancialcareers.sg/binaries/content/gallery/efinancial-careers/articles/2020/11/ocbc2.jpg");;
+  background-color: white;
   background-size: cover; 
   background-position: center;
 }

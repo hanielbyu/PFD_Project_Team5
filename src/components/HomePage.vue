@@ -87,7 +87,6 @@
         <hr>
         <p> Experience personalized assistance tailored to your specific needs. Our knowledgeable support agents are here to help you with account inquiries, transaction assistance, and any other banking-related questions you may have. Enjoy the benefits of quick, efficient, and personalized support with OCBC's Live Chat Support.</p>
     </div>
-    <img src="https://i.pinimg.com/564x/65/5f/fe/655ffee238b9cfa3671dedc72c879240.jpg" alt="LIVE CHAT SUPPORT" class="small-image" >
 </div>
 </section>
 </template>
@@ -117,193 +116,133 @@ export default {
 
 
 <style scoped>
+/* General Styles */
+body, h1, h2, p, button {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Header Styles */
+.header {
+  background-color: #D6001C; /* Slightly darker red for better contrast */
+  padding: 1rem 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo-container .title {
+  color: white;
+  font-size: 2rem; /* Increase size for impact */
+  font-weight: 700; /* Bold font weight */
+}
+
+/* Overlay Styles */
+.overlay {
+  /* Assuming this is used for a modal or similar component */
+}
+
+/* Live Chat Support Container */
 .live-chat-support-container {
-max-width: 800px;
-margin: 0 auto;
-padding: 20px;
-background-color: rgba(255, 25, 255, 0.9); /* Partially opaque white background */
-border-radius: 10px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift effect */
+  max-width: 700px; /* Slightly wider for better spacing */
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border: none; /* Removing border */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.page-title {
-color: #007bff; /* Blue color for the page title */
-}
-
-.instruction-step {
-margin-top: 20px;
-padding: 15px;
-background-color: #f4f4f4; /* Light gray background for each step */
-border-radius: 8px;
-}
-
+/* Buttons */
 button {
-background-color: #007bff;
-color: white;
-border: none;
-padding: 10px;
-cursor: pointer;
-border-radius: 5px;
+  background-color: #D6001C;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  outline: none; /* Remove outline for a clean design */
+  margin: 0.5rem; /* Uniform margin for buttons */
 }
 
-button:hover {
-background-color: #0056b3;
-}
-
-.logo-container {
-display: flex;
-align-items: center;
-max-width: 300px;
-}
-
-.ocbclogo {
-width: 50px;
-padding: 10px;
+button:hover, button:focus {
+  background-color: #AA0016; /* Darken button on hover/focus for interaction */
 }
 
 /* Hero Section */
-
-.bg-sm {
-  display: none;
+.hero-section {
+  background-color: #f4f4f4; /* Soft background color for the hero section */
+  padding: 2rem 0;
 }
 
-.hero__bg {
-  display: grid;
-  grid-template-columns: 2fr 2fr;
-  grid-template-rows: auto auto;
-  transform: none;
-}
-
-.hero__bg-images {
-  position: relative;
-}
-
-
-.mockup-img {
-  object-fit: contain;
-}
-
-.hero__bg-content{
-  max-width: 800px;
+.hero__bg-content {
+  padding: 2rem;
+  background-color: transparent; /* Make it consistent with the section background */
+  text-align: center; /* Center align the text */
 }
 
 .hero__bg-content h1,
 .hero__bg-content p {
-  text-align: left;
+  color: #333;
 }
 
 .hero__bg-content h1 {
-  line-height: 32px;
-  font-size: 1.5rem;
-  margin-bottom: 40px;
-  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-.hero__bg-content p {
-  font-size: 1rem;
-  line-height: 28px;
-  font-weight: 500;
-}
-div.hero__bg-content {
-background-color: rgba(193, 193, 193, 0.9);
--webkit-backdrop-filter: blur(5px);
-backdrop-filter: blur(5px);
-padding: 20px;
-margin: 30px;
-font-weight: bold;
+/* Additional global styles */
+p {
+  line-height: 1.6; /* Improve readability */
 }
 
-header {
-background-color: #ef61611c;
-max-width: 340px ;
-color: rgb(255, 255, 255);
-padding: 10px;
+.hr {
+  max-width: 700px;
+  margin: 1rem auto;
+  border-top: 1px solid #ddd; /* Subtle line for separation */
 }
 
-.logo-container {
-display: flex;
-align-items: center;
-}
-
-.ocbc-logo {
-width: 50px;
-margin-right: 10px;
-}
-
-.title {
-font-size: 1.5rem;
-margin: 0;
-}
-
-/* Add styles for the overlay */
-.overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.5);
-display: none;
-z-index: 1;
-}
-.live-chat-support-container {
-max-width: 800px;
-margin: 20px auto;
-padding: 20px;
-background-color: rgba(175, 174, 174, 0.9);
-border-radius: 10px;
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
-}
-
-.instruction-step {
-margin-top: 20px;
-padding: 15px;
-background-color: #e0e0e0;
-border-radius: 8px;
-}
-button {
-background-color: rgb(206, 12, 12);
-color: white;
-border: none;
-padding: 12px 20px;
-cursor: pointer;
-border-radius: 5px;
-font-size: 1rem;
-}
-
-button:hover {
-background-color: rgb(164, 97, 78)
-}
-.hero-section {
-background-color: rgba(255, 255, 255, 0.1);
-padding: 50px 0;
-}
-
-.hero__bg-content {
-background-color: rgba(255, 255, 255, 0.9);
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-hr {
-  border: 1px solid #2b2b2b; /* Set the color of the line */
-  margin: 20px 0; /* Adjust the margin above and below the line */
-}
-
-.small-image {
-      width: 75%;
-      height: auto; 
-      padding-left: 12%;
-}
+/* Button Container */
 .button-container {
   display: flex;
-  justify-content: flex-start; /* Align buttons to the left */
-  gap: 10px; /* Adjust the gap as needed */
-  margin-top: 10px; /* Adjust the top margin as needed */
+  justify-content: center; /* Center buttons */
+  gap: 1rem; /* Space between buttons */
 }
 
 .button-gap {
-  flex: 0; /* This creates a flexible space to push the buttons apart */
+  display: none; /* Remove if using gap */
+}
+
+/* Footer styles if you have a footer */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #D6001C;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .live-chat-support-container,
+  .hr {
+    width: 90%;
+    margin: 1rem auto;
+  }
+
+  .hero-section {
+    padding: 1rem;
+  }
+
+  .button-container {
+    flex-direction: column; /* Stack buttons on smaller screens */
+  }
+
+  button {
+    width: 100%; /* Full-width buttons on smaller screens */
+  }
 }
 </style>
+
