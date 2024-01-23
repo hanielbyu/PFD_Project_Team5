@@ -50,6 +50,7 @@ const authStore = useAuthStore();
 
 <style scoped>
 
+
 /* layout css */
 .site-layout-content {
   min-height: 500px; 
@@ -99,11 +100,11 @@ const authStore = useAuthStore();
 .menu-items {
   display: flex;
   justify-content: space-between;
-  color: rgb(242, 8, 8);
+  color: rgb(255, 0, 0);
   margin: 0 15px;
   font-size: 15px;
   font-weight: bold;
-  font-family: 'Your Font Here', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .menu-title{
@@ -130,25 +131,17 @@ const authStore = useAuthStore();
   transform: scaleX(1);
 }
 .need-button::before {
-    content: "" ;
     position: absolute;
-    background-color: #fff;
     top: 0px;
     left: 0;
     right: 0;
     bottom: 0px;
-    z-index: -1;
-    transform: scaleX(0);
+    transform: scaleX(-1);
     transform-origin: left;
     transition: all 0.8s;
 }
-.need-button:hover::before {
-    transform: scaleX(1);
-}
 .need-button:hover { 
-    border: solid 3px var(--bgOrange);
-    color: black;
-    background-color: #000000;
+    color: white;
 }
 .ocbclogo {
 width: 50px;

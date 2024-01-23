@@ -29,7 +29,7 @@ function onSubmit(values, { setErrors }) {
         <div class="container">
             
             <div class="card">
-                <h2 class="login-title">Login</h2>
+                <h2 class="login-title">Sign In</h2>
                 <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ errors, isSubmitting }">
                     <div class="form-group">
                         <Field name="username" type="text" class="form-control" placeholder="Username" :class="{ 'is-invalid': errors.username }" />
@@ -50,7 +50,7 @@ function onSubmit(values, { setErrors }) {
 
                     <div class="form-group btn-login">
                         <button class="btn btn-primary" :disabled="isSubmitting">
-                            <span v-show="isSubmitting" class="spinner-border spinner-border-sm mr-1"></span>Login</button>
+                            <span v-show="isSubmitting" class="spinner-border spinner-border-sm mr-1"></span>Sign In</button>
                     </div>
                     <div class="register-link">
                         <p> Don't have an account? <a href="#">Register</a></p>
@@ -63,12 +63,22 @@ function onSubmit(values, { setErrors }) {
     </div>
 </template>
 
+<style>
+.layout[data-v-7a7a37b1]{
+    background-image: url(../assets/shutterstock_593894891.jpg);
+    height: 100%;
+}
+
+</style>
 
 <style scoped>
 
-body {
-    background-color: #f4f4f4; /* or use a subtle gradient */
-    font-family: 'Amatic SC', cursive;
+
+
+
+body{
+    background-color:white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -91,9 +101,9 @@ body {
 
 .login-title {
     text-align: center; /* Center the title */
-    font-size: 30px; /* Set the font size */
-    font-weight: 800;
-    margin-bottom: 20px; /* Adjust margin as needed */
+    font-size: 25px; /* Set the font size */
+    font-weight: 400;
+    margin-bottom: 60px; /* Adjust margin as needed */
     /* Add any additional styles as needed */
 }
 .form-container {
@@ -109,18 +119,20 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Position items at the start (top) of the container */
+    margin-top: 100px;
     height: 100vh;
     padding-top: 50px; /* Add padding to create space from the top */
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Card styling */
 .card {
-    width: 400px;
+    width: 600px;
+    height: 500px;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.2); /* Set a translucent white background */
+    background-color: rgba(0, 0, 0, 0.164); /* Set a translucent white background */
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.233);
     font-size: 16px;
     text-align: center;
 
@@ -136,17 +148,19 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 30px;
-    font-weight: 900;
-    font-family: 'Amatic SC', cursive;
-    color: #fff; /* Title color */
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke; /* Title color */
 }
 
 /* Form and text input styling */
 .form-group {
     margin-bottom: 20px;
+    border: none;
 }
 
 label {
+    color: white;
     display: block;
     margin-bottom: 6px;
     font-weight: 400;
@@ -157,37 +171,41 @@ label {
 .form-group input[name="username"],
 .form-group input[name="password"] {
     width: 100%;
-    padding: 8px 14px;
-    border: 1px solid #ccc;
+    padding: 8px 14px;  
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px; /* Adjust border-radius as needed */
     box-sizing: border-box;
     font-size: 16px;
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* Apply backdrop filter for blur */
     background-color: rgba(255, 255, 255, 0.1); /* Set a translucent white background */
     backdrop-filter: blur(8px); /* Adjust the blur radius as needed */
     -webkit-backdrop-filter: blur(8px); /* For Safari */
+    color: whitesmoke;
 }
 
+::placeholder{
+    color: rgba(245, 245, 245, 0.767);
+}
 .invalid-feedback {
-    color: red;
+    color: rgb(221, 3, 3);
     font-size: 14px;
+    font-weight: 200;
     margin-top: 4px;
 }
 
 .btn-login button {
-    background-color: #fff; /* Set the background color to white */
-    color: #333; /* Set the text color */
+    background-color: #ec0000; /* Set the background color to white */
+    color: #ffffff; /* Set the text color */
     width: 90%; /* Set the width to 50% of the parent container */
     padding: 12px 0; /* Adjust button padding */
     font-size: 14px; /* Set the font size to 14px */
-    border: 1px solid #ccc; /* Add a border for better visibility */
     border-radius: 20px; /* Add border-radius for a rounded look */
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .btn-login button:hover {
-    background-color: #f2f2f2; /* Set a slightly darker color on hover */
+    background-color: #800505; /* Set a slightly darker color on hover */
 }
 
 
@@ -212,7 +230,7 @@ button:disabled {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 70px;
 }
 
 .remember-forgot label {
@@ -230,6 +248,7 @@ button:disabled {
 }
 
 .register-link {
+    color: white;
     font-size: 14px; /* Adjust the font size as needed */
     margin-top: 10px; /* Add some top margin for spacing */
 }
