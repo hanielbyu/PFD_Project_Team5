@@ -4,10 +4,11 @@
       <h1 class="title">WELCOME TO OCBC</h1>
     </div>
 </header>
-<div class="overlay" id="overlay"></div>
+<div class="overlay" id="overlay">
+</div>
 
 
-<div class="live-chat-support-container">
+<!-- <div class="live-chat-support-container">
     <h2>Live Chat Support Instructions</h2>
     <div v-if="currentPage === 1">
       <p>
@@ -74,7 +75,7 @@
       <button @click="prevPage">Prev</button>
     </div>
     <div class="opaque-background"></div>
-  </div>
+  </div> -->
 
 <hr>
 
@@ -124,6 +125,14 @@ body, h1, h2, p, button {
   box-sizing: border-box;
 }
 
+h1{
+  font-size: 30px;
+  
+}
+p{
+  font-size: 17px;
+}
+
 /* Header Styles */
 .header {
   background-color: #D6001C; /* Slightly darker red for better contrast */
@@ -131,17 +140,27 @@ body, h1, h2, p, button {
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
-.logo-container .title {
+.title{
+  color: white;
+  font-size: 5rem; /* Increase size for impact */
+  font-weight: 700;
+  text-shadow: 1px 1px #1414141f;
+}
+.logo-container{
   color: white;
   font-size: 2rem; /* Increase size for impact */
   font-weight: 700; /* Bold font weight */
+  margin-top: 70px;
+  margin-bottom: 200px;
+  text-align: center;
 }
 
 /* Overlay Styles */
 .overlay {
-  /* Assuming this is used for a modal or similar component */
+
 }
+
+    
 
 /* Live Chat Support Container */
 .live-chat-support-container {
@@ -181,6 +200,8 @@ button:hover, button:focus {
 
 .hero__bg-content {
   padding: 2rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
   background-color: transparent; /* Make it consistent with the section background */
   text-align: center; /* Center align the text */
 }
