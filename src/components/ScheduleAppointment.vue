@@ -3,6 +3,8 @@
       <header class="aptbooking">Book an Appointment</header>
       <hr>
       <br />
+      <input type="text" placeholder="Name"><br><br>
+      <input type="text" id="phoneNumber" placeholder="+65 Phone Number" oninput="validateNumber()" required><br><br>
       <a-space direction="vertical" :size="12">
         <a-date-picker allowClear="true" v-model:value="dateselected" :disabled-date="disabledDate" />
       </a-space>
@@ -27,21 +29,20 @@
         </div>
       </div><br>
       <p>Your issue</p>
-      <a-textarea :rows="3" placeholder="type here" :maxlength="150" />
-      <br />
-      <a-checkbox v-model:checked="checked">I understand that after scheduling an appointment, I will no longer remain in the current queue.</a-checkbox>
-      <br />
-      <br />
+      <a-textarea :rows="3" placeholder="type here" :maxlength="150" /><br><br>
+      <a-checkbox v-model:checked="checked">I understand that after scheduling an appointment, I will no longer remain in the current queue.</a-checkbox><br><br>
       <a-space wrap>
-        <a-button @click="submitAppointment" :disabled="!selectedTime || !dateselected || !checked" class="confirm-button">Confirm</a-button>
+        <a-button @click="submitAppointment" :disabled="!selectedTime || !dateselected || !checked" class="confirm-button">Book Now</a-button>
       </a-space>
+      
     </div>
   </template>
 
   <script>
   import { Modal } from 'ant-design-vue';
   import { h } from 'vue';
-
+  
+  
   export default {
     name: 'ScheduleAppointment',
     data() {
@@ -83,6 +84,7 @@
           submitAppointment() {
             if (this.selectedTime) {
               console.log('Appointment submitted for time:', this.selectedTime);
+              sendSMS();
               this.showModal(); 
             } else {
               console.log('Please select a time slot before submitting.');
@@ -90,10 +92,11 @@
           },
       showModal() {
         Modal.confirm({
-          title: 'Schedule Appointment',
+          title: 'Appointment Booked',
           content: h('div', {}, [
-            h('p', `Selected Date: ${this.dateselected ? this.dateselected.format('YYYY-MM-DD') : 'Not selected'}`),
-            h('p', `Selected Time: ${this.selectedTime || 'Not selected'}`),
+            h('p', `Date: ${this.dateselected ? this.dateselected.format('YYYY-MM-DD') : 'Not selected'}`),
+            h('p', `Time: ${this.selectedTime || 'Not selected'}`),
+            h('p', `You will sms to confirm your appointment.`),
           ]),
           onOk: () => {
             if (this.selectedTime && this.dateselected) {
@@ -102,9 +105,6 @@
               console.log('Error: Please select a time slot.');
               return false;
             }
-          },
-          onCancel() {
-            console.log('Cancel');
           },
           class: 'appointment-modal',
         });
@@ -117,7 +117,6 @@
   .appointment-container {
     max-width: 600px;
     margin: 0 auto;
-    margin-top: 140px;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -139,13 +138,16 @@
     border: 1px solid #ccc;
   }
   .button:hover {
-    background-color: #fff;
+    background-color: #ff4d4f;
     color: #000;
+    height: 50px;
   }
 
   .confirm-button {
-    background-color: #eb373a;
-    color: #ffffff;
+    background-color: #ff4d4f;
+    color: #000;
+    width: 200px;
+    height: 45px;
   }
 
   .confirm-button:hover {
