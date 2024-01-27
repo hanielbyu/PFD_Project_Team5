@@ -117,6 +117,7 @@
   .appointment-container {
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 140px;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -143,8 +144,8 @@
   }
 
   .confirm-button {
-    background-color: #ff4d4f;
-    color: #000;
+    background-color: #eb373a;
+    color: #ffffff;
   }
 
   .confirm-button:hover {

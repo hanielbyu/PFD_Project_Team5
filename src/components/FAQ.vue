@@ -74,7 +74,7 @@ export default {
       },
         {
           question: "If none of these questions answer my enquiry, what should I do?",
-          answer: "If none of the provided questions address your specific enquiry, please feel free to",
+          answer: "Please feel free to",
         },
         // Add more FAQs following the same structure
         
@@ -93,6 +93,7 @@ h2, .question, .answer {
 .faq-container {
   max-width: 800px;
   margin: 20px auto;
+  margin-top: 140px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;

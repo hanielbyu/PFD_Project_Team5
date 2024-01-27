@@ -102,8 +102,8 @@ const authStore = useAuthStore();
   justify-content: space-between;
   color: rgb(255, 0, 0);
   margin: 0 15px;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 18.5px;
+  font-weight: 650;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -119,14 +119,14 @@ const authStore = useAuthStore();
   background-color: var(--bgOrange);
   width: fit-content;
   color: white;
-    padding: 0.8rem 2.3rem;
-    box-shadow: 5px 5px 7px 0px #0000003f;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.5s;
-    font-weight: 500;
-    border: solid 3px transparent;
-    position: relative;
+  padding: 0.8rem 2.3rem;
+  box-shadow: 5px 5px 7px 0px #0000003f;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.5s;
+  font-weight: 500;
+  border: solid 3px transparent;
+  position: relative;
   z-index: 1;
   transform: scaleX(1);
 }

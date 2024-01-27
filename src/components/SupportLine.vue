@@ -5,20 +5,22 @@
       <a-radio-button value="left">left</a-radio-button>
       <a-radio-button value="right">right</a-radio-button>
     </a-radio-group> -->
-    <a-tabs v-model:activeKey="activeKey" tab-position="left" animated>
-        <a-tab-pane key="1" tab="John Doe">
+    <div class="container-support">
+        <a-tabs v-model:activeKey="activeKey" tab-position="left" animated>
+            <a-tab-pane key="1" tab="John Doe">
+                <LiveChatSupport />
+            </a-tab-pane>
+
+        <a-tab-pane key="2" tab="Jane Lee">
             <LiveChatSupport />
         </a-tab-pane>
-
-      <a-tab-pane key="2" tab="Jane Lee">
-        <LiveChatSupport />
-      </a-tab-pane>
-        
-      <a-tab-pane key="3" tab="Johnathan">
-        <LiveChatSupport />
-      </a-tab-pane>
-    </a-tabs>
-  </template>
+            
+        <a-tab-pane key="3" tab="Johnathan">
+            <LiveChatSupport />
+        </a-tab-pane>
+        </a-tabs>
+    </div>
+</template>
 
 
 
@@ -52,6 +54,10 @@ a-tabs{
     color: rgba(0, 0, 0, 0.267);
 }
 
+.container-support{
+    margin-top: 80px;
+}
+
 
 .ant-tabs-nav{
     height: 500px;
@@ -63,11 +69,12 @@ a-tabs{
 
 .ant-tabs-tab{
     color: white;
+    background-color: rgba(87, 87, 87, 0.527) !important;
     font-size: 18px !important;
 }
 
 .ant-tabs-tab:hover{
-    background:rgb(207, 52, 52);
+    background:rgb(207, 52, 52) !important;
 }
 
 .ant-tabs-tab-btn{
@@ -79,7 +86,7 @@ a-tabs{
 }
 
 .ant-tabs-tab-active{
-    background: rgba(0, 0, 0, 0.274) !important;
+    background: rgba(0, 0, 0, 0.575) !important;
 }
 
 
