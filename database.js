@@ -13,7 +13,7 @@ class DB {
     });
   }
 
-  addAppointment(data) {
+  addAppointment(data) {   
     return new Promise((resolve, reject) => {
       db.execute(
         "INSERT INTO appointments (name, date, time, issue) VALUES (?,?,?,?)",
