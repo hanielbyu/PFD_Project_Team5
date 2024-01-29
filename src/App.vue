@@ -1,28 +1,28 @@
 <template>
   <a-layout class="layout">
-    <a-layout-header v-show="authStore.user">
+    <a-layout-header v-if="authStore.user">
       <a-menu
         theme="light"
         mode="horizontal"
         :style="{ lineHeight: '63px', background: 'rgb(255, 255, 255)'}">
         <div class="menu-items">
           <a-menu-item class="menu-title" key="home">
-              <RouterLink to="/" class="nav-item nav-link">OCBC SUPPORT</RouterLink>
+              <RouterLink to="/" class="nav-item nav-link"><img class="ocbclogo" src="src/assets/OCBC without text.png" /></RouterLink>
           </a-menu-item>
           <a-menu-item class="menu-title" key="faq">
               <RouterLink to="/FAQ" class="nav-item nav-link">FAQ</RouterLink>
           </a-menu-item>
-          <a-menu-item class="menu-title" key="support">
+          <a-menu-item v-if="authStore.$state.user.role === 'tech'" class="menu-title" key="support">
               <RouterLink to="/support" class="nav-item nav-link">SUPPORT</RouterLink>
           </a-menu-item>
-          <a-menu-item class="menu-title" key="tech">
+          <a-menu-item v-if="authStore.$state.user.role === 'tech'" class="menu-title" key="tech">
               <RouterLink to="/tech" class="nav-item nav-link">TECH</RouterLink>
           </a-menu-item>
           <a-menu-item class="menu-title" key="appt">
-              <RouterLink to="/schedule-appointment" class="nav-item nav-link">Schedule Appointment</RouterLink>
+              <RouterLink to="/schedule-appointment" class="nav-item nav-link">APPOINTMENT</RouterLink>
           </a-menu-item>
           <a-menu-item class="logoutBtn">
-              <a @click="authStore.logout()" class="nav-item nav-link">Logout</a>
+              <a @click="authStore.logout()" class="nav-item nav-link">LOGOUT</a>
           </a-menu-item>
         </div>
       </a-menu>
@@ -30,11 +30,12 @@
 
     <a-layout-content style="padding: 0 50px" >
       <a-breadcrumb style="margin: 30px 0"/>
+      <!-- <button @click="checkRole"></button> -->
       <RouterView />
     </a-layout-content>
 
     <a-layout-footer>
-      <ChatBot/>
+      <ChatBot v-if="authStore.$state.user && authStore.$state.user.role ==='user'"/>
     </a-layout-footer>    
   </a-layout>
 </template>
@@ -48,6 +49,7 @@ const authStore = useAuthStore();
 </script>
 
 <style scoped>
+
 
 /* layout css */
 .site-layout-content {
@@ -79,7 +81,7 @@ const authStore = useAuthStore();
 
 .layout {
   min-height: 110vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.7)), url("https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iv2VYtHhrIF4/v0/1200x800.jpg");;
+  background-color: white;
   background-size: cover; 
   background-position: center;
 }
@@ -98,11 +100,11 @@ const authStore = useAuthStore();
 .menu-items {
   display: flex;
   justify-content: space-between;
-  color: rgb(242, 8, 8);
+  color: rgb(255, 0, 0);
   margin: 0 15px;
-  font-size: 15px;
-  font-weight: bold;
-  font-family: 'Your Font Here', sans-serif;
+  font-size: 18.5px;
+  font-weight: 650;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .menu-title{
@@ -114,23 +116,35 @@ const authStore = useAuthStore();
 }
 
 .need-button{
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 20px;
-  background-color: rgb(55, 63, 63);
-  border: 2px solid #7fa275;
-  border-radius: 10px;
-  color: whitesmoke;
+  background-color: var(--bgOrange);
+  width: fit-content;
+  color: white;
+  padding: 0.8rem 2.3rem;
+  box-shadow: 5px 5px 7px 0px #0000003f;
   font-size: 18px;
-  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  height:80px;
-  width:150px;
+  transition: all 0.5s;
+  font-weight: 500;
+  border: solid 3px transparent;
+  position: relative;
+  z-index: 1;
+  transform: scaleX(1);
 }
-
-.need-button:hover {
-  background-color: rgb(116, 164, 159) 
+.need-button::before {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    transform: scaleX(-1);
+    transform-origin: left;
+    transition: all 0.8s;
+}
+.need-button:hover { 
+    color: white;
+}
+.ocbclogo {
+width: 50px;
+padding: 10px;
 }
 </style>

@@ -6,18 +6,18 @@ import 'ant-design-vue/dist/reset.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-/* import specific icons */
-import { faMessage } from '@fortawesome/free-solid-svg-icons'
-/* add icons to the library */
 import VueSmoothScroll from 'vue3-smooth-scroll' 
 import { createPinia } from 'pinia';
 import { router } from './helpers';
 // setup fake backend will migrate to nodejs later
 import { fakeBackend } from './helpers';
+import {faMicrophone, faPhone } from '@fortawesome/free-solid-svg-icons'
+
 
 fakeBackend();
 
-library.add(faMessage)
+library.add(faMicrophone)
+library.add(faPhone)
 
 const app = createApp(App);
 

@@ -75,7 +75,7 @@
         } else if (technician.userName === 'Jane Smith') {
           return '12:00 PM (Scheduled)';
         } else if (technician.userName === 'Tarry Lim') {
-          return '12:15 PM';
+          return '12:30 PM';
         }
         return '';
       }
