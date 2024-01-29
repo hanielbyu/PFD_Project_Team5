@@ -6,10 +6,23 @@ class DB {
       host: "localhost",
       user: "root",
       password: "DB_PASSWORD",
-      database: "advanced-chat-app",
+      database: "advanced_chat_app",
     });
     db.connect(function (err) {
       if (err) console.log(err);
+    });
+  }
+
+  addAppointment(data) {
+    return new Promise((resolve, reject) => {
+      db.execute(
+        "INSERT INTO appointments (name, date, time, issue) VALUES (?,?,?,?)",
+        [data.name, data.date, data.time, data.issue],
+        function (err, rows) {
+          if (err) reject(new Error(err));
+          else resolve(rows);
+        }
+      );
     });
   }
 

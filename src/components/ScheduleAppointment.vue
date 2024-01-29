@@ -2,6 +2,10 @@
   <div class="appointment-container">
     <header>Appointment Booking</header>
     <br />
+    <!-- Add input field for name -->
+    <input type="text" placeholder="Enter your name" v-model="name" />
+    <br />
+    <br />
     <a-space direction="vertical" :size="12">
       <a-date-picker allowClear="true" v-model:value="dateselected" :disabled-date="disabledDate" />
     </a-space>
@@ -30,7 +34,7 @@
     <br />
     <br />
     <a-space wrap>
-      <a-button @click="submitAppointment" :disabled="!selectedTime || !dateselected" class="confirm-button">Confirm</a-button>
+      <a-button @click="submitAppointment" :disabled="!selectedTime || !dateselected || !name" class="confirm-button">Confirm</a-button>
     </a-space>
   </div>
 </template>
@@ -47,56 +51,58 @@ export default {
       timeSlots: [],
       selectedTime: null,
       checked: false,
+      name: '', // Added data property for name
     };
   },
   mounted() {
     this.updateTimeSlots();
   },
   methods: {
-        updateTimeSlots() {
-          const now = new Date();
-          now.setMinutes(Math.ceil(now.getMinutes() / 30) * 30); 
-          const options = { hour: 'numeric', minute: 'numeric', hour12: true };
-          // for loop to generate 30 min interval buttons
-          for (let i = 0; i < 10; i++) {
-            this.timeSlots.push(now.toLocaleTimeString(undefined, options));
-            now.setMinutes(now.getMinutes() + 30);
-          }
-        },
-        selectTime(slot) {
-          console.log('Selected time:', slot);
-          this.selectedTime = slot;
-        },
-        selectdate() {
-          console.log('Selected Date:', this.dateselected);
-        },
-        isSelected(slot) {
-          return this.selectedTime === slot;
-        },
-        disabledDate(current) {
-          // Disable dates before today
-          return current && current < new Date().setHours(0, 0, 0, 0);
-        },
-        submitAppointment() {
-          if (this.selectedTime) {
-            console.log('Appointment submitted for time:', this.selectedTime);
-            this.showModal(); 
-          } else {
-            console.log('Please select a time slot before submitting.');
-          }
-        },
+    updateTimeSlots() {
+      const now = new Date();
+      now.setMinutes(Math.ceil(now.getMinutes() / 30) * 30); 
+      const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+      // for loop to generate 30 min interval buttons
+      for (let i = 0; i < 10; i++) {
+        this.timeSlots.push(now.toLocaleTimeString(undefined, options));
+        now.setMinutes(now.getMinutes() + 30);
+      }
+    },
+    selectTime(slot) {
+      console.log('Selected time:', slot);
+      this.selectedTime = slot;
+    },
+    selectdate() {
+      console.log('Selected Date:', this.dateselected);
+    },
+    isSelected(slot) {
+      return this.selectedTime === slot;
+    },
+    disabledDate(current) {
+      // Disable dates before today
+      return current && current < new Date().setHours(0, 0, 0, 0);
+    },
+    submitAppointment() {
+      if (this.selectedTime && this.dateselected && this.name) {
+        console.log('Appointment submitted for time:', this.selectedTime);
+        this.showModal(); 
+      } else {
+        console.log('Please fill in all fields before submitting.');
+      }
+    },
     showModal() {
       Modal.confirm({
         title: 'Schedule Appointment',
         content: h('div', {}, [
+          h('p', `Name: ${this.name}`),
           h('p', `Selected Date: ${this.dateselected ? this.dateselected.format('YYYY-MM-DD') : 'Not selected'}`),
           h('p', `Selected Time: ${this.selectedTime || 'Not selected'}`),
         ]),
         onOk: () => {
-          if (this.selectedTime && this.dateselected) {
+          if (this.selectedTime && this.dateselected && this.name) {
             console.log('OK');
           } else {
-            console.log('Error: Please select a time slot.');
+            console.log('Error: Please fill in all fields.');
             return false;
           }
         },
