@@ -39,6 +39,8 @@
 <script>
 import { Modal } from 'ant-design-vue';
 import { h } from 'vue';
+import { addDoc, collection } from "firebase/firestore"; 
+import { db } from "../firebase.js";
 
 export default {
   name: 'ScheduleAppointment',
@@ -75,19 +77,17 @@ export default {
     disabledDate(current) {
       return current && current < new Date().setHours(0, 0, 0, 0);
     },
-    submitAppointment() {
-      if (this.selectedTime && this.dateselected) {
-        console.log('Appointment submitted for time:', this.selectedTime);
-        const [hours, minutesPart] = this.selectedTime.split(':');
-        const minutes = minutesPart.substring(0, 2);
-        const meridian = minutesPart.substring(3);
-        const appointmentDate = new Date(this.dateselected);
-        appointmentDate.setHours(meridian === 'PM' ? parseInt(hours) + 12 : hours, minutes, 0);
-        this.appointmentTime = appointmentDate;
-        this.showModal();
-      } else {
-        console.log('Please select a time slot before submitting.');
-      }
+    submitAppointment:function() {
+      try {
+      const docRef = addDoc(collection(db, "appointments"), {
+      name: "Test"
+      });
+  this.showModal();
+  console.log("Document written with ID: ", docRef.id);
+} catch (e) {
+  console.error("Error adding document: ", e);
+}
+
     },
     showModal() {
       Modal.confirm({
