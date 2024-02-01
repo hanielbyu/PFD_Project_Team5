@@ -56,6 +56,7 @@ body{
     margin-top: -50px;
     margin-left: -100px;
     font-size: 20px;
+    font-weight: 600;
     padding: 20px 40px;
     transition: background-color 0.3s ease, border-color 0.3s ease; /* Add a transition for background-color and border-color */
 }
