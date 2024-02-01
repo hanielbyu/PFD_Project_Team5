@@ -47,15 +47,25 @@ body{
     background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
 }
 
-#join-btn{
-    top:50%;
-    left:50%;
+#join-btn {
+    background-color: rgb(195, 26, 26);
+    border: 2px solid black; /* Add a black border */
+    top: 50%;
+    left: 50%;
     position: absolute;
-    margin-top:-50px;
-    margin-left:-100px;
-    font-size:18px;
-    padding:20px 40px;
+    margin-top: -50px;
+    margin-left: -100px;
+    font-size: 20px;
+    padding: 20px 40px;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Add a transition for background-color and border-color */
 }
+
+#join-btn:hover {
+    /* Change the background color to white on hover */
+    border-color: white; /* Change the border color to white on hover */
+    cursor: pointer;
+}
+
 
 #video-streams{
     display:grid;
@@ -72,7 +82,7 @@ body{
 .video-container{
     max-height: 100%;
     border: 2px solid black;
-    background-color: #203A49;
+    background-color: #921c1c;
 }
 
 .video-player{
@@ -85,7 +95,7 @@ body{
 
 button{
     border:none;
-    background-color: cadetblue;
+    background-color: #d21414;
     color:#fff;
     padding:10px 20px;
     font-size:16px;

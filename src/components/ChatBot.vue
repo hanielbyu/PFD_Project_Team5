@@ -203,7 +203,7 @@ section {
   height: 100vh;
 }
 .need-button{
-  background-color: rgb(179, 34, 34);
+  background-color: rgb(197, 25, 25);
   box-shadow: 5px 5px 7px 0px #0000003f;
   transition: all 0.5s;
   position: fixed;
@@ -221,26 +221,24 @@ section {
   z-index: 1;
 }
 .need-button::before{
-  content: "";
     position: absolute;
-    background-color: rgb(214, 53, 53);
+    background-color: rgb(179, 34, 34);
     top: 0px;
     left: 0;
     right: 0;
     bottom: 0px;
     z-index: -1;
     transform: scaleX(0);
-    transform-origin: left;
-    transition: all 0.8s;
 }
 
 .need-button:hover::before{
   transform: scaleX(1);
+  color: white !important;
 }
 .need-button:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(179, 34, 34);
   border: solid 3px rgb(255, 255, 255);
-  color: black;
+  color: white !important;
 
 }
 
