@@ -24,6 +24,7 @@
 </template>
 
 <script>
+
 import { videoBackend } from "@/helpers/video-backend";
 import { ref, onMounted } from 'vue';
 
@@ -64,8 +65,8 @@ body{
     margin:0 auto;
 }
 
-#agora-video-player-track-cam-26e46082 {
-    position: absolute;
+.agora_video_player{
+    position: fixed !important;
 }
 
 .video-container{

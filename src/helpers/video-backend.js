@@ -30,16 +30,25 @@ function videoBackend() {
                             <div class="video-player" id="user-${UID}"></div>
                     </div>`
         document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
-
         localTracks[1].play(`user-${UID}`)
         
         await client.publish([localTracks[0], localTracks[1]])
+        let x = document.getElementById(`user-${UID}`)
+        let y = x.firstChild.firstChild;
+        let z = x.firstChild;
+    
+        console.log(y , "HELOOOOOOOO");
+        z.style.backgroundColor = 'transparent'
+        y.style.position = 'relative';
+        y.style.height = '50%';
+        y.style.width = 'auto';
+
     }
 
     let joinStream = async () => {
         await joinAndDisplayLocalStream()
         document.getElementById('join-btn').style.display = 'none'
-        document.getElementById('stream-controls').style.display = 'flex'
+        document.getElementById('stream-controls').style.display = 'flex';
     }
 
     let handleUserJoined = async (user, mediaType) => {
@@ -48,6 +57,7 @@ function videoBackend() {
 
         if (mediaType === 'video'){
             let player = document.getElementById(`user-container-${user.uid}`)
+
             if (player != null){
                 player.remove()
             }
@@ -58,6 +68,13 @@ function videoBackend() {
             document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
 
             user.videoTrack.play(`user-${user.uid}`)
+            let x = document.getElementById(`user-${user.uid}`);
+            let y = x.firstChild.firstChild
+            let z = x.firstChild;
+            z.style.backgroundColor = 'transparent'
+            y.style.position = 'relative';
+            y.style.height = '50%';
+            y.style.width = 'auto';
         }
 
         if (mediaType === 'audio'){
