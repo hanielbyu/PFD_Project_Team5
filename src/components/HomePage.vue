@@ -3,93 +3,23 @@
     <div class="logo-container">
       <h1 class="title">WELCOME TO OCBC</h1>
     </div>
-</header>
-<div class="overlay" id="overlay">
-</div>
-
-
-<!-- <div class="live-chat-support-container">
-    <h2>Live Chat Support Instructions</h2>
-    <div v-if="currentPage === 1">
-      <p>
-        Welcome to our Live Chat Support! This guide will help you navigate through the process.
-      </p>
-      <button @click="nextPage">Next</button>
-    </div>
-    <div v-else-if="currentPage === 2">
-    <p>
-      Welcome to our Live Chat Support! To get started, look for the "Need Help?" button at the bottom right corner of the page. It's a round button with a chat icon. Click on it to open the chat interface.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
-    </div>
-  </div>
-  <div v-else-if="currentPage === 3">
-    <p>
-      You can then type your questions or concerns in the chatbox. The AI will analyze your input and provide helpful responses. Feel free to ask anything related to our products, services, or common issues.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
-    </div>
+  </header>
+  <div class="overlay" id="overlay">
   </div>
 
-  <div v-else-if="currentPage === 4">
-    <p>
-      The AI will suggest related categories based on your input.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
-    </div>
-  </div>
-  <div v-else-if="currentPage === 5">
-    <p>
-      Choose a category, and the system will categorize your inquiry by urgency (1-5).
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
-    </div>
-  </div>
+  <hr>
 
-  <div v-else-if="currentPage === 6">
-    <p>
-      You'll be redirected to a technician for live chat support based on urgency.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
-    </div>
-  </div>
-    <div v-else>
-      <p>
-        Ready to get started? Feel free to ask your first question!
-      </p>
-      <button @click="prevPage">Prev</button>
-    </div>
-    <div class="opaque-background"></div>
-  </div> -->
+  <section class="hero-section">
+    <div class="hero__bg">
+        <div class="hero__bg-content">
+            <h1>About Live Chat Support</h1>
 
-<hr>
-
-<section class="hero-section">
-<div class="hero__bg">
-    <div class="hero__bg-content">
-        <h1>About Live Chat Support</h1>
-
-        <p class="p-lead">OCBC is excited to introduce Live Chat Support, a new feature designed to make your banking experience even more convenient and efficient. With Live Chat Support, you can now connect with our dedicated support team in real-time, right from the comfort of your digital space.</p>
-        <hr>
-        <p> Experience personalized assistance tailored to your specific needs. Our knowledgeable support agents are here to help you with account inquiries, transaction assistance, and any other banking-related questions you may have. Enjoy the benefits of quick, efficient, and personalized support with OCBC's Live Chat Support.</p>
+            <p class="p-lead">OCBC is excited to introduce Live Chat Support, a new feature designed to make your banking experience even more convenient and efficient. With Live Chat Support, you can now connect with our dedicated support team in real-time, right from the comfort of your digital space.</p>
+            <hr>
+            <p> Experience personalized assistance tailored to your specific needs. Our knowledgeable support agents are here to help you with account inquiries, transaction assistance, and any other banking-related questions you may have. Enjoy the benefits of quick, efficient, and personalized support with OCBC's Live Chat Support.</p>
+        </div>
     </div>
-</div>
-</section>
+  </section>
 </template>
 
 <script>
@@ -154,13 +84,6 @@ p{
   margin-bottom: 200px;
   text-align: center;
 }
-
-/* Overlay Styles */
-.overlay {
-
-}
-
-    
 
 /* Live Chat Support Container */
 .live-chat-support-container {
