@@ -65,6 +65,8 @@ function onSubmit(values, { setErrors }) {
 
 <style>
 .layout[data-v-7a7a37b1]{
+    position:static;
+    z-index: -1;
     background-image: url(../assets/shutterstock_593894891.jpg);
     height: 100%;
 }

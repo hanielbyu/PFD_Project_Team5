@@ -40,9 +40,13 @@
 import { Modal } from 'ant-design-vue';
 import { h } from 'vue';
 
+
 export default {
   name: 'ScheduleAppointment',
+
+  
   data() {
+
     return {
       dateselected: null,
       timeSlots: [],
@@ -75,7 +79,7 @@ export default {
     disabledDate(current) {
       return current && current < new Date().setHours(0, 0, 0, 0);
     },
-    submitAppointment() {
+    async submitAppointment() {
       if (this.selectedTime && this.dateselected) {
         console.log('Appointment submitted for time:', this.selectedTime);
         const [hours, minutesPart] = this.selectedTime.split(':');
@@ -85,7 +89,17 @@ export default {
         appointmentDate.setHours(meridian === 'PM' ? parseInt(hours) + 12 : hours, minutes, 0);
         this.appointmentTime = appointmentDate;
         this.showModal();
-      } else {
+        let message11 = "Hello hello String node js yes sir";
+        // POST request using fetch with async/await
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: message11 })
+        };
+        const response = await fetch("http://localhost:5000/sms", requestOptions);
+        const data = await response.json();
+      } 
+      else {
         console.log('Please select a time slot before submitting.');
       }
     },
@@ -124,8 +138,10 @@ export default {
       });
     },
   },
+  
 };
 </script>
+
 <style scoped>
 .appointment-container {
   max-width: 600px;
@@ -149,15 +165,16 @@ export default {
   border: 1px solid #ccc;
 }
 .button:hover {
-  background-color: #ff4d4f;
-  color: #000;
-  height: 50px;
+  background-color: #d44e51;
+    color: #fff;
+    width: 200px;
+    height: 45px;
 }
 .confirm-button {
-  background-color: #ff4d4f;
-  color: #000;
-  width: 200px;
-  height: 45px;
+  background-color: #c50f11;
+    color: #fff;
+    width: 200px;
+    height: 45px;
 }
 .confirm-button:hover {
   background-color: #fff;
@@ -172,7 +189,5 @@ button:disabled {
   font-weight: bold;
   font-size: 20px;
 }
-.appointment-reminder-modal {
-  /* Style for the appointment reminder overlay */
-}
+
 </style>
