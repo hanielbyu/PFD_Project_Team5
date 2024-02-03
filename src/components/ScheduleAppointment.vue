@@ -110,9 +110,9 @@ export default {
       Modal.confirm({
         title: 'Appointment Booked',
         content: h('div', {}, [
-          h('p', `Date: ${this.dateselected ? this.dateselected.format('YYYY-MM-DD') : 'Not selected'}`),
-          h('p', `Time: ${this.selectedTime || 'Not selected'}`),
-          h('p', `You will sms to confirm your appointment.`),
+          h('p', Date: ${this.dateselected ? this.dateselected.format('YYYY-MM-DD') : 'Not selected'}),
+          h('p', Time: ${this.selectedTime || 'Not selected'}),
+          h('p', You will sms to confirm your appointment.),
         ]),
         onOk: () => {
           if (this.selectedTime && this.dateselected) {
