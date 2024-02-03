@@ -96,11 +96,11 @@ export default {
   position: absolute;
   right: 10px;
   top: 5px;
-  background-color: rgb(49, 49, 49);
+  background-color: rgb(43, 43, 43);
 }
 
 .active {
-  background-color: #f22f46 !important;
+  background-color: #ff0d0d !important;
   color: #fff;
   
   box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);

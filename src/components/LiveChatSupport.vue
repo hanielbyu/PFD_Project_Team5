@@ -3,10 +3,9 @@
     <div class="messages" ref="messagesRef">
       <div class="inner">
         <div v-if="role == 'tech'">
-          <h5 v-if="role == 'tech'">Keywords: Compromised, Scam</h5>
-          <h5 v-if="role == 'tech'">Time: 12:00pm </h5>
+          <h5 v-if="role == 'tech'">Name: Jaden</h5>
+          <h5 id="datetime" v-if="role == 'tech'">Time: 12:00pm</h5>
         </div>
-        <h5>Waiting for Customer Service Staff to assist you</h5>
       
         <div 
           :key="index"
@@ -37,9 +36,10 @@
       <Speech v-on:set-child-data="speech2text"/>
       <button class="text-button" >></button>
     </form>
-    <Call/>
   </div>
 </template>
+
+
 
 
 <script setup>
@@ -48,7 +48,7 @@ import AgoraRTM from 'agora-rtm-sdk';
 import { v4 as uuidv4 } from 'uuid';
 import { ref, onMounted, nextTick, defineExpose } from 'vue';
 import Speech from './Speech.vue';
-import Call from './Call.vue';
+
 
 const authStore = useAuthStore();
 
@@ -163,10 +163,10 @@ h5{
   
 }
 .user-self {
-  color: rgb(71, 148, 0);
+  color: rgb(0, 122, 17);
 }
 .user-them {
-  color: rgb(170, 6, 6);
+  color: rgb(0, 0, 0);
 }
 .chatbox-form {
   position: relative;
@@ -186,7 +186,7 @@ h5{
 .text-button {
   border: none;
   outline: none;
-  background: rgb(58, 58, 58);
+  background: rgb(112, 10, 10);
   color: white;
   padding: 1px 10px;
   position: absolute;
@@ -203,7 +203,7 @@ h5{
 .suggested-texts span {
   cursor: pointer;
   padding: 8px 12px;
-  background-color: #313030; /* Grey color */
+  background-color: #801616; /* Grey color */
   color: white;
   border-radius: 5px;
   margin-right: 5px; /* No spacing between buttons */

@@ -1,73 +1,78 @@
 <template>
-    <div class="live-chat-support-container">
+  <div class="live-chat-support-container">
     <h2>Live Chat Support Instructions</h2>
+
     <div v-if="currentPage === 1">
       <p>
-        Welcome to our Live Chat Support! This guide will help you navigate through the process.
+        Thank you for choosing our Live Chat Support! This quick guide will ensure you know exactly how to get the help you need, every step of the way. Let's get started!
       </p>
       <button @click="nextPage">Next</button>
     </div>
+
     <div v-else-if="currentPage === 2">
-    <p>
-      Welcome to our Live Chat Support! To get started, look for the "Need Help?" button at the bottom right corner of the page. It's a round button with a chat icon. Click on it to open the chat interface.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
+      <p>
+        To begin, locate the 'Need Help?' button. You'll find it at the bottom right corner of your screen. It’s a round button with a chat icon. Give it a click to open up the chat interface.
+      </p>
+      <div class="button-container">
+        <button @click="prevPage">Prev</button>
+        <div class="button-gap"></div>
+        <button @click="nextPage">Next</button>
+      </div>
     </div>
-  </div>
-  <div v-else-if="currentPage === 3">
-    <p>
-      You can then type your questions or concerns in the chatbox. The AI will analyze your input and provide helpful responses. Feel free to ask anything related to our products, services, or common issues.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
-    </div>
-  </div>
 
-  <div v-else-if="currentPage === 4">
-    <p>
-      The AI will suggest related categories based on your input.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
+    <div v-else-if="currentPage === 3">
+      <p>
+        Now that the chat is open, go ahead and type in any questions or concerns you have in the chatbox. Our AI assistant is here to provide you with immediate, helpful answers. Whether it's about our products, services, or any issues you're facing, don't hesitate to ask.
+      </p>
+      <div class="button-container">
+        <button @click="prevPage">Prev</button>
+        <div class="button-gap"></div>
+        <button @click="nextPage">Next</button>
+      </div>
     </div>
-  </div>
-  <div v-else-if="currentPage === 5">
-    <p>
-      Choose a category, and the system will categorize your inquiry by urgency (1-5).
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
-    </div>
-  </div>
 
-  <div v-else-if="currentPage === 6">
-    <p>
-      You'll be redirected to a technician for live chat support based on urgency.
-    </p>
-    <div class="button-container">
-      <button @click="prevPage">Prev</button>
-      <div class="button-gap"></div>
-      <button @click="nextPage">Next</button>
+    <div v-else-if="currentPage === 4">
+      <p>
+        As you interact with our AI, it will suggest categories related to your query. This helps in providing you with the most relevant information and support options.
+      </p>
+      <div class="button-container">
+        <button @click="prevPage">Prev</button>
+        <div class="button-gap"></div>
+        <button @click="nextPage">Next</button>
+      </div>
     </div>
-  </div>
+
+    <div v-else-if="currentPage === 5">
+      <p>
+        Your questions will be prioritized based on their urgency level, ensuring those with more immediate needs receive attention first.
+      </p>
+      <div class="button-container">
+        <button @click="prevPage">Prev</button>
+        <div class="button-gap"></div>
+        <button @click="nextPage">Next</button>
+      </div>
+    </div>
+
+    <div v-else-if="currentPage === 6">
+      <p>
+        Based on the urgency and category of your inquiry, you'll be promptly connected to a technician for live support. We're here to ensure your concerns are addressed with the utmost attention and care.
+      </p>
+      <div class="button-container">
+        <button @click="prevPage">Prev</button>
+        <div class="button-gap"></div>
+        <button @click="nextPage">Next</button>
+      </div>
+    </div>
+
     <div v-else>
       <p>
-        Ready to get started? Feel free to ask your first question!
+        All set! You're now ready to start your first conversation. Feel free to ask your first question whenever you're ready, and let's make your experience as smooth as possible.
       </p>
       <button @click="prevPage">Prev</button>
     </div>
-    <div class="opaque-background"></div>
+
   </div>
-  </template>
+</template>
 
 <script>
 export default {
@@ -90,10 +95,11 @@ export default {
     },
   },
 };
-</script>   
+</script>
+  
 
 <style scoped>
-/* General Styles */
+/* Base styles for body elements to ensure consistency and readability */
 body, h1, h2, p, button {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
@@ -101,137 +107,59 @@ body, h1, h2, p, button {
   box-sizing: border-box;
 }
 
-h1{
-  font-size: 30px;
-  
-  
-}
-p{
-  font-size: 17px;
-  margin-top: 25px;
+/* Styling for headings and paragraphs to make them more appealing */
+h2 {
+  font-size: 24px; /* Slightly reduced for subtlety */
+  color: #333; /* Dark grey for contrast */
+  margin-bottom: 1rem; /* Space below the heading */
 }
 
-/* Header Styles */
-.header {
-  background-color: #D6001C; /* Slightly darker red for better contrast */
-  padding: 1rem 0;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-.title{
-  color: white;
-  font-size: 5rem; /* Increase size for impact */
-  font-weight: 700;
-  text-shadow: 1px 1px #1414141f;
-}
-.logo-container{
-  color: white;
-  font-size: 2rem; /* Increase size for impact */
-  font-weight: 700; /* Bold font weight */
-  margin-top: 70px;
-  margin-bottom: 200px;
-  text-align: center;
-}
-
-
-/* Live Chat Support Container */
-.live-chat-support-container {
-  max-width: 900px; /* Slightly wider for better spacing */
-  margin: 2rem auto;
-  margin-top: 90px;
-  padding: 2rem;
-  background-color: #fff;
-  border: none; /* Removing border */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Buttons */
-button {
-  background-color: #D6001C;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  outline: none; /* Remove outline for a clean design */
-  margin: 0.5rem; /* Uniform margin for buttons */
-  margin-top: 50px;
-}
-
-button:hover, button:focus {
-  background-color: #AA0016; /* Darken button on hover/focus for interaction */
-}
-
-/* Hero Section */
-.hero-section {
-  background-color: #f4f4f4; /* Soft background color for the hero section */
-  padding: 2rem 0;
-  
-}
-
-.hero__bg-content {
-  padding: 2rem;
-  padding-left: 10rem;
-  padding-right: 10rem;
-  background-color: transparent; /* Make it consistent with the section background */
-  text-align: center; /* Center align the text */
-  
-}
-
-.hero__bg-content h1,
-.hero__bg-content p {
-  color: #333;
-  
-}
-
-.hero__bg-content h1 {
-  margin-bottom: 1rem;
-}
-
-/* Additional global styles */
 p {
-  line-height: 1.6; /* Improve readability */
+  font-size: 16px; /* Comfortable reading size */
+  margin-top: 20px; /* Space above paragraphs */
+  color: #555; /* Soft black for readability */
+  line-height: 1.5; /* Improved line spacing */
 }
 
-.hr {
-  max-width: 700px;
-  margin: 1rem auto;
-  border-top: 1px solid #ddd; /* Subtle line for separation */
+/* Enhancing the live chat support container */
+.live-chat-support-container {
+  max-width: 800px; /* Increased width for a larger container */
+  margin: 100px auto; /* Centered with more vertical space */
+  padding: 30px; /* Increased padding for more internal space */
+  background-color: rgba(255, 255, 255, 0.884); /* Slightly transparent white */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-/* Button Container */
+/* Refined button styles for better user interaction */
+button {
+  background-color: #D6001C; /* Vibrant red */
+  color: #fff; /* White text for contrast */
+  border: none; /* Clean look without border */
+  padding: 10px 20px; /* Adequate padding for easy tapping */
+  font-size: 14px; /* Readable font size */
+  font-weight: 600; /* Medium weight for emphasis */
+  border-radius: 5px; /* Slightly rounded corners for a soft look */
+  cursor: pointer; /* Cursor indication for interactivity */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for feedback */
+}
+
+button:hover {
+  background-color: #AA0016; /* Darker shade on hover for feedback */
+  transform: scale(1.05); /* Slight increase in size for emphasis */
+}
+
+/* Button container for navigation */
 .button-container {
   display: flex;
-  justify-content: center; /* Center buttons */
-  gap: 1rem; /* Space between buttons */
+  justify-content: space-between; /* Space out buttons */
+  margin-top: 30px; /* Space above the button container */
 }
 
-.button-gap {
-  display: none; /* Remove if using gap */
-}
-
-/* Footer styles if you have a footer */
-footer {
-  text-align: center;
-  padding: 1rem 0;
-  background-color: #D6001C;
-  color: white;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-  .live-chat-support-container,
-  .hr {
-    width: 90%;
-    margin: 1rem auto;
-  }
-
-  .hero-section {
-    padding: 1rem;
+  .live-chat-support-container {
+    width: 90%; /* Responsive width */
+    margin: 20px auto; /* Adjusted vertical spacing */
   }
 
   .button-container {
@@ -239,7 +167,7 @@ footer {
   }
 
   button {
-    width: 100%; /* Full-width buttons on smaller screens */
+    margin-bottom: 10px; /* Space between stacked buttons */
   }
 }
 </style>

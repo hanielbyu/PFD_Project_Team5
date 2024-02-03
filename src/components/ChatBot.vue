@@ -38,14 +38,17 @@
 <template>
   <a-popover v-model:open="visible" title="Customer Enquiry" trigger="click">
     <template #content>
-      <a-card style="width: 400px; height: 500px; max-height: 500px; background-color: rgb(243, 238, 238); overflow-y:auto;">
+      <a-card class="card-container" style="display: flex; flex-direction: column; justify-content: flex-end; flex-wrap: wrap; width: 400px; height: 500px; max-height: 500px; background-color: rgb(243, 238, 238); overflow-y:auto;">
         <!-- Loop through each message and use the 'type' to determine the styling -->
+
+
         <div v-for="(message, index) in arr" :key="index" :class="message.type === 'user' ? 'chat-message' : message.type">
           <p>{{ message.message }}</p>
         </div>
-        
-        <!-- User input area -->
-        <div class="user-input">
+      
+
+                  <!-- User input area -->
+        <div class="user-input" style="min-width: 320px;">
           <input
             v-model="textInput"
             type="text"
@@ -55,15 +58,14 @@
           />
           <button @click="processInput" class="send-button">Send</button>
         </div>
-        
-        <!-- Button for Live Support, only visible if a message has been sent -->
+
         <a-button type="link" :class="liveChat"
           @click="liveChatSupport()"  href="#sec-3" v-smooth-scroll>Proceed to Live Support</a-button>
         
         <!-- Button for FAQ Page, only visible if a message has been sent -->
         <a-button :class="faqPage" type="link" >
           <RouterLink to="/FAQ" class="nav-item nav-link">View FAQ Page</RouterLink></a-button>
-          <section :class="liveChatCard" id="sec-3">
+        <section :class="liveChatCard" id="sec-3">
           <div :class="liveChatCard">
           <a-divider style="height: 5px; background-color: #7cb305" />
           <h1 class="livechattitle"> LIVE CHAT SUPPORT</h1>
@@ -82,41 +84,12 @@
 <script>
 import { defineComponent, ref} from 'vue';
 import LiveChatSupport from "./LiveChatSupport.vue";
-import { inferRuntimeType } from 'vue/compiler-sfc';
 export default defineComponent({
   components:{
     LiveChatSupport
 },
   setup(){
-    // const arr = ref([
-    // {
-    //   message: "Hi, how may I assist you?",
-    //   type: "chatbot",
-    //   buttons: [
-    //     {
-    //       message: "Credit Card Stolen",
-    //       urgency: 3,
-    //       answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
-    //     },
-    //     {
-    //       message: "Suspicious Transaction",
-    //       urgency: 3,
-    //       answer: "We understand the level of urgency on this matter, We will redirect you to our Customer Service Staff"
-    //     },
-    //     {
-    //       message: "Register for Card",
-    //       urgency: 1,
-    //       answer: "Our FAQ page will have knowledge on this, Click here to view our FAQ page"
-    //     },
-    //     {
-    //       message: "Credit Limit Enquiry",
-    //       urgency: 2,
-    //       answer: "We will redirect you to our Customer Service Staff\
-    //       However, feel free to contact us via Email or call this hotline"
-    //     } 
-    //   ]
-    // }
-    // ])
+  
     const textInput = ref(''); // This ref holds the user's input
     const arr = ref([]); // This ref holds the array of chat messages
     const showLiveChatButton = ref(false); // Flag to control the display of the live chat 
@@ -143,12 +116,15 @@ export default defineComponent({
         'reset my password': { message: 'Our FAQ page will have knowledge on this. Click the link below to view our FAQ page. \
         However if you need any assistance, feel free to contact our Customer Service Staff via the Link below.', urgency: 2 },
         'checking account balance': { message: 'Information about checking your account balance can be found on our FAQ page.', urgency: 1 },
+        'Hello': { message: 'Hi there! Im Tommy, your Chatbot :) How can i help you today?', urgency: -1},
+        'hi': { message: 'Hi there! Im Tommy, your Chatbot :) How can i help you today?', urgency: -1},
+        'help me': { message: 'It is my pleasure! How can i help you today?', urgency: -1},
         // ... other key phrases and urgency levels
       };
 
     // Default urgency level
     let urgencyLevel = 0;
-    let responseMessage = "I'm not sure how to help with that. Would you like to rephrase your enquiry or talk to our Customer Service Staff?";
+    let responseMessage;
     let showLiveChatForOther = false;
   
     // Check if the input matches any key phrase
@@ -157,11 +133,15 @@ export default defineComponent({
         const response = responses[phrase];
         // Display user's input in the chat messages
         arr.value.push({ message: input, type: 'user' });
-        arr.value.push({ message: response.message, type: 'chatbot' }); // Push the response to the chat messages array
+        var delayInMilliseconds = 1500; //1 second
         urgencyLevel = response.urgency; // Set the urgency level
-        responseMessage = response.message;
+        responseMessage = response.message; 
+        setTimeout(function() {
+          arr.value.push({ message: response.message, type: 'chatbot' }); // Push the response to the chat messages array
+      }, delayInMilliseconds);
         break;
       }
+      
     }
 
     // Display the live chat button based on urgency level
@@ -172,27 +152,32 @@ export default defineComponent({
       // Display user's input in the chat messages
       arr.value.push({ message: input, type: 'user' });
       responseMessage = "I'm not sure how to help with that. Would you like to rephrase your enquiry or talk to our Customer Service Staff?";
-      proceedLiveChat('show')
-      proceedFAQ('show')
+      setTimeout(function() {
+        arr.value.push({ message: responseMessage, type: 'chatbot' });
+        proceedLiveChat('show')
+        proceedFAQ('show')
+      },1600)
     }
     else if(urgencyLevel == 1){
-        // INSERT HERE
+      setTimeout(function() {
+        proceedFAQ('show')
+      },1600)
     }
     else if (urgencyLevel == 2){
-        // INSERT HERE
+      setTimeout(function() {
+        proceedLiveChat('show')
+        proceedFAQ('show')
+      },1600)
     }
-    else{
-        // INSERT HERE
+    else if (urgencyLevel == 3){
+      setTimeout(function()   {
+        proceedLiveChat('show')
+        proceedFAQ('show')
+      },1600)
+    }else{
     }
-
-
-       // Prevent duplication of responses
-       if (arr.value[arr.value.length - 1]?.message !== responseMessage) {
-        arr.value.push({ message: responseMessage, type: 'chatbot' });
-      }
 
       showLiveChatButton.value = showLiveChatButton.value || showLiveChatForOther;
-
       textInput.value = ''; // Clear the input field after processing
       messageSent.value = true; // Set messageSent flag to true after sending a message
     };
@@ -223,20 +208,6 @@ export default defineComponent({
       liveChatCard.value = 'showLive'
     }
     
-    function displayMessages(message) {
-      arr.value.push({ message: message.message, type: 'customer' }) 
-      var delayInMilliseconds = 1500; //1 second
-      setTimeout(function() {
-        arr.value.push({ message: message.answer, type: 'chatbot' })
-        if (message.urgency == 1){
-          proceedFAQ('show')
-        }
-        else{
-          proceedLiveChat('show')
-          proceedFAQ('show')
-        }    
-      }, delayInMilliseconds);
-    }
 
     function postMessage(message){
       arr.value.push({ message: message, type: 'customer' }) 
@@ -246,7 +217,6 @@ export default defineComponent({
     return{
       handleMessage,
       role,
-      displayMessages,
       arr,
       hide,
       textInput,
@@ -256,7 +226,6 @@ export default defineComponent({
       faqPage,
       handleMessageLive,
       isDisabled,
-      showLiveChatButton,
       processInput,
       messageSent,
       // btnContent
@@ -318,9 +287,13 @@ export default defineComponent({
   text-align: left;
 }
 
-section {
-  height: 100vh;
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
+
 .need-button{
   background-color: rgb(179, 34, 34);
   box-shadow: 5px 5px 7px 0px #0000003f;
@@ -544,7 +517,7 @@ section {
   border: none;
   border-radius: 25px;
   background-color: #ffffff; /* White background for user input */
-  color: #ff3b3b; /* Red text color for user input */
+  color: #000000; 
   outline: none;
 }
 

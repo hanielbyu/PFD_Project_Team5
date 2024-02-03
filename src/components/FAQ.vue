@@ -95,7 +95,7 @@ h2, .question, .answer {
   margin: 20px auto;
   margin-top: 140px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.856);
   border-radius: 10px;
 }
 
