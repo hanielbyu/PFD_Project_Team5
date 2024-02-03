@@ -3,8 +3,10 @@
     <header class="aptbooking">Book an Appointment</header>
     <hr>
     <br />
-    <input type="text" placeholder="Name"><br><br>
-    <input type="text" id="phoneNumber" placeholder="+65 Phone Number" oninput="validateNumber()" required><br><br>
+    <div>Full Name</div>
+    <input type="text" placeholder="John Smith" id="name"><br><br>
+    <div>Phone Number</div>
+    <input type="text" id="phoneNumber" placeholder="+6585152231" oninput="validateNumber()" required><br><br>
     <a-space direction="vertical" :size="12">
       <a-date-picker allowClear="true" v-model:value="dateselected" :disabled-date="disabledDate" />
     </a-space>
@@ -89,7 +91,8 @@ export default {
         appointmentDate.setHours(meridian === 'PM' ? parseInt(hours) + 12 : hours, minutes, 0);
         this.appointmentTime = appointmentDate;
         this.showModal();
-        let message11 = "Hello hello String node js yes sir";
+        const name = document.getElementById('name').value;
+        let message11 = "Dear " + name + ", your appointment is confirmed on " + this.dateselected.format('YYYY-MM-DD') + " at " + this.selectedTime + ". PLease do not reply to this SMS.";
         // POST request using fetch with async/await
         const requestOptions = {
             method: "POST",
@@ -167,7 +170,7 @@ export default {
 .button:hover {
   background-color: #d44e51;
     color: #fff;
-    width: 200px;
+    width: 100px;
     height: 45px;
 }
 .confirm-button {
