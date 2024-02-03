@@ -21,6 +21,12 @@
           <a-menu-item class="menu-title" key="appt">
               <RouterLink to="/schedule-appointment" class="nav-item nav-link">APPOINTMENT</RouterLink>
           </a-menu-item>
+          <a-menu-item class="menu-title" key="inst">
+              <RouterLink to="/instruct" class="nav-item nav-link">INSTRUCTIONS</RouterLink>
+          </a-menu-item>
+          <a-menu-item class="menu-title" key="video">
+              <RouterLink to="/video" class="nav-item nav-link">VIDEOCHAT</RouterLink>
+          </a-menu-item>
           <a-menu-item class="logoutBtn">
               <a @click="authStore.logout()" class="nav-item nav-link">LOGOUT</a>
           </a-menu-item>
@@ -55,7 +61,7 @@ const authStore = useAuthStore();
 .site-layout-content {
   min-height: 500px; 
   padding: 24px;
-  background: #fff;
+
 }
 
 .ant-layout-header{
@@ -78,6 +84,7 @@ const authStore = useAuthStore();
 [data-theme='dark'] .site-layout-content {
   background: #141414;
 }
+
 
 .layout {
   min-height: 110vh;
@@ -141,7 +148,8 @@ const authStore = useAuthStore();
     transition: all 0.8s;
 }
 .need-button:hover { 
-    color: white;
+    color: white !important;
+
 }
 .ocbclogo {
 width: 50px;

@@ -37,16 +37,6 @@ import { ref, onMounted } from 'vue';
 
 export default {
   setup() {
-    // const name = ref('haniel')
-    // const room = ref('test')
-    // const open = ref(false);
-    // const showModal = () => {
-    //   open.value = true;
-    // };
-    // const handleOk = e => {
-    //   console.log(e);
-    //   open.value = false;
-    // };
 
     onMounted(async () => {
       // document.getElementById('form').displayname.value = name.value
