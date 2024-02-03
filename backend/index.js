@@ -12,11 +12,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
 const accountSid = 'AC08684d8f4db8b42ce1308619191a54de'
 const authToken = '068b127a2471d45395276b61f40bc390'
 const client = require('twilio')(accountSid,authToken);
-
 
 const sendSMS = async (body) => {
     let msgOptions = {
@@ -32,8 +30,6 @@ const sendSMS = async (body) => {
     }
 }
 
-
-
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -45,15 +41,6 @@ app.post("/sms", function   (req, res) {
   sendSMS(req.body.message)
   res.send({ status: 'SUCCESS' });
 });
-
-// app.post('/sms', (req, res) => {
-//     // let message = req.body.message;
-//     console.log("Helloooooooooo happi birthday");
-//     console.log(req.body);
-//     // sendSMS(message);
-//     res.status(200);
-// })
-
 
 app.get('/', (req, res) => {       
     res.sendFile('index.html', {root: __dirname});     
