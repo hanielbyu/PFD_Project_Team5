@@ -8,7 +8,7 @@ import AgoraRTC  from "agora-rtc-sdk-ng"
 
 function videoBackend() {
     const APP_ID = "137960e2a15348fdb103cfe975b77f40"
-    const TOKEN = "007eJxTYJDhiLO4ZcTaN+Hj9K0PvdvZnZqOBG/71th/bl7AuwlLOXYrMBgam1uaGaQaJRqaGptYpKUkGRoYJ6elWpqbJpmbp5kYxM7fn9oQyMhwQYOJlZEBAkF8dgbnjMS8vNQcBgYAn3EgRQ=="
+    const TOKEN = "007eJxTYDi2R3Vm+AK7X6LTVmcGHrBWviTANGdbyKyyrQ33ryiH5lUqMBgam1uaGaQaJRqaGptYpKUkGRoYJ6elWpqbJpmbp5kYLFi7P7UhkJHhw04BFkYGCATx2RmcMxLz8lJzGBgApnIguQ=="
     const CHANNEL = "Channel"
 
     const client = AgoraRTC.createClient({mode:'rtc', codec:'vp8'})
