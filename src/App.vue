@@ -36,7 +36,6 @@
 
     <a-layout-content style="padding: 0 50px" >
       <a-breadcrumb style="margin: 30px 0"/>
-      <!-- <button @click="checkRole"></button> -->
       <RouterView />
     </a-layout-content>
 

@@ -6,26 +6,38 @@ import { useAuthStore } from '@/stores';
 
 const schema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
-    password: Yup.string().required('Password is required')
+    password1: Yup.string().required('Password is required'),
+    password2: Yup.string().required('Password is required'),
 });
 
-function onSubmit(values, { setErrors }) {
+// ADD VALIDATION CHECK IF PASSWORD 
+async function onSubmit(values, { setErrors }) {
     const authStore = useAuthStore();
-    const { username, password } = values;
+    const { username, password1, password2 } = values;
+
+    if(password1 == password2 && username) {
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+              username: username,
+              password: password1,
+              role: 'user'
+             })
+        };
+        const response = await fetch("http://localhost:5000/register", requestOptions);
+        const data = await response.json();
 
 
-        // login
-        // if(data.status == 'ERROR') {
-        //   // means username and/or password is incorrect
-        // }
-
-        // register
-        // if(data.status == ERROR) {
-        //   // means username is already taken
-        // }
-    return authStore.login(username, password)
-        .catch(error => setErrors({ apiError: error }));
-}
+        console.log('cherafkred', data.status);
+        if(data.status == 'ERROR') {
+            
+        }
+        } else {
+            return authStore.login(username, password1, password2)
+            .catch(error => setErrors({ apiError: error }));
+        }
+    }
 </script>
 
 <template>
@@ -39,7 +51,7 @@ function onSubmit(values, { setErrors }) {
         <div class="container">
             
             <div class="card">
-                <h2 class="login-title">Sign In</h2>
+                <h2 class="login-title">Registration</h2>
                 <Form @submit="onSubmit" :validation-schema="schema" v-slot="{ errors, isSubmitting }">
                     <div class="form-group">
                         <Field name="username" type="text" class="form-control" placeholder="Username" :class="{ 'is-invalid': errors.username }" />
@@ -47,26 +59,27 @@ function onSubmit(values, { setErrors }) {
                         <i class = 'bx bxs-user'></i>
                     </div>            
                     <div class="form-group">
-                        <Field name="password" type="password" class="form-control" placeholder="Password" :class="{ 'is-invalid': errors.password }" />
+                        <Field name="password1" type="password" class="form-control" placeholder="Password" :class="{ 'is-invalid': errors.password }" />
                         <div class="invalid-feedback">{{errors.password}}</div>
                         <i class = 'bx bxs-lock-alt'></i>
-                    </div>            
-
-                    <div class="remember-forgot">
-                        <label><input type="checkbox"> Remember me</label>
-                        <a href="#">Forgot password?</a>
-
+                    </div>    
+                    
+                    <div class="form-group">
+                        <Field name="password2" type="password" class="form-control" placeholder="Confirm Password" :class="{ 'is-invalid': errors.password }" />
+                        <div class="invalid-feedback">{{errors.password}}</div>
+                        <i class = 'bx bxs-lock-alt'></i>
                     </div>
 
                     <div class="form-group btn-login">
                         <button class="btn btn-primary" :disabled="isSubmitting">
-                            <span v-show="isSubmitting" class="spinner-border spinner-border-sm mr-1"></span>Sign In</button>
+                            <span v-show="isSubmitting" class="spinner-border spinner-border-sm mr-1"></span>Create Account</button>
                     </div>
                     <div class="register-link">
-                        <p> Don't have an account? <a href="./registration">Register</a></p>
+                        <p> Already have an account? <a href="/login">Login</a></p>
                     </div>
 
                     <div v-if="errors.apiError" class="alert alert-danger mt-3 mb-0">{{errors.apiError}}</div>
+
                 </Form>
             </div>
         </div>
@@ -181,7 +194,22 @@ label {
 
 
 .form-group input[name="username"],
-.form-group input[name="password"] {
+.form-group input[name="password1"] {
+    width: 100%;
+    padding: 8px 14px;  
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px; /* Adjust border-radius as needed */
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Apply backdrop filter for blur */
+    background-color: rgba(255, 255, 255, 0.1); /* Set a translucent white background */
+    backdrop-filter: blur(8px); /* Adjust the blur radius as needed */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
+    color: whitesmoke;
+}
+
+.form-group input[name="password2"] {
     width: 100%;
     padding: 8px 14px;  
     border: 1px solid rgba(255, 255, 255, 0.1);
