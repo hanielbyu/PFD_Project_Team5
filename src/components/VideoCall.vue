@@ -108,6 +108,7 @@ button{
     display: none;
     justify-content: center;
     margin-top:0.5em;
+    margin-bottom: 100px;
 }
 
 @media screen and (max-width:1400px){

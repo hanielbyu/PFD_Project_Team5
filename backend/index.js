@@ -37,10 +37,15 @@ app.use(
   }),
 );
 
+// POST REQUEST FOR SMS 
 app.post("/sms", function   (req, res) {
   sendSMS(req.body.message)
   res.send({ status: 'SUCCESS' });
 });
+
+
+
+
 
 app.get('/', (req, res) => {       
     res.sendFile('index.html', {root: __dirname});     
