@@ -6,3 +6,4 @@ export { default as ApptView } from '../components/ScheduleAppointment.vue';
 export { default as LoginView } from './LoginView.vue';
 export { default as VideoCall } from '../components/VideoCall.vue';
 export { default as InstructionsView } from '../components/InstructionsView.vue';
+export { default as RegistrationView } from './RegistrationView.vue';

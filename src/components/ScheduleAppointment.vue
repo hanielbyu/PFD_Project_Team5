@@ -92,7 +92,7 @@ export default {
         const name = document.getElementById('name').value;
         const desc = document.getElementById('description').value;
         const phoneNumber = document.getElementById('phoneNumber').value;
-        let message11 = "HEY CARLO THIS IS HANIEL DONT WORRY ITS NOT A SCAM";  
+        let message11 = "Dear " + name + ", your appointment is confirmed on " + this.dateselected.format('YYYY-MM-DD') + " at " + this.selectedTime + ". PLease do not reply to this SMS.";  
         // POST request using fetch with async/await
         const requestOptions = {
             method: "POST",
@@ -107,6 +107,9 @@ export default {
         };
         const response = await fetch("http://localhost:5000/sms", requestOptions);
         const data = await response.json();
+
+
+        
       } 
 
 

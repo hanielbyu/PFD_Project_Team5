@@ -16,14 +16,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 const accountSid = 'AC08684d8f4db8b42ce1308619191a54de'
-const authToken = '86b274f858295f84c721bf39619c6aff'
+const authToken = 'fb378259201821fbf6534ac9e62e6744'
 const client = require('twilio')(accountSid,authToken);
 
-const sendSMS = async (body) => {
+const sendSMS = async (body, phoneNumber) => {
     let msgOptions = {
         from: '+16592214697',
-        to: body.phoneNumber,
-        body.message,
+        to: phoneNumber,
+        body
     }
     try{
         const message = await client.messages.create(msgOptions);
@@ -79,11 +79,121 @@ app.post("/sms", function(req, res) {
   )
   
   // sends SMS
-  sendSMS(req.body)
+  sendSMS(req.body.message , req.body.phone)
   res.send({ status: 'SUCCESS' });
 });
 
 
+
+app.post("/register", (req,res) => {
+    // Connect to MongoDB
+    MongoClient.connect(
+      url,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      },
+      async(err, client) => {
+        if (err) {
+          return console.log(err)
+        }
+  
+        // Specify the database you want to access
+        const db = client.db('PFDDatabase')
+  
+        console.log(`MongoDB Connected: ${url}`)
+  
+        const users = db.collection('users')
+        users.find({username: req.body.username}).toArray(async(err, results) => {
+            console.log(results)
+            if(results.length == 0) {
+              const doc = {
+                username: req.body.username,
+                password: req.body.password,
+                role: req.body.role
+              }
+              const result = await users.insertOne(doc);
+              console.log(`A document was inserted with the _id: ${result.insertedId}`);
+              res.send({ status: 'SUCCESS' });
+            } else {
+              res.send({ status: 'ERROR' });
+            }
+          })
+      }
+    )
+})
+
+app.post("/login", (req, res) => {
+  // Connect to MongoDB
+  MongoClient.connect(
+    url,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    },
+    async(err, client) => {
+      if (err) {
+        return console.log(err)
+      }
+
+      // Specify the database you want to access
+      const db = client.db('PFDDatabase')
+
+      console.log(`MongoDB Connected: ${url}`)
+
+      const users = db.collection('users')
+      users.find({username: req.body.username}).toArray(async(err, results) => {
+          console.log(results)
+          if(results.length > 0) {
+            if(req.body.password == results[0].password) {
+              res.send({ status: 'SUCCESS', user: results[0] });
+            } else {
+              res.send({ status: 'ERROR' });
+            }
+          } else {
+            res.send({ status: 'ERROR' });
+          }
+        })
+    }
+  )
+})
+
+
+
+// app.post("/login", (req, res) => {
+//   // Connect to MongoDB
+//   MongoClient.connect(
+//     url,
+//     {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true
+//     },
+//     async(err, client) => {
+//       if (err) {
+//         return console.log(err)
+//       }
+
+//       // Specify the database you want to access
+//       const db = client.db('PFDDatabase')
+
+//       console.log(`MongoDB Connected: ${url}`)
+
+//       const users = db.collection('users')
+//       users.find({username: req.body.username}).toArray(async(err, results) => {
+//           console.log(results)
+//           if(results.length > 0) {
+//             if(req.body.password == results[0].password) {
+//               res.send({ status: 'SUCCESS' });
+//             } else {
+//               res.send({ status: 'ERROR' });
+//             }
+//           } else {
+//             res.send({ status: 'ERROR' });
+//           }
+//         })
+//     }
+//   )
+// })
 
 
 

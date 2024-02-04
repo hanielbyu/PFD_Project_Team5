@@ -42,17 +42,30 @@ function fakeBackend() {
 
             // route functions
 
-            function authenticate() {
+            async function authenticate() {
                 const { username, password } = body();
-                const user = users.find(x => x.username === username && x.password === password);
 
-                if (!user) return error('Username or password is incorrect');
+                const requestOptions = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                      username: username,
+                      password: password,
+                     })
+                };
+                const response = await fetch("http://localhost:5000/login", requestOptions);
+                const data = await response.json();
+                const user = data.user;
+                console.log("user this: ", user);
+                
+
+                // const user = users.find(x => x.username === username && x.password === password);
+
+                if (data.status == 'ERROR') return error('Username or password is incorrect');
 
                 return ok({
                     id: user.id,
                     username: user.username,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
                     role: user.role,
                     token: 'fake-jwt-token'
                 });
