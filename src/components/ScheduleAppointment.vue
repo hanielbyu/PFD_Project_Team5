@@ -3,7 +3,7 @@
     <header class="aptbooking">Book an Appointment</header>
     <hr>
     <br />
-    <input type="text"  placeholder="John Smith"><br><br>
+    <input type="text" id="name" placeholder="John Smith"><br><br>
     <input type="text" id="phoneNumber" placeholder="+6585152231" oninput="validateNumber()" required><br><br>
     <a-space direction="vertical" :size="12">
       <a-date-picker allowClear="true" v-model:value="dateselected" :disabled-date="disabledDate" />
@@ -29,7 +29,7 @@
       </div>
     </div><br>
     <p>Your issue</p>
-    <a-textarea :rows="3" placeholder="type here" :maxlength="150" /><br><br>
+    <a-textarea :rows="3" id="description" placeholder="type here" :maxlength="150" /><br><br>
     <a-checkbox v-model:checked="checked">I understand that after scheduling an appointment, I will no longer remain in the current queue.</a-checkbox><br><br>
     <a-space wrap>
       <a-button @click="submitAppointment" :disabled="!selectedTime || !dateselected || !checked" class="confirm-button">Book Now</a-button>
@@ -89,19 +89,30 @@ export default {
         appointmentDate.setHours(meridian === 'PM' ? parseInt(hours) + 12 : hours, minutes, 0);
         this.appointmentTime = appointmentDate;
         this.showModal();
-        let message11 = "Hello hello String node js yes sir";
+        const name = document.getElementById('name').value;
+        const desc = document.getElementById('description').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        let message11 = "Dear " + name + ", your appointment is confirmed on " + this.dateselected.format('YYYY-MM-DD') + " at " + this.selectedTime + ". Please do not reply to this SMS.";  
         // POST request using fetch with async/await
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
+              name: name,
+              appointmentDate: appointmentDate,
+              description: desc,
               message: message11,
-              phone: '+6592323204',
+              phone: phoneNumber
              })
         };
         const response = await fetch("http://localhost:5000/sms", requestOptions);
         const data = await response.json();
+
+
+        
       } 
+
+
       else {
         console.log('Please select a time slot before submitting.');
       }
